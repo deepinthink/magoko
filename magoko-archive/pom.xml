@@ -10,16 +10,16 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../magoko-parent/pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-stack</artifactId>
+  <artifactId>magoko-archive</artifactId>
   <packaging>pom</packaging>
-  <description>MagOKO :: Stack</description>
+  <description>MagOKO :: Archive</description>
   <properties>
     <parameter.license-header.location>
       ${project.basedir}/../../src/license-header.txt
     </parameter.license-header.location>
   </properties>
   <modules>
-    <module>magoko-stack-archive-server</module>
-    <module>magoko-stack-broker-server</module>
+    <module>magoko-archive-client</module>
+    <module>magoko-archive-server</module>
   </modules>
 </project>

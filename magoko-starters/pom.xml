@@ -14,6 +14,8 @@
   <packaging>pom</packaging>
   <description>MagOKO :: Starters</description>
   <modules>
+    <module>magoko-starter-archive-client</module>
+    <module>magoko-starter-archive-server</module>
     <module>magoko-starter-boot</module>
     <module>magoko-starter-broker-client</module>
     <module>magoko-starter-broker-server</module>

@@ -50,6 +50,7 @@
     </parameter.license-header.location>
   </properties>
   <modules>
+    <module>magoko-archive</module>
     <module>magoko-bom</module>
     <module>magoko-boot</module>
     <module>magoko-broker</module>
