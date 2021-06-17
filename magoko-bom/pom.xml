@@ -15,8 +15,10 @@
   <description>MagOKO :: BOM</description>
   <properties>
     <dep.spring-boot.version>2.4.5</dep.spring-boot.version>
-    <dep.okhttp.version>4.8.1</dep.okhttp.version>
     <dep.lombok.version>1.18.20</dep.lombok.version>
+    <dep.guava.version>30.0-jre</dep.guava.version>
+    <dep.okhttp.version>4.8.1</dep.okhttp.version>
+    <dep.minio.version>8.2.2</dep.minio.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -28,6 +30,17 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${dep.lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${dep.guava.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>okhttp-bom</artifactId>
         <version>${dep.okhttp.version}</version>
@@ -35,10 +48,9 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${dep.lombok.version}</version>
-        <scope>provided</scope>
+        <groupId>io.minio</groupId>
+        <artifactId>minio</artifactId>
+        <version>8.2.2</version>
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>

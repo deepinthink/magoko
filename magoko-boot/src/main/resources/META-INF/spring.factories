@@ -1,3 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.deepinthink.magoko.boot.okhttp.config.OkHttpAutoConfiguration
+org.deepinthink.magoko.boot.okhttp.config.OkHttpAutoConfiguration,\
+org.deepinthink.magoko.boot.minio.config.MinioAutoConfiguration
