@@ -19,5 +19,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name: Check codingstyle
+        run: ./mvnw spotless:check
       - name: Build with Maven
         run: ./mvnw clean install -B -U
