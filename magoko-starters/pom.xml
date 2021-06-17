@@ -21,5 +21,7 @@
     <module>magoko-starter-boot-okhttp</module>
     <module>magoko-starter-broker-client</module>
     <module>magoko-starter-broker-server</module>
+    <module>magoko-starter-login-client</module>
+    <module>magoko-starter-login-server</module>
   </modules>
 </project>

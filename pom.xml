@@ -54,6 +54,7 @@
     <module>magoko-bom</module>
     <module>magoko-boot</module>
     <module>magoko-broker</module>
+    <module>magoko-login</module>
     <module>magoko-parent</module>
     <module>magoko-stack</module>
     <module>magoko-starters</module>
