@@ -15,6 +15,8 @@
   <description>MagOKO :: BOM</description>
   <properties>
     <dep.spring-boot.version>2.4.5</dep.spring-boot.version>
+    <dep.okhttp.version>4.8.1</dep.okhttp.version>
+    <dep.lombok.version>1.18.20</dep.lombok.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -24,6 +26,19 @@
         <version>${dep.spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp-bom</artifactId>
+        <version>${dep.okhttp.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${dep.lombok.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
@@ -53,6 +68,11 @@
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-starter-boot</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-boot-okhttp</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
