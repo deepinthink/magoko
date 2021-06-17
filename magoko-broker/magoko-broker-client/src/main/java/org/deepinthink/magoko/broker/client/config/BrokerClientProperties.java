@@ -15,9 +15,10 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import lombok.Data;
+import org.deepinthink.magoko.broker.client.BrokerClientConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = BrokerClientProperties.PREFIX)
-public class BrokerClientProperties {
-  public static final String PREFIX = "magoko.broker.client";
-}
+@Data
+@ConfigurationProperties(prefix = BrokerClientConstants.PREFIX)
+public class BrokerClientProperties {}

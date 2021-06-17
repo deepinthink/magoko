@@ -20,6 +20,7 @@
   </properties>
   <modules>
     <module>magoko-broker-client</module>
+    <module>magoko-broker-core</module>
     <module>magoko-broker-server</module>
   </modules>
 </project>

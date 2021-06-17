@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.config;
+package org.deepinthink.magoko.broker.server;
 
-import lombok.Data;
-import org.deepinthink.magoko.broker.server.BrokerServerConstants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+public final class BrokerServerConstants {
+  public static final String PREFIX = "magoko.broker.client";
 
-@Data
-@ConfigurationProperties(prefix = BrokerServerConstants.PREFIX)
-public class BrokerServerProperties {}
+  private BrokerServerConstants() {}
+}

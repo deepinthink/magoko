@@ -50,7 +50,7 @@
       <dependency>
         <groupId>io.minio</groupId>
         <artifactId>minio</artifactId>
-        <version>8.2.2</version>
+        <version>${dep.minio.version}</version>
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
@@ -100,6 +100,11 @@
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-broker-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-broker-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

@@ -10,9 +10,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-broker-client</artifactId>
+  <artifactId>magoko-broker-core</artifactId>
   <packaging>jar</packaging>
-  <description>MagOKO Broker :: Client</description>
+  <description>MagOKO Broker :: Core</description>
   <dependencies>
     <dependency>
       <groupId>org.deepinthink.magoko</groupId>
