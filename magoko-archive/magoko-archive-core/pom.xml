@@ -10,9 +10,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-archive-client</artifactId>
+  <artifactId>magoko-archive-core</artifactId>
   <packaging>jar</packaging>
-  <description>MagOKO Archive :: Client</description>
+  <description>MagOKO Archive :: Core</description>
   <dependencies>
     <dependency>
       <groupId>org.deepinthink.magoko</groupId>

@@ -17,7 +17,9 @@ package org.deepinthink.magoko.archive.client.config;
 
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ArchiveClientMarkerConfiguration.Marker.class)
+@EnableConfigurationProperties(ArchiveClientProperties.class)
 public class ArchiveClientAutoConfiguration {}

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.server.config;
+package org.deepinthink.magoko.archive.client.config;
 
 import lombok.Data;
-import org.deepinthink.magoko.archive.server.ArchiveServerConstants;
+import org.deepinthink.magoko.archive.client.ArchiveClientConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@ConfigurationProperties(prefix = ArchiveServerConstants.PREFIX)
-public class ArchiveServerProperties {}
+@ConfigurationProperties(prefix = ArchiveClientConstants.PREFIX)
+public class ArchiveClientProperties {}
