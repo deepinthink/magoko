@@ -8,6 +8,10 @@
   <artifactId>magoko</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+    <module>magoko-bom</module>
+    <module>magoko-parent</module>
+  </modules>
   <description>
     SpringBoot styled Game Server Development Framework designed for Java developers.
   </description>
@@ -35,29 +39,4 @@
       </roles>
     </developer>
   </developers>
-  <properties>
-    <parameter.jdk.version>1.8</parameter.jdk.version>
-    <parameter.file.encoding>UTF-8</parameter.file.encoding>
-    <project.build.sourceEncoding>${parameter.file.encoding}</project.build.sourceEncoding>
-    <project.report.outputEncoding>${parameter.file.encoding}</project.report.outputEncoding>
-    <plugin.maven-compiler.version>3.8.1</plugin.maven-compiler.version>
-  </properties>
-  <modules>
-    <module>bom</module>
-    <module>build-parent</module>
-  </modules>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${plugin.maven-compiler.version}</version>
-        <configuration>
-          <source>${parameter.jdk.version}</source>
-          <target>${parameter.jdk.version}</target>
-          <encoding>${parameter.file.encoding}</encoding>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
