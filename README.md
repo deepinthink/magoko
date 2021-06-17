@@ -1,6 +1,13 @@
 # MagOKO [![CI](https://github.com/deepinthink/magoko/actions/workflows/ci.yml/badge.svg)](https://github.com/deepinthink/magoko/actions/workflows/ci.yml)
 SpringBoot styled Game Server Development Framework designed for Java developers.
 
+## Contributing
+If you're interested in fixing issues or contributing to the codebase 
+directly, pleas visit the [Contributor Guidelines](CONTRIBUTING.md) 
+for details on how to contribute as well as the 
+[Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md) 
+for details on how to participate. 
+
 ## License
 Copyright (c) 2021-present deepinthink. All rights reserved.
 
