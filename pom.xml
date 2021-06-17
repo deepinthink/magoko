@@ -12,6 +12,7 @@
     <module>magoko-bom</module>
     <module>magoko-boot</module>
     <module>magoko-parent</module>
+    <module>magoko-stack</module>
     <module>magoko-starters</module>
   </modules>
   <description>
