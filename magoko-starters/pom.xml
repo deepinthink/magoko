@@ -23,5 +23,7 @@
     <module>magoko-starter-broker-server</module>
     <module>magoko-starter-login-client</module>
     <module>magoko-starter-login-server</module>
+    <module>magoko-starter-pay-client</module>
+    <module>magoko-starter-pay-server</module>
   </modules>
 </project>
