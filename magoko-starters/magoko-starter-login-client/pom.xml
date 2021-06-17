@@ -20,7 +20,7 @@
     </dependency>
     <dependency>
       <groupId>org.deepinthink.magoko</groupId>
-      <artifactId>magoko-broker-client</artifactId>
+      <artifactId>magoko-login-client</artifactId>
     </dependency>
   </dependencies>
 </project>

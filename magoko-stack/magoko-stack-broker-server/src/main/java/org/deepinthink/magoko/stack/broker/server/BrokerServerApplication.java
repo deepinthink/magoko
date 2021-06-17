@@ -15,14 +15,26 @@
  */
 package org.deepinthink.magoko.stack.broker.server;
 
+import org.deepinthink.magoko.boot.banner.MagOKOBanner;
 import org.deepinthink.magoko.broker.server.EnableBrokerServer;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @EnableBrokerServer
 @SpringBootApplication
 public class BrokerServerApplication {
   public static void main(String[] args) {
-    SpringApplication.run(BrokerServerApplication.class, args);
+    new SpringApplicationBuilder()
+        .sources(BrokerServerApplication.class)
+        .banner(newBanner())
+        .run(args);
+  }
+
+  private static MagOKOBanner newBanner() {
+    return MagOKOBanner.newBuilder()
+        .tag("MagOKO Stack :: Broker Server")
+        .tag("For more information, please visit our website:")
+        .tag("\thttps://deepinthink.org/magoko")
+        .build();
   }
 }

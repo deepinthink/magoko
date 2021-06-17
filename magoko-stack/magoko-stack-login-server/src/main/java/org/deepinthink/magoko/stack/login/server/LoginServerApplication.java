@@ -15,14 +15,26 @@
  */
 package org.deepinthink.magoko.stack.login.server;
 
+import org.deepinthink.magoko.boot.banner.MagOKOBanner;
 import org.deepinthink.magoko.login.server.EnableLoginServer;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @EnableLoginServer
 @SpringBootApplication
 public class LoginServerApplication {
   public static void main(String[] args) {
-    SpringApplication.run(LoginServerApplication.class, args);
+    new SpringApplicationBuilder()
+        .sources(LoginServerApplication.class)
+        .banner(newBanner())
+        .run(args);
+  }
+
+  private static MagOKOBanner newBanner() {
+    return MagOKOBanner.newBuilder()
+        .tag("MagOKO Stack :: Login Server")
+        .tag("For more information, please visit our website:")
+        .tag("\thttps://deepinthink.org/magoko")
+        .build();
   }
 }

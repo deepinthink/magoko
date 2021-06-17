@@ -16,13 +16,25 @@
 package org.deepinthink.magoko.stack.archive.server;
 
 import org.deepinthink.magoko.archive.server.EnableArchiveServer;
-import org.springframework.boot.SpringApplication;
+import org.deepinthink.magoko.boot.banner.MagOKOBanner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @EnableArchiveServer
 @SpringBootApplication
 public class ArchiveServerApplication {
   public static void main(String[] args) {
-    SpringApplication.run(ArchiveServerApplication.class, args);
+    new SpringApplicationBuilder()
+        .sources(ArchiveServerApplication.class)
+        .banner(newBanner())
+        .run(args);
+  }
+
+  private static MagOKOBanner newBanner() {
+    return MagOKOBanner.newBuilder()
+        .tag("MagOKO Stack :: Archive Server")
+        .tag("For more information, please visit our website:")
+        .tag("\thttps://deepinthink.org/magoko")
+        .build();
   }
 }
