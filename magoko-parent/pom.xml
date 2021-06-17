@@ -13,13 +13,6 @@
   <artifactId>magoko-parent</artifactId>
   <packaging>pom</packaging>
   <description>MagOKO :: Parent</description>
-  <properties>
-    <parameter.jdk.version>1.8</parameter.jdk.version>
-    <parameter.file.encoding>UTF-8</parameter.file.encoding>
-    <project.build.sourceEncoding>${parameter.file.encoding}</project.build.sourceEncoding>
-    <project.report.outputEncoding>${parameter.file.encoding}</project.report.outputEncoding>
-    <plugin.maven-compiler.version>3.8.1</plugin.maven-compiler.version>
-  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -31,18 +24,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${plugin.maven-compiler.version}</version>
-        <configuration>
-          <source>${parameter.jdk.version}</source>
-          <target>${parameter.jdk.version}</target>
-          <encoding>${parameter.file.encoding}</encoding>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

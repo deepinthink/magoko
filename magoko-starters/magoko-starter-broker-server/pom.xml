@@ -10,13 +10,17 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-starter-boot</artifactId>
+  <artifactId>magoko-starter-broker-server</artifactId>
   <packaging>jar</packaging>
-  <description>MagOKO Starter :: Boot</description>
+  <description>MagOKO Starter :: Broker Server</description>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-broker-server</artifactId>
     </dependency>
   </dependencies>
 </project>

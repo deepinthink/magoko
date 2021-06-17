@@ -10,12 +10,16 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../magoko-parent/pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-starters</artifactId>
+  <artifactId>magoko-broker</artifactId>
   <packaging>pom</packaging>
-  <description>MagOKO :: Starters</description>
+  <description>MagOKO :: Broker</description>
+  <properties>
+    <parameter.license-header.location>
+      ${project.basedir}/../../src/license-header.txt
+    </parameter.license-header.location>
+  </properties>
   <modules>
-    <module>magoko-starter-boot</module>
-    <module>magoko-starter-broker-client</module>
-    <module>magoko-starter-broker-server</module>
+    <module>magoko-broker-client</module>
+    <module>magoko-broker-server</module>
   </modules>
 </project>

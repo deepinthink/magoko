@@ -6,16 +6,18 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.deepinthink.magoko</groupId>
-    <artifactId>magoko-parent</artifactId>
+    <artifactId>magoko-broker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../magoko-parent/pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-starters</artifactId>
-  <packaging>pom</packaging>
-  <description>MagOKO :: Starters</description>
-  <modules>
-    <module>magoko-starter-boot</module>
-    <module>magoko-starter-broker-client</module>
-    <module>magoko-starter-broker-server</module>
-  </modules>
+  <artifactId>magoko-broker-client</artifactId>
+  <packaging>jar</packaging>
+  <description>MagOKO Broker :: Client</description>
+  <dependencies>
+    <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-boot</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 </project>

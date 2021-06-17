@@ -8,13 +8,6 @@
   <artifactId>magoko</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <modules>
-    <module>magoko-bom</module>
-    <module>magoko-boot</module>
-    <module>magoko-parent</module>
-    <module>magoko-stack</module>
-    <module>magoko-starters</module>
-  </modules>
   <description>
     SpringBoot styled Game Server Development Framework designed for Java developers.
   </description>
@@ -42,4 +35,57 @@
       </roles>
     </developer>
   </developers>
+  <properties>
+    <parameter.jdk.version>1.8</parameter.jdk.version>
+    <parameter.file.encoding>UTF-8</parameter.file.encoding>
+    <project.build.sourceEncoding>${parameter.file.encoding}</project.build.sourceEncoding>
+    <project.report.outputEncoding>${parameter.file.encoding}</project.report.outputEncoding>
+    <plugin.maven-compiler.version>3.8.1</plugin.maven-compiler.version>
+    <plugin.maven-spotless.version>2.8.0</plugin.maven-spotless.version>
+    <parameter.maven-spotless.skip>false</parameter.maven-spotless.skip>
+    <parameter.google-java-format.version>1.7</parameter.google-java-format.version>
+    <parameter.google-java-format.style>GOOGLE</parameter.google-java-format.style>
+    <parameter.license-header.location>
+      ${project.basedir}/../src/license-header.txt
+    </parameter.license-header.location>
+  </properties>
+  <modules>
+    <module>magoko-bom</module>
+    <module>magoko-boot</module>
+    <module>magoko-broker</module>
+    <module>magoko-parent</module>
+    <module>magoko-stack</module>
+    <module>magoko-starters</module>
+  </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${plugin.maven-compiler.version}</version>
+        <configuration>
+          <source>${parameter.jdk.version}</source>
+          <target>${parameter.jdk.version}</target>
+          <encoding>${parameter.file.encoding}</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${plugin.maven-spotless.version}</version>
+        <configuration>
+          <skip>${parameter.maven-spotless.skip}</skip>
+          <java>
+            <googleJavaFormat>
+              <version>${parameter.google-java-format.version}</version>
+              <style>${parameter.google-java-format.style}</style>
+            </googleJavaFormat>
+            <licenseHeader>
+              <file>${parameter.license-header.location}</file>
+            </licenseHeader>
+          </java>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
