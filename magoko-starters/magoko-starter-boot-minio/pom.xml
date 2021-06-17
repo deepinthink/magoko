@@ -15,8 +15,8 @@
   <description>MagOKO Starter :: Boot MinIO</description>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-boot</artifactId>
     </dependency>
     <dependency>
       <groupId>io.minio</groupId>

@@ -15,11 +15,11 @@
  */
 package org.deepinthink.magoko.archive.server.config;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication(proxyBeanMethods = false)
+@SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ArchiveServerMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(ArchiveServerProperties.class)
 public class ArchiveServerAutoConfiguration {}

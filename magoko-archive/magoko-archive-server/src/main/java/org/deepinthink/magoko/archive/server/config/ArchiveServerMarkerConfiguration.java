@@ -15,10 +15,10 @@
  */
 package org.deepinthink.magoko.archive.server.config;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication(proxyBeanMethods = false)
+@SpringBootConfiguration(proxyBeanMethods = false)
 public class ArchiveServerMarkerConfiguration {
 
   @Bean
