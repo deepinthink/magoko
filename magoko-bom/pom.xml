@@ -64,32 +64,7 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-archive-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-archive-server</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-boot</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-boot</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-boot-minio</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-boot-okhttp</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -109,6 +84,16 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-config-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-config-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-login-client</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -124,26 +109,6 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-broker-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-broker-server</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-login-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-login-server</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-pay-client</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -155,6 +120,61 @@
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-pay-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-archive-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-archive-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-boot</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-boot-minio</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-boot-okhttp</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-broker-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-broker-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-config-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-config-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-login-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-login-server</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
