@@ -16,7 +16,7 @@
 package org.deepinthink.magoko.boot.profile.condition;
 
 import java.util.Objects;
-import org.deepinthink.magoko.boot.profile.MatchAnyProfile;
+import org.deepinthink.magoko.boot.profile.MatchAllProfile;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Profiles;
@@ -29,7 +29,7 @@ public class MatchAllProfileCondition implements Condition {
   @Override
   public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
     MultiValueMap<String, Object> attrs =
-        metadata.getAllAnnotationAttributes(MatchAnyProfile.class.getName());
+        metadata.getAllAnnotationAttributes(MatchAllProfile.class.getName());
     if (Objects.nonNull(attrs)) {
       for (Object value : attrs.get("value")) {
         String[] profiles = (String[]) value;
