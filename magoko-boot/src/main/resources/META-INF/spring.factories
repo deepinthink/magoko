@@ -1,3 +1,7 @@
+# Environment Post Processors
+org.springframework.boot.env.EnvironmentPostProcessor=\
+org.deepinthink.magoko.boot.bootstrap.env.BootstrapEnvPostProcessor
+
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.deepinthink.magoko.boot.okhttp.config.OkHttpAutoConfiguration,\
