@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Copy Markdown Files
+      - name: Copy && Replace Files
         run: |
           cp README.md docs/index.md
+          sed -i 's/CONTRIBUTING.md/contributing.md/g' docs/index.md
+          sed -i 's/CODE_OF_CONDUCT.md/code_of_conduct.md/g' docs/index.md
           cp MAINTAINERS.md docs/maintainers.md
           cp CONTRIBUTING.md docs/contributing.md
           cp CODE_OF_CONDUCT.md docs/code_of_conduct.md
