@@ -15,6 +15,8 @@
  */
 package org.deepinthink.magoko.boot.banner;
 
+import static org.deepinthink.magoko.boot.banner.MagOKOBannerConstants.*;
+
 import java.io.PrintStream;
 import java.util.*;
 import org.springframework.boot.Banner;
@@ -22,19 +24,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
 public final class MagOKOBanner implements Banner {
-
-  private static final String[] DEFAULT_BANNER = {
-    "███╗   ███╗ █████╗  ██████╗  ██████╗ ██╗  ██╗ ██████╗",
-    "████╗ ████║██╔══██╗██╔════╝ ██╔═══██╗██║ ██╔╝██╔═══██╗",
-    "██╔████╔██║███████║██║  ███╗██║   ██║█████╔╝ ██║   ██║",
-    "██║╚██╔╝██║██╔══██║██║   ██║██║   ██║██╔═██╗ ██║   ██║",
-    "██║ ╚═╝ ██║██║  ██║╚██████╔╝╚██████╔╝██║  ██╗╚██████╔╝",
-    "╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ",
-  };
-
-  private static final String DEFAULT_COPYRIGHT =
-      "© 2021-present deepinthink. All rights reserved.";
-
   private final String[] banner;
   private final List<String> tags;
   private final String copyright;
@@ -60,6 +49,8 @@ public final class MagOKOBanner implements Banner {
     String[] banner = DEFAULT_BANNER;
     List<String> tags = new ArrayList<>();
     String copyright = DEFAULT_COPYRIGHT;
+
+    private Builder() {}
 
     public Builder banner(String[] banner) {
       Optional.ofNullable(banner).ifPresent(b -> this.banner = b);
