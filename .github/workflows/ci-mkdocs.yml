@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Copy && Replace Files
         run: |
+          mkdir -p docs
           cp README.md docs/index.md
           sed -i 's/CONTRIBUTING.md/contributing.md/g' docs/index.md
           sed -i 's/CODE_OF_CONDUCT.md/code_of_conduct.md/g' docs/index.md
