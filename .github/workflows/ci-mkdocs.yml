@@ -1,0 +1,25 @@
+name: CI MkDocs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Copy Markdown Files
+        run: |
+          cp README.md docs/index.md
+          cp MAINTAINERS.md docs/maintainers.md
+          cp CONTRIBUTING.md docs/contributing.md
+          cp CODE_OF_CONDUCT.md docs/code_of_conduct.md
+      - name: Deploy MkDocs Website
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CUSTOM_DOMAIN: https://deepinthink.org/magoko
+          CONFIG_FILE: mkdocs.yml
+          EXTRA_PACKAGES: build-base

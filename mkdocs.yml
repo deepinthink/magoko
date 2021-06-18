@@ -1,0 +1,40 @@
+site_name: MagOKO
+site_url: https://deepinthink.org/magoko/
+repo_name: MagOKO
+repo_url: https://github.com/deepinthink/magoko
+site_description: "SpringBoot styled Game Server Development Framework designed for Java developers"
+site_author: deepinthink.org.
+remote_branch: gh-pages
+edit_uri: ""
+
+copyright: 'Copyright &copy; 2021-present deepinthink. All rights reserved'
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'teal'
+    accent: 'white'
+
+markdown_extensions:
+  - smarty
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - pymdownx.tabbed
+  - tables
+nav:
+  - 'Overview': index.md
+  - 'Maintainers': maintainers.md
+  - 'Contributing': contributing.md
+  - 'Code of Conduct': code_of_conduct.md
