@@ -27,5 +27,8 @@ public final class BootstrapConstants {
   public static final String DEFAULT_BOOTSTRAP_DEFAULT_PROPERTY_SOURCE_NAME =
       System.getProperty(PREFIX + "property-source", "magoko.properties");
 
+  public static final BootstrapLaunchMode DEFAULT_BOOTSTRAP_LAUNCH_MODE =
+      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
+
   private BootstrapConstants() {}
 }

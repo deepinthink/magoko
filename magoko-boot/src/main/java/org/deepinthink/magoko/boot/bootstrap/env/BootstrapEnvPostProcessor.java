@@ -46,7 +46,7 @@ public class BootstrapEnvPostProcessor implements EnvironmentPostProcessor, Orde
       ConfigurableEnvironment environment, SpringApplication application) {
     try {
       InputStream inputStream =
-          getClass().getResourceAsStream(DEFAULT_BOOTSTRAP_DEFAULT_CONFIG_FILE);
+          getClass().getClassLoader().getResourceAsStream(DEFAULT_BOOTSTRAP_DEFAULT_CONFIG_FILE);
       if (Objects.nonNull(inputStream)) {
         Properties properties = new Properties();
         properties.load(inputStream);
