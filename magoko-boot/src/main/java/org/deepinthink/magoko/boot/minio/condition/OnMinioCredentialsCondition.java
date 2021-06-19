@@ -26,7 +26,7 @@ import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class MinioCredentialsCondition extends SpringBootCondition {
+class OnMinioCredentialsCondition extends SpringBootCondition {
 
   @Override
   public ConditionOutcome getMatchOutcome(

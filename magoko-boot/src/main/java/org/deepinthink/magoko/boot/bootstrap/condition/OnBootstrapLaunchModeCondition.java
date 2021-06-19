@@ -30,7 +30,7 @@ import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class OnBootstrapLaunchModeCondition extends SpringBootCondition {
+class OnBootstrapLaunchModeCondition extends SpringBootCondition {
 
   @Override
   public ConditionOutcome getMatchOutcome(

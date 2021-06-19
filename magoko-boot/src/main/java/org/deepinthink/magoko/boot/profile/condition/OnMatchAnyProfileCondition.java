@@ -16,14 +16,13 @@
 package org.deepinthink.magoko.boot.profile.condition;
 
 import java.util.Objects;
-import org.deepinthink.magoko.boot.profile.MatchAnyProfile;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Profiles;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.MultiValueMap;
 
-public class MatchAnyProfileCondition implements Condition {
+class OnMatchAnyProfileCondition implements Condition {
 
   @Override
   public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {

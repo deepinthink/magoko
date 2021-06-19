@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.boot.profile;
+package org.deepinthink.magoko.boot.minio.condition;
 
 import java.lang.annotation.*;
-import org.deepinthink.magoko.boot.profile.condition.MatchAllProfileCondition;
 import org.springframework.context.annotation.Conditional;
 
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Conditional(MatchAllProfileCondition.class)
-public @interface MatchAllProfile {
-  String[] value();
-}
+@Conditional(OnMinioCredentialsCondition.class)
+public @interface ConditionalOnMinioCredentials {}
