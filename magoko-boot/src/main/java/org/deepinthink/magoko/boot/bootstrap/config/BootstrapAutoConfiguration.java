@@ -15,9 +15,19 @@
  */
 package org.deepinthink.magoko.boot.bootstrap.config;
 
+import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @EnableConfigurationProperties(BootstrapProperties.class)
-public class BootstrapAutoConfiguration {}
+public class BootstrapAutoConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BootstrapIdentity bootstrapIdentity(BootstrapProperties properties) {
+    return BootstrapIdentity.from(properties.getInstance());
+  }
+}

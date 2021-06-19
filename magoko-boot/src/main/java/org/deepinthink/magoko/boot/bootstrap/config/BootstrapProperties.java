@@ -19,12 +19,13 @@ import static org.deepinthink.magoko.boot.bootstrap.BootstrapConstants.DEFAULT_B
 
 import lombok.Data;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapConstants;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapInstance;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = BootstrapConstants.PREFIX)
 public class BootstrapProperties {
-
   private BootstrapLaunchMode launchMode = DEFAULT_BOOTSTRAP_LAUNCH_MODE;
+  private final BootstrapInstance instance = new BootstrapInstance();
 }
