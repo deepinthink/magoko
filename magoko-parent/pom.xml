@@ -13,8 +13,20 @@
   <artifactId>magoko-parent</artifactId>
   <packaging>pom</packaging>
   <description>MagOKO :: Parent</description>
+  <properties>
+    <dep.spring-boot.version>2.5.1</dep.spring-boot.version>
+    <plugin.maven-spring-boot.version>${dep.spring-boot.version}</plugin.maven-spring-boot.version>
+    <parameter.maven-spring-boot.classifier>exec</parameter.maven-spring-boot.classifier>
+  </properties>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${dep.spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-bom</artifactId>
@@ -24,4 +36,25 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${plugin.maven-spring-boot.version}</version>
+          <configuration>
+            <classifier>${parameter.maven-spring-boot.classifier}</classifier>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
