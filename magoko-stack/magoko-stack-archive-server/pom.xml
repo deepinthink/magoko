@@ -18,6 +18,10 @@
       <groupId>org.deepinthink.magoko</groupId>
       <artifactId>magoko-starter-archive-server</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-config-client</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

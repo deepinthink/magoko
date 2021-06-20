@@ -22,9 +22,9 @@ public final class BootstrapConstants {
 
   public static final int DEFAULT_BOOTSTRAP_ENV_POST_PROCESSOR_ORDER =
       Integer.getInteger(PREFIX + ".order", Ordered.HIGHEST_PRECEDENCE);
-  public static final String DEFAULT_BOOTSTRAP_DEFAULT_CONFIG_FILE =
+  public static final String DEFAULT_BOOTSTRAP_CONFIG_FILE =
       System.getProperty(PREFIX + ".config-file", "magoko.properties");
-  public static final String DEFAULT_BOOTSTRAP_DEFAULT_PROPERTY_SOURCE_NAME =
+  public static final String DEFAULT_BOOTSTRAP_PROPERTY_SOURCE_NAME =
       System.getProperty(PREFIX + "property-source", "magoko.properties");
 
   public static final BootstrapLaunchMode DEFAULT_BOOTSTRAP_LAUNCH_MODE =

@@ -28,6 +28,11 @@ public class ArchiveServerApplication {
         .sources(ArchiveServerApplication.class)
         .banner(newBanner())
         .run(args);
+    try {
+      Thread.currentThread().join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   private static MagOKOBanner newBanner() {

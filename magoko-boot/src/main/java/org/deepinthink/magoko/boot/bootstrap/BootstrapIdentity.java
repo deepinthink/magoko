@@ -15,12 +15,12 @@
  */
 package org.deepinthink.magoko.boot.bootstrap;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@NoArgsConstructor
 @Data
-@Builder
 @ToString
 public class BootstrapIdentity {
   private int uid;
@@ -35,12 +35,20 @@ public class BootstrapIdentity {
           "BootstrapInstance parameter type should be in range (0, 0x0000007F], id should be in range (0, 0x00FFFFFF].");
     }
     int uid = (type << 24) | id;
-    return new BootstrapIdentityBuilder().uid(uid).type(type).id(id).build();
+    BootstrapIdentity identity = new BootstrapIdentity();
+    identity.setUid(uid);
+    identity.setType(type);
+    identity.setId(id);
+    return identity;
   }
 
   public static BootstrapIdentity from(int uid) {
     int type = uid >>> 24;
     int id = uid ^ (type << 24);
-    return new BootstrapIdentityBuilder().uid(uid).type(type).id(id).build();
+    BootstrapIdentity identity = new BootstrapIdentity();
+    identity.setUid(uid);
+    identity.setType(type);
+    identity.setId(id);
+    return identity;
   }
 }

@@ -15,8 +15,21 @@
  */
 package org.deepinthink.magoko.config.client;
 
+import static org.deepinthink.magoko.boot.bootstrap.BootstrapConstants.DEFAULT_BOOTSTRAP_ENV_POST_PROCESSOR_ORDER;
+
 public final class ConfigClientConstants {
   public static final String PREFIX = "magoko.config.client";
+
+  public static final int DEFAULT_CONFIG_CLIENT_INSTANCE_ENV_POST_PROCESSOR_ORDER =
+      Integer.getInteger(PREFIX + ".order", DEFAULT_BOOTSTRAP_ENV_POST_PROCESSOR_ORDER + 1);
+  public static final String DEFAULT_CONFIG_CLIENT_ENABLE_MARKER_CLASSNAME =
+      "org.deepinthink.magoko.config.client.EnableMarker";
+  public static final String DEFAULT_CONFIG_CLIENT_INSTANCE_RSOCKET_ROUTE =
+      System.getProperty(PREFIX + ".config-instance-route", "config.instance");
+  public static final boolean DEFAULT_CONFIG_CLIENT_INSTANCE_ENABLE =
+      Boolean.getBoolean(PREFIX + ".instance.enable");
+  public static final String DEFAULT_CONFIG_CLIENT_INSTANCE_PROPERTY_NAME =
+      System.getProperty(PREFIX + ".instance.property-source", "config.instance.properties");
 
   private ConfigClientConstants() {}
 }

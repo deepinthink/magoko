@@ -13,6 +13,11 @@
   <artifactId>magoko-starters</artifactId>
   <packaging>pom</packaging>
   <description>MagOKO :: Starters</description>
+  <properties>
+    <parameter.license-header.location>
+      ${project.basedir}/../../src/license-header.txt
+    </parameter.license-header.location>
+  </properties>
   <modules>
     <module>magoko-starter-archive-client</module>
     <module>magoko-starter-archive-server</module>
