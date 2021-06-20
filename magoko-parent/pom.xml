@@ -17,6 +17,7 @@
     <dep.spring-boot.version>2.5.1</dep.spring-boot.version>
     <plugin.maven-spring-boot.version>${dep.spring-boot.version}</plugin.maven-spring-boot.version>
     <parameter.maven-spring-boot.classifier>exec</parameter.maven-spring-boot.classifier>
+    <dep.groot.version>0.0.1-SNAPSHOT</dep.groot.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -24,6 +25,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${dep.spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.groot</groupId>
+        <artifactId>groot-bom</artifactId>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

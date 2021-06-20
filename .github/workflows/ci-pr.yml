@@ -7,7 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -19,6 +18,16 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name: Checkout [deepinthink/groot]
+        uses: actions/checkout@v2
+        with:
+          repository: deepinthink/groot
+          path: deepinthink/groot
+      - name: Install [deepinthink/groot]
+        run: |
+          cd deepinthink/groot
+          ./mvnw clean install -B -U
+      - uses: actions/checkout@v2
       - name: Check codingstyle
         run: ./mvnw spotless:check
       - name: Build with Maven

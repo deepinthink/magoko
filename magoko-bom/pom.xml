@@ -131,11 +131,6 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
-        <artifactId>magoko-starter-boot-minio</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-starter-boot-okhttp</artifactId>
         <version>${project.version}</version>
       </dependency>
