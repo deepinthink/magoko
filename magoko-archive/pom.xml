@@ -21,6 +21,7 @@
   <modules>
     <module>magoko-archive-client</module>
     <module>magoko-archive-core</module>
+    <module>magoko-archive-oss</module>
     <module>magoko-archive-server</module>
   </modules>
 </project>

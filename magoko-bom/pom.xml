@@ -51,6 +51,16 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-archive-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-archive-oss</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-archive-server</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -117,6 +127,11 @@
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-starter-archive-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-archive-oss</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
