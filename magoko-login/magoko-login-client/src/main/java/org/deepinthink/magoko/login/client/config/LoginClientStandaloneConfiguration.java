@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.login.client;
+package org.deepinthink.magoko.login.client.config;
 
-import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+import org.deepinthink.magoko.login.client.condition.ConditionalOnLoginClientStandalone;
+import org.springframework.boot.SpringBootConfiguration;
 
-public final class LoginClientConstants {
-  public static final String PREFIX = "magoko.login.client";
-
-  public static final BootstrapLaunchMode DEFAULT_LOGIN_SERVER_LAUNCH_MODE =
-      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
-
-  private LoginClientConstants() {}
-}
+@SpringBootConfiguration(proxyBeanMethods = false)
+@ConditionalOnLoginClientStandalone
+public class LoginClientStandaloneConfiguration {}

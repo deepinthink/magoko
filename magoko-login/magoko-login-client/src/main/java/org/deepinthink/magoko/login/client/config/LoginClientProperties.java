@@ -15,10 +15,16 @@
  */
 package org.deepinthink.magoko.login.client.config;
 
+import static org.deepinthink.magoko.login.client.LoginClientConstants.DEFAULT_LOGIN_SERVER_LAUNCH_MODE;
+
 import lombok.Data;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 import org.deepinthink.magoko.login.client.LoginClientConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = LoginClientConstants.PREFIX)
-public class LoginClientProperties {}
+public class LoginClientProperties {
+
+  private BootstrapLaunchMode launchMode = DEFAULT_LOGIN_SERVER_LAUNCH_MODE;
+}

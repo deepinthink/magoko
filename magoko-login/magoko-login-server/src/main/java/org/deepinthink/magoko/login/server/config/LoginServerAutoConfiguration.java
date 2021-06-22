@@ -15,11 +15,23 @@
  */
 package org.deepinthink.magoko.login.server.config;
 
+import org.deepinthink.magoko.login.server.controller.LoginServerRSocketController;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(LoginServerMarkerConfiguration.Marker.class)
+@Import({LoginServerBrokerConfiguration.class, LoginServerStandaloneConfiguration.class})
 @EnableConfigurationProperties(LoginServerProperties.class)
-public class LoginServerAutoConfiguration {}
+public class LoginServerAutoConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public LoginServerRSocketController loginServerRSocketController() {
+    return new LoginServerRSocketController();
+  }
+}

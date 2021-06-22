@@ -18,8 +18,10 @@ package org.deepinthink.magoko.login.client.config;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(LoginClientMarkerConfiguration.Marker.class)
+@Import({LoginClientBrokerConfiguration.class, LoginClientStandaloneConfiguration.class})
 @EnableConfigurationProperties(LoginClientProperties.class)
 public class LoginClientAutoConfiguration {}
