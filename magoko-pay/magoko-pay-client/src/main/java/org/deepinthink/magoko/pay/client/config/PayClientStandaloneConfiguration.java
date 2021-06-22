@@ -15,13 +15,9 @@
  */
 package org.deepinthink.magoko.pay.client.config;
 
+import org.deepinthink.magoko.pay.client.condition.ConditionalOnPayClientStandalone;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnBean(PayClientMarkerConfiguration.Marker.class)
-@Import({PayClientBrokerConfiguration.class, PayClientStandaloneConfiguration.class})
-@EnableConfigurationProperties(PayClientProperties.class)
-public class PayClientAutoConfiguration {}
+@ConditionalOnPayClientStandalone
+public class PayClientStandaloneConfiguration {}

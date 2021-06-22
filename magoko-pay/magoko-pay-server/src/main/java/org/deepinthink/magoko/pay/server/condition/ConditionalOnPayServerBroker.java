@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.pay.client.config;
+package org.deepinthink.magoko.pay.server.condition;
 
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
+import java.lang.annotation.*;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+import org.deepinthink.magoko.boot.bootstrap.condition.ConditionalOnBootstrapLaunchMode;
 
-@SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnBean(PayClientMarkerConfiguration.Marker.class)
-@Import({PayClientBrokerConfiguration.class, PayClientStandaloneConfiguration.class})
-@EnableConfigurationProperties(PayClientProperties.class)
-public class PayClientAutoConfiguration {}
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@ConditionalOnBootstrapLaunchMode(BootstrapLaunchMode.BROKER)
+public @interface ConditionalOnPayServerBroker {}

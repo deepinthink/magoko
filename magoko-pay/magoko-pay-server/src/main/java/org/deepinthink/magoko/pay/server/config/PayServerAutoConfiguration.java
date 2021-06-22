@@ -15,11 +15,22 @@
  */
 package org.deepinthink.magoko.pay.server.config;
 
+import org.deepinthink.magoko.pay.server.controller.PayServerRSocketController;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(PayServerMarkerConfiguration.Marker.class)
+@Import({PayServerBrokerConfiguration.class, PayServerStandaloneConfiguration.class})
 @EnableConfigurationProperties(PayServerProperties.class)
-public class PayServerAutoConfiguration {}
+public class PayServerAutoConfiguration {
+
+  @Bean
+  @ConditionalOnBean
+  public PayServerRSocketController payServerRSocketController() {
+    return new PayServerRSocketController();
+  }
+}

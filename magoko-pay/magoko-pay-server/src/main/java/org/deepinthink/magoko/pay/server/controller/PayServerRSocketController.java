@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.pay.client.config;
+package org.deepinthink.magoko.pay.server.controller;
 
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.stereotype.Controller;
 
-@SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnBean(PayClientMarkerConfiguration.Marker.class)
-@Import({PayClientBrokerConfiguration.class, PayClientStandaloneConfiguration.class})
-@EnableConfigurationProperties(PayClientProperties.class)
-public class PayClientAutoConfiguration {}
+@MessageMapping("magoko.pay")
+@Controller
+public class PayServerRSocketController {}
