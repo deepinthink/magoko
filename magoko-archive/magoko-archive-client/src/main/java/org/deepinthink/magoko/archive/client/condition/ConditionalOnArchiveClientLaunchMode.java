@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.client;
+package org.deepinthink.magoko.archive.client.condition;
 
+import java.lang.annotation.*;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+import org.springframework.context.annotation.Conditional;
 
-public final class ArchiveClientConstants {
-  public static final String PREFIX = "magoko.archive.client";
-
-  public static final BootstrapLaunchMode DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE =
-      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
-
-  private ArchiveClientConstants() {}
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(onArchiveClientLaunchModeCondition.class)
+public @interface ConditionalOnArchiveClientLaunchMode {
+  BootstrapLaunchMode value() default BootstrapLaunchMode.STANDALONE;
 }

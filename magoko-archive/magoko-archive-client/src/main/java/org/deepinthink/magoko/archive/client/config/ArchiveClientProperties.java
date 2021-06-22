@@ -15,10 +15,16 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE;
+
 import lombok.Data;
 import org.deepinthink.magoko.archive.client.ArchiveClientConstants;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = ArchiveClientConstants.PREFIX)
-public class ArchiveClientProperties {}
+public class ArchiveClientProperties {
+
+  private BootstrapLaunchMode launchMode = DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE;
+}
