@@ -28,6 +28,8 @@ public final class OkHttpConstants {
       Integer.getInteger(PREFIX + ".dispatcher.keep-alive-time", 60);
   public static final TimeUnit DEFAULT_OKHTTP_DISPATCHER_TIMEUNIT =
       TimeUnit.valueOf(System.getProperty(PREFIX + ".dispatcher.timeunit", "SECONDS"));
+  public static final String DEFAULT_OKHTTP_DISPATCHER_THREAD_NAME =
+      System.getProperty(PREFIX + ".dispatcher.thread-name", "OkHttp Dispatcher");
   public static final boolean DEFAULT_OKHTTP_DISPATCHER_DAEMON =
       Boolean.getBoolean(PREFIX + ".dispatcher.daemon");
 

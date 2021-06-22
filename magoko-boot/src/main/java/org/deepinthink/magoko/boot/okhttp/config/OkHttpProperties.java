@@ -34,6 +34,7 @@ public class OkHttpProperties {
     private int maximumPoolSize = DEFAULT_OKHTTP_DISPATCHER_MAXIMUM_POOL_SIZE;
     private long keepAliveTime = DEFAULT_OKHTTP_DISPATCHER_KEEP_ALIVE_TIME;
     private TimeUnit timeUnit = DEFAULT_OKHTTP_DISPATCHER_TIMEUNIT;
+    private String threadName = DEFAULT_OKHTTP_DISPATCHER_THREAD_NAME;
     private boolean daemon = DEFAULT_OKHTTP_DISPATCHER_DAEMON;
   }
 

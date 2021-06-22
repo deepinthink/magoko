@@ -38,8 +38,6 @@ import org.springframework.context.annotation.Scope;
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttpAutoConfiguration {
 
-  public static final String OKHTTP_DISPATCHER_THREAD_NAME = "OkHttp Dispatcher";
-
   /**
    * OKHttpClients Should Be Shared.
    *
@@ -49,22 +47,24 @@ public class OkHttpAutoConfiguration {
 
   @Autowired
   public OkHttpAutoConfiguration(OkHttpProperties properties) {
+    OkHttpProperties.Dispatcher dispatcher = properties.getDispatcher();
+    OkHttpProperties.ConnectionPool connectionPool = properties.getConnectionPool();
     this.sharedClient =
         new OkHttpClient.Builder()
             .dispatcher(
                 new Dispatcher(
                     new ThreadPoolExecutor(
-                        properties.getDispatcher().getCorePoolSize(),
-                        properties.getDispatcher().getMaximumPoolSize(),
-                        properties.getDispatcher().getKeepAliveTime(),
-                        properties.getDispatcher().getTimeUnit(),
+                        dispatcher.getCorePoolSize(),
+                        dispatcher.getMaximumPoolSize(),
+                        dispatcher.getKeepAliveTime(),
+                        dispatcher.getTimeUnit(),
                         new SynchronousQueue<>(),
-                        Util.threadFactory(OKHTTP_DISPATCHER_THREAD_NAME, false))))
+                        Util.threadFactory(dispatcher.getThreadName(), dispatcher.isDaemon()))))
             .connectionPool(
                 new ConnectionPool(
-                    properties.getConnectionPool().getMaxIdleConnections(),
-                    properties.getConnectionPool().getKeepAliveDuration(),
-                    properties.getConnectionPool().getTimeUnit()))
+                    connectionPool.getMaxIdleConnections(),
+                    connectionPool.getKeepAliveDuration(),
+                    connectionPool.getTimeUnit()))
             .build();
   }
 
