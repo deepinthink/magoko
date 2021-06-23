@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.client.config;
+package org.deepinthink.magoko.archive.client.condition;
 
-import org.deepinthink.magoko.archive.client.condition.ConditionalOnArchiveClientStandalone;
-import org.springframework.boot.SpringBootConfiguration;
+import java.lang.annotation.*;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 
-@SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnArchiveClientStandalone
-public class ArchiveClientStandaloneConfiguration {}
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@ConditionalOnArchiveClientLaunchMode(BootstrapLaunchMode.STANDALONE)
+public @interface ConditionalOnArchiveClientStandalone {}

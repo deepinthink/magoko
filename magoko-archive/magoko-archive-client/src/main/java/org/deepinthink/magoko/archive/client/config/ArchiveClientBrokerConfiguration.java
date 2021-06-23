@@ -15,10 +15,9 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
-import org.deepinthink.magoko.archive.client.condition.ConditionalOnArchiveClientLaunchMode;
-import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+import org.deepinthink.magoko.archive.client.condition.ConditionalOnArchiveClientBroker;
 import org.springframework.boot.SpringBootConfiguration;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnArchiveClientLaunchMode(BootstrapLaunchMode.BROKER)
+@ConditionalOnArchiveClientBroker
 public class ArchiveClientBrokerConfiguration {}
