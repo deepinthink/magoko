@@ -20,6 +20,15 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name: Checkout [deepinthink/dataseer]
+        uses: actions/checkout@v2
+        with:
+          repository: deepinthink/dataseer
+          path: deepinthink/dataseer
+      - name: Install [deepinthink/dataseer]
+        run: |
+          cd deepinthink/dataseer
+          ./mvnw clean install -B -U
       - name: Checkout [deepinthink/groot]
         uses: actions/checkout@v2
         with:
