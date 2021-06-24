@@ -15,9 +15,12 @@
  */
 package org.deepinthink.magoko.pay.server.config;
 
+import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
 import org.deepinthink.magoko.pay.server.condition.ConditionalOnPayServerBroker;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
+@ConditionalOnClass(BrokerClientRSocketRequesterBootstrap.class)
 @ConditionalOnPayServerBroker
 public class PayServerBrokerConfiguration {}
