@@ -17,9 +17,11 @@ package org.deepinthink.magoko.stack.archive.server;
 
 import org.deepinthink.magoko.archive.server.EnableArchiveServer;
 import org.deepinthink.magoko.boot.banner.MagOKOBanner;
+import org.deepinthink.magoko.broker.client.EnableBrokerClient;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+@EnableBrokerClient
 @EnableArchiveServer
 @SpringBootApplication
 public class ArchiveServerApplication {

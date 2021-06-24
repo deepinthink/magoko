@@ -15,12 +15,35 @@
  */
 package org.deepinthink.magoko.archive.server.config;
 
+import java.util.Collections;
 import org.deepinthink.magoko.archive.server.condition.ConditionalOnArchiveServerBroker;
+import org.deepinthink.magoko.archive.server.controller.ArchiveServerRSocketController;
+import org.deepinthink.magoko.broker.client.BrokerClientRSocketHandlersProvider;
 import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnClass(BrokerClientRSocketRequesterBootstrap.class)
 @ConditionalOnArchiveServerBroker
-public class ArchiveServerBrokerConfiguration {}
+public class ArchiveServerBrokerConfiguration {
+
+  private final ApplicationContext applicationContext;
+
+  @Autowired
+  public ArchiveServerBrokerConfiguration(ApplicationContext applicationContext) {
+    this.applicationContext = applicationContext;
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BrokerClientRSocketHandlersProvider archiveServerBrokerRSocketHandlerProvider() {
+    return () ->
+        Collections.singletonList(
+            this.applicationContext.getBean(ArchiveServerRSocketController.class));
+  }
+}
