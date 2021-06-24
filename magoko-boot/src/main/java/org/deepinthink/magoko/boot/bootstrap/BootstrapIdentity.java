@@ -16,12 +16,14 @@
 package org.deepinthink.magoko.boot.bootstrap;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @NoArgsConstructor
 @Data
 @ToString
+@EqualsAndHashCode
 public class BootstrapIdentity {
   private int uid;
   private int type;

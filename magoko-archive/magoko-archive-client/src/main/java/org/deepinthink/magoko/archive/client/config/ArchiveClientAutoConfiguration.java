@@ -15,13 +15,28 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
+
+import org.deepinthink.magoko.archive.client.ArchiveClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ArchiveClientMarkerConfiguration.Marker.class)
 @Import({ArchiveClientBrokerConfiguration.class, ArchiveClientStandaloneConfiguration.class})
 @EnableConfigurationProperties(ArchiveClientProperties.class)
-public class ArchiveClientAutoConfiguration {}
+public class ArchiveClientAutoConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public ArchiveClient archiveClient(
+      @Qualifier(ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME) RSocketRequester requester) {
+    return ArchiveClient.fromRSocketRequester(requester);
+  }
+}

@@ -25,6 +25,15 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-archive-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-messaging</artifactId>
       <optional>true</optional>

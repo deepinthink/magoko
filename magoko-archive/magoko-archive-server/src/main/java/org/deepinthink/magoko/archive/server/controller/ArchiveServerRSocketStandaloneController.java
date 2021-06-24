@@ -15,18 +15,28 @@
  */
 package org.deepinthink.magoko.archive.server.controller;
 
-import org.springframework.core.io.buffer.DataBuffer;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.rsocket.RSocketRequester;
+import org.springframework.messaging.rsocket.annotation.ConnectMapping;
 import org.springframework.stereotype.Controller;
-import reactor.core.publisher.Flux;
 
-@MessageMapping("magoko.archive")
+@MessageMapping("magoko.archive.standalone")
 @Controller
-public class ArchiveServerRSocketController {
+public class ArchiveServerRSocketStandaloneController {
 
-  @MessageMapping("getObject")
-  public Flux<DataBuffer> getObject(@Payload Object id) {
-    return Flux.never();
+  private final Map<BootstrapIdentity, RSocketRequester> clientStore;
+
+  public ArchiveServerRSocketStandaloneController() {
+    this.clientStore = new ConcurrentHashMap<>();
+  }
+
+  @ConnectMapping("connect")
+  public void onArchiveClientConnect(
+      RSocketRequester requester, @Payload BootstrapIdentity identity) {
+    this.clientStore.putIfAbsent(identity, requester);
   }
 }

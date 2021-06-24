@@ -16,6 +16,8 @@
 package org.deepinthink.magoko.archive.client.config;
 
 import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE;
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_HOST;
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_PORT;
 
 import lombok.Data;
 import org.deepinthink.magoko.archive.client.ArchiveClientConstants;
@@ -25,6 +27,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = ArchiveClientConstants.PREFIX)
 public class ArchiveClientProperties {
-
   private BootstrapLaunchMode launchMode = DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE;
+  private final Standalone standalone = new Standalone();
+
+  @Data
+  public static class Standalone {
+    private String serverHost = DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_HOST;
+    private int serverPort = DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_PORT;
+  }
 }
