@@ -13,19 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client;
+package org.deepinthink.magoko.broker.client.condition;
 
-public final class BrokerClientConstants {
-  public static final String PREFIX = "magoko.broker.client";
+import java.lang.annotation.*;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+import org.deepinthink.magoko.boot.bootstrap.condition.ConditionalOnBootstrapLaunchMode;
 
-  public static final String BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME =
-      "BrokerClientRSocketRequester";
-
-  public static final String DEFAULT_BROKER_CLIENT_SERVER_HOST =
-      System.getProperty(PREFIX + ".server-host", "localhost");
-
-  public static final int DEFAULT_BROKER_CLIENT_SERVER_PORT =
-      Integer.getInteger(PREFIX + ".server-port", 8002);
-
-  private BrokerClientConstants() {}
-}
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@ConditionalOnBootstrapLaunchMode(BootstrapLaunchMode.BROKER)
+public @interface ConditionalOnBrokerClient {}

@@ -15,6 +15,9 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.DEFAULT_BROKER_CLIENT_SERVER_HOST;
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.DEFAULT_BROKER_CLIENT_SERVER_PORT;
+
 import lombok.Data;
 import org.deepinthink.magoko.broker.client.BrokerClientConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -22,6 +25,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = BrokerClientConstants.PREFIX)
 public class BrokerClientProperties {
-  private String serverHost;
-  private int serverPort;
+  private String serverHost = DEFAULT_BROKER_CLIENT_SERVER_HOST;
+  private int serverPort = DEFAULT_BROKER_CLIENT_SERVER_PORT;
 }
