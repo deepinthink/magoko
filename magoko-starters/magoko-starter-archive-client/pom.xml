@@ -22,5 +22,13 @@
       <groupId>org.deepinthink.magoko</groupId>
       <artifactId>magoko-archive-client</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-messaging</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.rsocket</groupId>
+      <artifactId>rsocket-transport-netty</artifactId>
+    </dependency>
   </dependencies>
 </project>

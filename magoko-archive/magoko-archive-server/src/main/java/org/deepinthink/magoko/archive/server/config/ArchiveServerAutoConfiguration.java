@@ -18,13 +18,16 @@ package org.deepinthink.magoko.archive.server.config;
 import org.deepinthink.magoko.archive.server.controller.ArchiveServerRSocketController;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ArchiveServerMarkerConfiguration.Marker.class)
+@ConditionalOnClass(RSocketRequester.class)
 @Import({ArchiveServerBrokerConfiguration.class, ArchiveServerStandaloneConfiguration.class})
 @EnableConfigurationProperties(ArchiveServerProperties.class)
 public class ArchiveServerAutoConfiguration {
