@@ -15,11 +15,46 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+
+import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
+import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.rsocket.RSocketStrategiesAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketRequester;
+import org.springframework.messaging.rsocket.RSocketStrategies;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
+@ConditionalOnClass({RSocketRequester.class, RSocketStrategies.class})
+@AutoConfigureAfter(RSocketStrategiesAutoConfiguration.class)
 @EnableConfigurationProperties(BrokerClientProperties.class)
-public class BrokerClientAutoConfiguration {}
+public class BrokerClientAutoConfiguration {
+
+  @Bean(BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  public RSocketRequester brokerClientRSocketRequester(
+      RSocketRequester.Builder builder,
+      BrokerClientProperties properties,
+      BootstrapIdentity identity,
+      RSocketStrategies rSocketStrategies) {
+    return builder
+        .rsocketStrategies(rSocketStrategies)
+        .setupData(identity)
+        .tcp(properties.getServerHost(), properties.getServerPort());
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BrokerClientRSocketRequesterBootstrap brokerClientRSocketRequesterBootstrap(
+      @Qualifier(BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
+    return new BrokerClientRSocketRequesterBootstrap(requester);
+  }
+}
