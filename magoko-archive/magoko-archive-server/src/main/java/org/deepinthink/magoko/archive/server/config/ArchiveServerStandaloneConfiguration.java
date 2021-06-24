@@ -17,8 +17,11 @@ package org.deepinthink.magoko.archive.server.config;
 
 import org.deepinthink.magoko.archive.server.condition.ConditionalOnArchiveServerStandalone;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.rsocket.server.RSocketServer;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
+@ConditionalOnClass(RSocketServer.class)
 @ConditionalOnArchiveServerStandalone
 public class ArchiveServerStandaloneConfiguration {
   public ArchiveServerStandaloneConfiguration() {}
