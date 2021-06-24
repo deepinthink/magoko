@@ -13,20 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.server.controller;
+package org.deepinthink.magoko.archive.client;
 
+import java.util.Objects;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Controller;
+import org.springframework.messaging.rsocket.RSocketRequester;
 import reactor.core.publisher.Flux;
 
-@MessageMapping("magoko.archive")
-@Controller
-public class ArchiveServerRSocketController {
+final class RSocketArchiveClient implements ArchiveClient {
 
-  @MessageMapping("getObject")
-  public Flux<DataBuffer> getObject(@Payload Object id) {
-    return Flux.never();
+  private final RSocketRequester requester;
+
+  RSocketArchiveClient(RSocketRequester requester) {
+    this.requester = Objects.requireNonNull(requester);
+  }
+
+  @Override
+  public Flux<DataBuffer> getObject(Object id) {
+    return this.requester.route("magoko.archive.getObject").data(id).retrieveFlux(DataBuffer.class);
   }
 }
