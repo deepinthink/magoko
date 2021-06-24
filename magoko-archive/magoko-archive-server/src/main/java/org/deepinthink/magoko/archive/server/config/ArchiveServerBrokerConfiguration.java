@@ -16,8 +16,11 @@
 package org.deepinthink.magoko.archive.server.config;
 
 import org.deepinthink.magoko.archive.server.condition.ConditionalOnArchiveServerBroker;
+import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
+@ConditionalOnClass(BrokerClientRSocketRequesterBootstrap.class)
 @ConditionalOnArchiveServerBroker
 public class ArchiveServerBrokerConfiguration {}

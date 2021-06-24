@@ -22,5 +22,9 @@
       <groupId>org.deepinthink.magoko</groupId>
       <artifactId>magoko-pay-server</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-broker-client</artifactId>
+    </dependency>
   </dependencies>
 </project>

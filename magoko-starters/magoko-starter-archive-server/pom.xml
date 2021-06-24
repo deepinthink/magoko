@@ -23,6 +23,10 @@
       <artifactId>magoko-archive-server</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-broker-client</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-rsocket</artifactId>
     </dependency>
