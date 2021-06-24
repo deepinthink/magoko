@@ -18,5 +18,8 @@ package org.deepinthink.magoko.broker.client;
 public final class BrokerClientConstants {
   public static final String PREFIX = "magoko.broker.client";
 
+  public static final String BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME =
+      "BrokerClientRSocketRequester";
+
   private BrokerClientConstants() {}
 }

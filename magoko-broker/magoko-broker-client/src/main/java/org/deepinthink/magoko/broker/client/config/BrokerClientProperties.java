@@ -21,4 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = BrokerClientConstants.PREFIX)
-public class BrokerClientProperties {}
+public class BrokerClientProperties {
+  private String serverHost;
+  private int serverPort;
+}
