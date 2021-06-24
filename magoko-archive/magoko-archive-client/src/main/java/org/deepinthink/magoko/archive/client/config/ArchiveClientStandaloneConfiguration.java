@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
-import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.ARCHIVE_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
 
 import org.deepinthink.magoko.archive.client.condition.ConditionalOnArchiveClientStandalone;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
@@ -28,8 +28,8 @@ import org.springframework.messaging.rsocket.RSocketRequester;
 @ConditionalOnArchiveClientStandalone
 public class ArchiveClientStandaloneConfiguration {
 
-  @Bean(ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
-  @ConditionalOnMissingBean(name = ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
+  @Bean(ARCHIVE_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = ARCHIVE_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
   public RSocketRequester archiveClientStandaloneRSocketRequester(
       RSocketRequester.Builder builder,
       ArchiveClientProperties properties,

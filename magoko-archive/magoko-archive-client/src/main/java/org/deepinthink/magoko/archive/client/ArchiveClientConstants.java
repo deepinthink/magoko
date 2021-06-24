@@ -20,7 +20,7 @@ import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 public final class ArchiveClientConstants {
   public static final String PREFIX = "magoko.archive.client";
 
-  public static final String ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME =
+  public static final String ARCHIVE_CLIENT_RSOCKET_REQUESTER_BEAN_NAME =
       "ArchiveClientRSocketRequester";
 
   public static final BootstrapLaunchMode DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE =

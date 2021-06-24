@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
-import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.ARCHIVE_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
 
 import io.rsocket.RSocket;
 import org.deepinthink.magoko.archive.client.ArchiveClient;
@@ -39,7 +39,7 @@ public class ArchiveClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ArchiveClient archiveClient(
-      @Qualifier(ARCHIVE_CLIENT_RSOCKET_REQUEST_BEAN_NAME) RSocketRequester requester) {
+      @Qualifier(ARCHIVE_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
     return ArchiveClient.fromRSocketRequester(requester);
   }
 }
