@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
 import org.deepinthink.magoko.broker.client.BrokerClientRSocketHandlersProvider;
+import org.deepinthink.magoko.broker.client.condition.ConditionalOnBrokerClient;
 import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ import org.springframework.stereotype.Controller;
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
 @ConditionalOnClass({RSocketRequester.class, RSocketStrategies.class})
 @AutoConfigureAfter(RSocketStrategiesAutoConfiguration.class)
+@ConditionalOnBrokerClient
 @EnableConfigurationProperties(BrokerClientProperties.class)
 public class BrokerClientAutoConfiguration {
 
