@@ -15,8 +15,8 @@
  */
 package org.deepinthink.magoko.config.server.config;
 
-import org.deepinthink.magoko.boot.bootstrap.condition.ConditionalOnBootstrapLaunchMode;
 import org.deepinthink.magoko.boot.bootstrap.config.BootstrapAutoConfiguration;
+import org.deepinthink.magoko.config.server.condition.ConditionalOnConfigServer;
 import org.deepinthink.magoko.config.server.controller.ConfigServerRSocketController;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ConfigServerMarkerConfiguration.Marker.class)
 @AutoConfigureAfter(BootstrapAutoConfiguration.class)
-@ConditionalOnBootstrapLaunchMode
+@ConditionalOnConfigServer
 @EnableConfigurationProperties(ConfigServerProperties.class)
 public class ConfigServerAutoConfiguration {
 
