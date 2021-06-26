@@ -80,4 +80,11 @@ public class ConfigClientRSocketRequester {
         .data(identity)
         .retrieveMono(new ParameterizedTypeReference<Map<String, Object>>() {});
   }
+
+  public Mono<Map<String, Object>> requestExcelConfig() {
+    return requester
+        .route(ccp.getExcel().getRoute())
+        .data(identity)
+        .retrieveMono(new ParameterizedTypeReference<Map<String, Object>>() {});
+  }
 }
