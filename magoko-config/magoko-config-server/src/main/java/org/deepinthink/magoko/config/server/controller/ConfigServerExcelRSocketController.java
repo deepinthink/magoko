@@ -22,11 +22,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Mono;
 
-@MessageMapping("config")
+@MessageMapping("magoko.config.excel")
 @Controller
-public class ConfigServerRSocketController {
+public class ConfigServerExcelRSocketController {
 
-  @MessageMapping("instance")
+  @MessageMapping("getExcelConfig")
   public Mono<Map<String, Object>> config(BootstrapIdentity identity) {
     return Mono.fromSupplier(HashMap::new);
   }

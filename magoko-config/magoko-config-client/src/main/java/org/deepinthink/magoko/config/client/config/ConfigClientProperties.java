@@ -25,10 +25,18 @@ public class ConfigClientProperties {
   private int serverPort;
 
   private final InstanceConfig instance = new InstanceConfig();
+  private final ExcelConfig excel = new ExcelConfig();
 
   @Data
   public static class InstanceConfig {
     private boolean enable = DEFAULT_CONFIG_CLIENT_INSTANCE_ENABLE;
     private String route = DEFAULT_CONFIG_CLIENT_INSTANCE_RSOCKET_ROUTE;
+  }
+
+  @Data
+  public static class ExcelConfig {
+    private boolean enable = DEFAULT_CONFIG_CLIENT_EXCEL_ENABLE;
+    private boolean autoRelease = DEFAULT_CONFIG_CLIENT_EXCEL_AUTO_RELEASE;
+    private String route = DEFAULT_CONFIG_CLIENT_EXCEL_RSOCKET_ROUTE;
   }
 }
