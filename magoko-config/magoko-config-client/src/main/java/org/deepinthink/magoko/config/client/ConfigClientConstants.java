@@ -23,6 +23,9 @@ public final class ConfigClientConstants {
   public static final String DEFAULT_CONFIG_CLIENT_ENABLE_MARKER_CLASSNAME =
       "org.deepinthink.magoko.config.client.EnableMarker";
 
+  public static final String DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME =
+      "ConfigClientRSocketRequester";
+
   public static final int DEFAULT_CONFIG_CLIENT_INSTANCE_ENV_POST_PROCESSOR_ORDER =
       Integer.getInteger(
           PREFIX + ".instance.order", DEFAULT_BOOTSTRAP_ENV_POST_PROCESSOR_ORDER + 1);
