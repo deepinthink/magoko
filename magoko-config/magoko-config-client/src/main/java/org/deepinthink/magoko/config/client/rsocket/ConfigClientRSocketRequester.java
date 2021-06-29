@@ -22,6 +22,8 @@ import java.util.function.Supplier;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapInstance;
 import org.deepinthink.magoko.config.client.config.ConfigClientProperties;
+import org.springframework.boot.BootstrapRegistry.InstanceSupplier;
+import org.springframework.boot.BootstrapRegistry.Scope;
 import org.springframework.boot.ConfigurableBootstrapContext;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -40,22 +42,24 @@ public class ConfigClientRSocketRequester {
   private final ConfigClientProperties ccp;
   private final BootstrapIdentity identity;
 
-  public static ConfigClientRSocketRequester getOrElseSupply(
-      ConfigurableBootstrapContext bootstrapContext,
-      Supplier<ConfigClientRSocketRequester> supplier) {
-    return bootstrapContext.getOrElseSupply(ConfigClientRSocketRequester.class, supplier);
-  }
-
   public static ConfigClientRSocketRequester get(
       ConfigurableBootstrapContext bootstrapContext,
       ConfigClientProperties ccp,
       BootstrapInstance instance) {
     return getOrElseSupply(
-        bootstrapContext, () -> ConfigClientRSocketRequester.from(ccp, instance));
+        bootstrapContext, () -> ConfigClientRSocketRequester.from(bootstrapContext, ccp, instance));
   }
 
-  public static ConfigClientRSocketRequester from(
-      ConfigClientProperties ccp, BootstrapInstance instance) {
+  private static ConfigClientRSocketRequester getOrElseSupply(
+      ConfigurableBootstrapContext bootstrapContext,
+      Supplier<ConfigClientRSocketRequester> supplier) {
+    return bootstrapContext.getOrElseSupply(ConfigClientRSocketRequester.class, supplier);
+  }
+
+  private static ConfigClientRSocketRequester from(
+      ConfigurableBootstrapContext bootstrapContext,
+      ConfigClientProperties ccp,
+      BootstrapInstance instance) {
     RSocketRequester requester =
         RSocketRequester.builder()
             .rsocketStrategies(
@@ -64,7 +68,18 @@ public class ConfigClientRSocketRequester {
                     .encoder(new Jackson2JsonEncoder(objectMapper, SUPPORTED_TYPES))
                     .build())
             .tcp(ccp.getServerHost(), ccp.getServerPort());
-    return new ConfigClientRSocketRequester(requester, ccp, instance);
+    ConfigClientRSocketRequester configRequester =
+        new ConfigClientRSocketRequester(requester, ccp, instance);
+    bootstrapContext.register(
+        ConfigClientRSocketRequester.class,
+        InstanceSupplier.of(configRequester).withScope(Scope.SINGLETON));
+    bootstrapContext.addCloseListener(
+        (bootstrapClosedEvent) ->
+            bootstrapClosedEvent
+                .getApplicationContext()
+                .getBeanFactory()
+                .registerSingleton(ConfigClientRSocketRequester.class.getName(), configRequester));
+    return configRequester;
   }
 
   private ConfigClientRSocketRequester(
@@ -86,5 +101,9 @@ public class ConfigClientRSocketRequester {
         .route(ccp.getExcel().getRoute())
         .data(identity)
         .retrieveMono(new ParameterizedTypeReference<Map<String, Object>>() {});
+  }
+
+  public RSocketRequester getRequester() {
+    return requester;
   }
 }

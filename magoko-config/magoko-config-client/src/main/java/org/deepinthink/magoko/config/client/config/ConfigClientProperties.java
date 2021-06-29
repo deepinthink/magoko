@@ -18,8 +18,11 @@ package org.deepinthink.magoko.config.client.config;
 import static org.deepinthink.magoko.config.client.ConfigClientConstants.*;
 
 import lombok.Data;
+import org.deepinthink.magoko.config.client.ConfigClientConstants;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
+@ConfigurationProperties(prefix = ConfigClientConstants.PREFIX)
 public class ConfigClientProperties {
   private String serverHost;
   private int serverPort;
