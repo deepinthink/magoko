@@ -18,12 +18,14 @@ package org.deepinthink.magoko.config.client.config;
 import static org.deepinthink.magoko.config.client.ConfigClientConstants.*;
 
 import lombok.Data;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 import org.deepinthink.magoko.config.client.ConfigClientConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = ConfigClientConstants.PREFIX)
 public class ConfigClientProperties {
+  private BootstrapLaunchMode launchMode = DEFAULT_CONFIG_CLIENT_LAUNCH_MODE;
   private String serverHost;
   private int serverPort;
 

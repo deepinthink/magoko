@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.config.client.rsocket;
+package org.deepinthink.magoko.config.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.rsocket.ConnectionSetupPayload;
+import io.rsocket.RSocket;
+import io.rsocket.SocketAcceptor;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -42,6 +45,8 @@ public class ConfigClientRSocketRequester {
   private final ConfigClientProperties ccp;
   private final BootstrapIdentity identity;
 
+  private SocketAcceptor socketAcceptor;
+
   public static ConfigClientRSocketRequester get(
       ConfigurableBootstrapContext bootstrapContext,
       ConfigClientProperties ccp,
@@ -60,16 +65,7 @@ public class ConfigClientRSocketRequester {
       ConfigurableBootstrapContext bootstrapContext,
       ConfigClientProperties ccp,
       BootstrapInstance instance) {
-    RSocketRequester requester =
-        RSocketRequester.builder()
-            .rsocketStrategies(
-                RSocketStrategies.builder()
-                    .decoder(new Jackson2JsonDecoder(objectMapper, SUPPORTED_TYPES))
-                    .encoder(new Jackson2JsonEncoder(objectMapper, SUPPORTED_TYPES))
-                    .build())
-            .tcp(ccp.getServerHost(), ccp.getServerPort());
-    ConfigClientRSocketRequester configRequester =
-        new ConfigClientRSocketRequester(requester, ccp, instance);
+    ConfigClientRSocketRequester configRequester = new ConfigClientRSocketRequester(ccp, instance);
     bootstrapContext.register(
         ConfigClientRSocketRequester.class,
         InstanceSupplier.of(configRequester).withScope(Scope.SINGLETON));
@@ -82,11 +78,24 @@ public class ConfigClientRSocketRequester {
     return configRequester;
   }
 
-  private ConfigClientRSocketRequester(
-      RSocketRequester requester, ConfigClientProperties ccp, BootstrapInstance instance) {
-    this.requester = Objects.requireNonNull(requester);
+  private ConfigClientRSocketRequester(ConfigClientProperties ccp, BootstrapInstance instance) {
+    this.requester =
+        RSocketRequester.builder()
+            .rsocketConnector(connector -> connector.acceptor(this::accept))
+            .rsocketStrategies(
+                RSocketStrategies.builder()
+                    .decoder(new Jackson2JsonDecoder(objectMapper, SUPPORTED_TYPES))
+                    .encoder(new Jackson2JsonEncoder(objectMapper, SUPPORTED_TYPES))
+                    .build())
+            .tcp(ccp.getServerHost(), ccp.getServerPort());
     this.ccp = Objects.requireNonNull(ccp);
     this.identity = Objects.requireNonNull(BootstrapIdentity.from(instance));
+  }
+
+  private Mono<RSocket> accept(ConnectionSetupPayload setup, RSocket sendingSocket) {
+    return Objects.nonNull(this.socketAcceptor)
+        ? this.socketAcceptor.accept(setup, sendingSocket)
+        : Mono.just(sendingSocket);
   }
 
   public Mono<Map<String, Object>> requestInstanceConfig() {
@@ -105,5 +114,9 @@ public class ConfigClientRSocketRequester {
 
   public RSocketRequester getRequester() {
     return requester;
+  }
+
+  public void setSocketAcceptor(SocketAcceptor socketAcceptor) {
+    this.socketAcceptor = socketAcceptor;
   }
 }

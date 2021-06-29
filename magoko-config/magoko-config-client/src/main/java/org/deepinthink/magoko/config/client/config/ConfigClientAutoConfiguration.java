@@ -17,31 +17,26 @@ package org.deepinthink.magoko.config.client.config;
 
 import static org.deepinthink.magoko.config.client.ConfigClientConstants.DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
 
-import java.util.Objects;
-import org.deepinthink.magoko.config.client.rsocket.ConfigClientRSocketRequester;
+import org.deepinthink.magoko.config.client.ConfigClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.rsocket.RSocketStrategiesAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.messaging.rsocket.RSocketRequester;
-import org.springframework.messaging.rsocket.RSocketStrategies;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnBean(ConfigClientRSocketRequester.class)
-@AutoConfigureAfter(RSocketStrategiesAutoConfiguration.class)
+@ConditionalOnClass(RSocketRequester.class)
+@Import({ConfigClientBrokerConfiguration.class, ConfigClientStandaloneConfiguration.class})
+@EnableConfigurationProperties(ConfigClientProperties.class)
 public class ConfigClientAutoConfiguration {
 
-  @Bean(DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
-  @ConditionalOnMissingBean(name = DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
-  public RSocketRequester configClientRSocketRequester(
-      ConfigClientRSocketRequester configRequester, RSocketStrategies rSocketStrategies) {
-    RSocketRequester requester = configRequester.getRequester();
-    return RSocketRequester.wrap(
-        Objects.requireNonNull(requester.rsocket()),
-        requester.dataMimeType(),
-        requester.metadataMimeType(),
-        rSocketStrategies);
+  @Bean
+  @ConditionalOnMissingBean
+  public ConfigClient configClient(
+      @Qualifier(DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME) RSocketRequester requester) {
+    return ConfigClient.fromRSocketRequester(requester);
   }
 }
