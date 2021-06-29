@@ -17,11 +17,16 @@ package org.deepinthink.magoko.config.client;
 
 import static org.deepinthink.magoko.boot.bootstrap.BootstrapConstants.DEFAULT_BOOTSTRAP_ENV_POST_PROCESSOR_ORDER;
 
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+
 public final class ConfigClientConstants {
   public static final String PREFIX = "magoko.config.client";
 
   public static final String DEFAULT_CONFIG_CLIENT_ENABLE_MARKER_CLASSNAME =
       "org.deepinthink.magoko.config.client.EnableMarker";
+
+  public static final BootstrapLaunchMode DEFAULT_CONFIG_CLIENT_LAUNCH_MODE =
+      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
 
   public static final String DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME =
       "ConfigClientRSocketRequester";
