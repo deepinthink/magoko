@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.config.client.config;
 
-import static org.deepinthink.magoko.config.client.ConfigClientConstants.DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
+import static org.deepinthink.magoko.config.client.ConfigClientConstants.CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -38,8 +38,8 @@ import org.springframework.messaging.rsocket.annotation.support.RSocketMessageHa
 @ConditionalOnConfigClientStandalone
 public class ConfigClientStandaloneConfiguration {
 
-  @Bean(DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
-  @ConditionalOnMissingBean(name = DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
+  @Bean(CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
+  @ConditionalOnMissingBean(name = CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
   public RSocketRequester configClientRSocketRequester(
       ConfigClientRSocketRequester configRequester,
       RSocketStrategies rSocketStrategies,

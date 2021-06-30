@@ -79,17 +79,20 @@ public class ConfigClientRSocketRequester {
   }
 
   private ConfigClientRSocketRequester(ConfigClientProperties ccp, BootstrapInstance instance) {
+    this.ccp = Objects.requireNonNull(ccp);
+    ConfigClientProperties.Standalone standalone = ccp.getStandalone();
+    this.identity = Objects.requireNonNull(BootstrapIdentity.from(instance));
     this.requester =
         RSocketRequester.builder()
+            .setupData(this.identity)
+            .setupRoute(standalone.getSetupRoute())
             .rsocketConnector(connector -> connector.acceptor(this::accept))
             .rsocketStrategies(
                 RSocketStrategies.builder()
                     .decoder(new Jackson2JsonDecoder(objectMapper, SUPPORTED_TYPES))
                     .encoder(new Jackson2JsonEncoder(objectMapper, SUPPORTED_TYPES))
                     .build())
-            .tcp(ccp.getServerHost(), ccp.getServerPort());
-    this.ccp = Objects.requireNonNull(ccp);
-    this.identity = Objects.requireNonNull(BootstrapIdentity.from(instance));
+            .tcp(standalone.getServerHost(), standalone.getServerPort());
   }
 
   private Mono<RSocket> accept(ConnectionSetupPayload setup, RSocket sendingSocket) {

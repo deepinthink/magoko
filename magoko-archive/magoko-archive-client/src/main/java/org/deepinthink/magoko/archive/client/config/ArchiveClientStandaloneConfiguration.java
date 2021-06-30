@@ -36,8 +36,8 @@ public class ArchiveClientStandaloneConfiguration {
       BootstrapIdentity identity) {
     ArchiveClientProperties.Standalone standalone = properties.getStandalone();
     return builder
-        .setupRoute("magoko.archive.standalone.connect")
         .setupData(identity)
+        .setupRoute(standalone.getSetupRoute())
         .tcp(standalone.getServerHost(), standalone.getServerPort());
   }
 }

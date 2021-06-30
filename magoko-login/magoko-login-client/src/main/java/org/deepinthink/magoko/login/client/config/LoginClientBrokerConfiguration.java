@@ -16,7 +16,7 @@
 package org.deepinthink.magoko.login.client.config;
 
 import static org.deepinthink.magoko.broker.client.BrokerClientConstants.BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
-import static org.deepinthink.magoko.login.client.LoginClientConstants.DEFAULT_LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+import static org.deepinthink.magoko.login.client.LoginClientConstants.LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
 
 import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
 import org.deepinthink.magoko.login.client.condition.ConditionalOnLoginClientBroker;
@@ -32,8 +32,8 @@ import org.springframework.messaging.rsocket.RSocketRequester;
 @ConditionalOnLoginClientBroker
 public class LoginClientBrokerConfiguration {
 
-  @Bean(DEFAULT_LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
-  @ConditionalOnMissingBean(name = DEFAULT_LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @Bean(LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
   public RSocketRequester loginClientBrokerRSocketRequester(
       @Qualifier(BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
     return requester;
