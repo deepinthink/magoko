@@ -15,13 +15,28 @@
  */
 package org.deepinthink.magoko.pay.client.config;
 
+import static org.deepinthink.magoko.pay.client.PayClientConstants.DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+
+import org.deepinthink.magoko.pay.client.PayClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(PayClientMarkerConfiguration.Marker.class)
 @Import({PayClientBrokerConfiguration.class, PayClientStandaloneConfiguration.class})
 @EnableConfigurationProperties(PayClientProperties.class)
-public class PayClientAutoConfiguration {}
+public class PayClientAutoConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public PayClient payClient(
+      @Qualifier(DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
+    return PayClient.fromRSocketRequester(requester);
+  }
+}

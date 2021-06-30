@@ -15,9 +15,29 @@
  */
 package org.deepinthink.magoko.pay.client.config;
 
+import static org.deepinthink.magoko.pay.client.PayClientConstants.DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+
+import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
 import org.deepinthink.magoko.pay.client.condition.ConditionalOnPayClientStandalone;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnPayClientStandalone
-public class PayClientStandaloneConfiguration {}
+public class PayClientStandaloneConfiguration {
+
+  @Bean(DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  public RSocketRequester payClientStandaloneRSocketRequester(
+      RSocketRequester.Builder builder,
+      PayClientProperties properties,
+      BootstrapIdentity identity) {
+    PayClientProperties.Standalone standalone = properties.getStandalone();
+    return builder
+        .setupRoute(standalone.getSetupRoute())
+        .setupData(identity)
+        .tcp(standalone.getServerHost(), standalone.getServerPort());
+  }
+}
