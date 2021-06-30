@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.login.client.config;
 
-import static org.deepinthink.magoko.login.client.LoginClientConstants.DEFAULT_LOGIN_CLIENT_LAUNCH_MODE;
+import static org.deepinthink.magoko.login.client.LoginClientConstants.*;
 
 import lombok.Data;
 import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
@@ -30,7 +30,8 @@ public class LoginClientProperties {
 
   @Data
   public static class Standalone {
-    private String serverHost;
-    private int serverPort;
+    private String serverHost = DEFAULT_LOGIN_CLIENT_STANDALONE_SERVER_HOST;
+    private int serverPort = DEFAULT_LOGIN_CLIENT_STANDALONE_SERVER_PORT;
+    private String setupRoute = DEFAULT_LOGIN_CLIENT_STANDALONE_SETUP_ROUTE;
   }
 }

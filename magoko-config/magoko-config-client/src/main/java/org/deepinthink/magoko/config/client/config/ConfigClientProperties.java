@@ -26,11 +26,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = ConfigClientConstants.PREFIX)
 public class ConfigClientProperties {
   private BootstrapLaunchMode launchMode = DEFAULT_CONFIG_CLIENT_LAUNCH_MODE;
-  private String serverHost;
-  private int serverPort;
-
+  private final Standalone standalone = new Standalone();
   private final InstanceConfig instance = new InstanceConfig();
   private final ExcelConfig excel = new ExcelConfig();
+
+  @Data
+  public static class Standalone {
+    private String serverHost = DEFAULT_CONFIG_CLIENT_STANDALONE_SERVER_HOST;
+    private int serverPort = DEFAULT_CONFIG_CLIENT_STANDALONE_SERVER_PORT;
+    private String setupRoute = DEFAULT_CONFIG_CLIENT_STANDALONE_SETUP_ROUTE;
+  }
 
   @Data
   public static class InstanceConfig {

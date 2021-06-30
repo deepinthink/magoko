@@ -20,11 +20,20 @@ import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 public final class LoginClientConstants {
   public static final String PREFIX = "magoko.login.client";
 
-  public static final String DEFAULT_LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME =
+  public static final String LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME =
       "LoginClientRSocketRequester";
 
   public static final BootstrapLaunchMode DEFAULT_LOGIN_CLIENT_LAUNCH_MODE =
       BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
+
+  public static final String DEFAULT_LOGIN_CLIENT_STANDALONE_SERVER_HOST =
+      System.getProperty(PREFIX + ".standalone.server-host", "localhost");
+
+  public static final int DEFAULT_LOGIN_CLIENT_STANDALONE_SERVER_PORT =
+      Integer.getInteger(PREFIX + ".standalone.server-port", 8004);
+
+  public static final String DEFAULT_LOGIN_CLIENT_STANDALONE_SETUP_ROUTE =
+      System.getProperty(PREFIX + ".standalone.setup-route", "magoko.login.standalone.connect");
 
   private LoginClientConstants() {}
 }

@@ -15,9 +15,7 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
-import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_LAUNCH_MODE;
-import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_HOST;
-import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_PORT;
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.*;
 
 import lombok.Data;
 import org.deepinthink.magoko.archive.client.ArchiveClientConstants;
@@ -34,5 +32,6 @@ public class ArchiveClientProperties {
   public static class Standalone {
     private String serverHost = DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_HOST;
     private int serverPort = DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_PORT;
+    private String setupRoute = DEFAULT_ARCHIVE_CLIENT_STANDALONE_SETUP_ROUTE;
   }
 }

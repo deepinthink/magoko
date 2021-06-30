@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.config.client.config;
 
-import static org.deepinthink.magoko.config.client.ConfigClientConstants.DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
+import static org.deepinthink.magoko.config.client.ConfigClientConstants.CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
 
 import org.deepinthink.magoko.config.client.ConfigClient;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +36,7 @@ public class ConfigClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ConfigClient configClient(
-      @Qualifier(DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME) RSocketRequester requester) {
+      @Qualifier(CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME) RSocketRequester requester) {
     return ConfigClient.fromRSocketRequester(requester);
   }
 }

@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.pay.client.config;
 
-import static org.deepinthink.magoko.pay.client.PayClientConstants.DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+import static org.deepinthink.magoko.pay.client.PayClientConstants.PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
 
 import org.deepinthink.magoko.pay.client.PayClient;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +36,7 @@ public class PayClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public PayClient payClient(
-      @Qualifier(DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
+      @Qualifier(PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
     return PayClient.fromRSocketRequester(requester);
   }
 }

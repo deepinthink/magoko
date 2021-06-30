@@ -28,29 +28,45 @@ public final class ConfigClientConstants {
   public static final BootstrapLaunchMode DEFAULT_CONFIG_CLIENT_LAUNCH_MODE =
       BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
 
-  public static final String DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME =
+  public static final String CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME =
       "ConfigClientRSocketRequester";
+
+  public static final String DEFAULT_CONFIG_CLIENT_STANDALONE_SERVER_HOST =
+      System.getProperty(PREFIX + ".standalone.server-host", "localhost");
+
+  public static final int DEFAULT_CONFIG_CLIENT_STANDALONE_SERVER_PORT =
+      Integer.getInteger(PREFIX + ".standalone.server-port", 8001);
+
+  public static final String DEFAULT_CONFIG_CLIENT_STANDALONE_SETUP_ROUTE =
+      System.getProperty(PREFIX + ".standalone.setup-route", "magoko.config.standalone.connect");
 
   public static final int DEFAULT_CONFIG_CLIENT_INSTANCE_ENV_POST_PROCESSOR_ORDER =
       Integer.getInteger(
           PREFIX + ".instance.order", DEFAULT_BOOTSTRAP_ENV_POST_PROCESSOR_ORDER + 1);
+
   public static final boolean DEFAULT_CONFIG_CLIENT_INSTANCE_ENABLE =
       Boolean.getBoolean(PREFIX + ".instance.enable");
+
   public static final String DEFAULT_CONFIG_CLIENT_INSTANCE_RSOCKET_ROUTE =
       System.getProperty(
           PREFIX + ".config-instance-route", "magoko.config.instance.getInstanceConfig");
+
   public static final String DEFAULT_CONFIG_CLIENT_INSTANCE_PROPERTY_NAME =
       System.getProperty(PREFIX + ".instance.property-source", "config.instance.properties");
 
   public static final int DEFAULT_CONFIG_CLIENT_EXCEL_ENV_POST_PROCESSOR_ORDER =
       Integer.getInteger(
           PREFIX + ".excel.order", DEFAULT_CONFIG_CLIENT_INSTANCE_ENV_POST_PROCESSOR_ORDER + 1);
+
   public static final boolean DEFAULT_CONFIG_CLIENT_EXCEL_ENABLE =
       Boolean.getBoolean(PREFIX + ".excel.enable");
+
   public static final boolean DEFAULT_CONFIG_CLIENT_EXCEL_AUTO_RELEASE =
       Boolean.getBoolean(PREFIX + ".excel.auto-release");
+
   public static final String DEFAULT_CONFIG_CLIENT_EXCEL_RSOCKET_ROUTE =
       System.getProperty(PREFIX + ".config-excel-route", "magoko.config.excel.getExcelConfig");
+
   public static final String DEFAULT_CONFIG_CLIENT_EXCEL_PROPERTY_NAME =
       System.getProperty(PREFIX + ".excel.property-source", "config.excel.properties");
 
