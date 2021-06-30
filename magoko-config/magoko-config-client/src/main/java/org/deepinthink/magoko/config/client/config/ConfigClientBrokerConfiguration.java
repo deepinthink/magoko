@@ -15,9 +15,27 @@
  */
 package org.deepinthink.magoko.config.client.config;
 
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+import static org.deepinthink.magoko.config.client.ConfigClientConstants.DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME;
+
+import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
 import org.deepinthink.magoko.config.client.condition.ConditionalOnConfigClientBroker;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
+@ConditionalOnBean(BrokerClientRSocketRequesterBootstrap.class)
 @ConditionalOnConfigClientBroker
-public class ConfigClientBrokerConfiguration {}
+public class ConfigClientBrokerConfiguration {
+
+  @Bean(DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
+  @ConditionalOnMissingBean(name = DEFAULT_CONFIG_CLIENT_RSOCKET_REQUEST_BEAN_NAME)
+  public RSocketRequester configClientBrokerRSocketRequester(
+      @Qualifier(BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
+    return requester;
+  }
+}
