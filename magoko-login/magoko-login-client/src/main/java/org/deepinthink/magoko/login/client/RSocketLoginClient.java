@@ -15,16 +15,13 @@
  */
 package org.deepinthink.magoko.login.client;
 
-import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+import java.util.Objects;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
-public final class LoginClientConstants {
-  public static final String PREFIX = "magoko.login.client";
+final class RSocketLoginClient implements LoginClient {
+  private final RSocketRequester requester;
 
-  public static final String DEFAULT_LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME =
-      "LoginClientRSocketRequester";
-
-  public static final BootstrapLaunchMode DEFAULT_LOGIN_CLIENT_LAUNCH_MODE =
-      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
-
-  private LoginClientConstants() {}
+  RSocketLoginClient(RSocketRequester requester) {
+    this.requester = Objects.requireNonNull(requester);
+  }
 }
