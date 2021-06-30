@@ -15,12 +15,27 @@
  */
 package org.deepinthink.magoko.pay.client.config;
 
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+import static org.deepinthink.magoko.pay.client.PayClientConstants.DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+
 import org.deepinthink.magoko.broker.client.context.BrokerClientRSocketRequesterBootstrap;
 import org.deepinthink.magoko.pay.client.condition.ConditionalOnPayClientBroker;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnClass(BrokerClientRSocketRequesterBootstrap.class)
 @ConditionalOnPayClientBroker
-public class PayClientBrokerConfiguration {}
+public class PayClientBrokerConfiguration {
+
+  @Bean(DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = DEFAULT_PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  public RSocketRequester payClientBrokerRSocketRequester(
+      @Qualifier(BROKER_CLIENT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester requester) {
+    return requester;
+  }
+}

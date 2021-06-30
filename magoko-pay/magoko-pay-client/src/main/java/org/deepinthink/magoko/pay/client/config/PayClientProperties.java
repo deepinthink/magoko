@@ -15,10 +15,23 @@
  */
 package org.deepinthink.magoko.pay.client.config;
 
+import static org.deepinthink.magoko.pay.client.PayClientConstants.*;
+
 import lombok.Data;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 import org.deepinthink.magoko.pay.client.PayClientConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = PayClientConstants.PREFIX)
-public class PayClientProperties {}
+public class PayClientProperties {
+  private BootstrapLaunchMode launchMode = DEFAULT_PAY_CLIENT_LAUNCH_MODE;
+  private final Standalone standalone = new Standalone();
+
+  @Data
+  public static class Standalone {
+    private String serverHost = DEFAULT_PAY_CLIENT_STANDALONE_SERVER_HOST;
+    private int serverPort = DEFAULT_PAY_CLIENT_STANDALONE_SERVER_PORT;
+    private String setupRoute = DEFAULT_PAY_CLIENT_STANDALONE_SETUP_ROUTE;
+  }
+}
