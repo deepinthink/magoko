@@ -15,8 +15,13 @@
  */
 package org.deepinthink.magoko.archive.server;
 
+import org.deepinthink.magoko.archive.server.config.ArchiveServerProperties.ArchiveDriver;
+
 public final class ArchiveServerConstants {
   public static final String PREFIX = "magoko.archive.server";
+
+  public static final ArchiveDriver DEFAULT_ARCHIVE_SERVER_DRIVER =
+      ArchiveDriver.valueOf(System.getProperty(PREFIX + ".driver", "GROOT_OSS"));
 
   private ArchiveServerConstants() {}
 }

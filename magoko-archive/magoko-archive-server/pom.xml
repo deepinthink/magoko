@@ -43,5 +43,10 @@
       <artifactId>spring-messaging</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.deepinthink.groot</groupId>
+      <artifactId>groot-starter-oss</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 </project>
