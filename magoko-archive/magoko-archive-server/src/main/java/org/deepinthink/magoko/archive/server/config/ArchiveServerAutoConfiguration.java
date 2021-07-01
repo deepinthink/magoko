@@ -16,6 +16,7 @@
 package org.deepinthink.magoko.archive.server.config;
 
 import org.deepinthink.magoko.archive.server.controller.ArchiveServerRSocketController;
+import org.deepinthink.magoko.archive.server.groot.GrootOSSConfiguration;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -28,8 +29,12 @@ import org.springframework.messaging.rsocket.RSocketRequester;
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ArchiveServerMarkerConfiguration.Marker.class)
 @ConditionalOnClass(RSocketRequester.class)
-@Import({ArchiveServerBrokerConfiguration.class, ArchiveServerStandaloneConfiguration.class})
 @EnableConfigurationProperties(ArchiveServerProperties.class)
+@Import({
+  ArchiveServerBrokerConfiguration.class,
+  ArchiveServerStandaloneConfiguration.class,
+  GrootOSSConfiguration.class
+})
 public class ArchiveServerAutoConfiguration {
 
   @Bean

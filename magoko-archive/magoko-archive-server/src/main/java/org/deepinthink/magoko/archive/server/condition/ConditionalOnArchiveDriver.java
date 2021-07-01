@@ -13,20 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.server.config;
+package org.deepinthink.magoko.archive.server.condition;
 
-import static org.deepinthink.magoko.archive.server.ArchiveServerConstants.DEFAULT_ARCHIVE_SERVER_DRIVER;
+import java.lang.annotation.*;
+import org.deepinthink.magoko.archive.server.config.ArchiveServerProperties.ArchiveDriver;
+import org.springframework.context.annotation.Conditional;
 
-import lombok.Data;
-import org.deepinthink.magoko.archive.server.ArchiveServerConstants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@Data
-@ConfigurationProperties(prefix = ArchiveServerConstants.PREFIX)
-public class ArchiveServerProperties {
-  private ArchiveDriver driver = DEFAULT_ARCHIVE_SERVER_DRIVER;
-
-  public enum ArchiveDriver {
-    GROOT_OSS;
-  }
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(OnArchiveDriverCondition.class)
+public @interface ConditionalOnArchiveDriver {
+  ArchiveDriver value() default ArchiveDriver.GROOT_OSS;
 }

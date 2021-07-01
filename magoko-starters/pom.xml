@@ -20,7 +20,6 @@
   </properties>
   <modules>
     <module>magoko-starter-archive-client</module>
-    <module>magoko-starter-archive-oss</module>
     <module>magoko-starter-archive-server</module>
     <module>magoko-starter-boot</module>
     <module>magoko-starter-boot-msocket</module>
