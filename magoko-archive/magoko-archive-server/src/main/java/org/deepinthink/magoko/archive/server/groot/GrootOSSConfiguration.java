@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.server.config;
+package org.deepinthink.magoko.archive.server.groot;
 
-import static org.deepinthink.magoko.archive.server.ArchiveServerConstants.DEFAULT_ARCHIVE_SERVER_DRIVER;
+import org.deepinthink.groot.oss.config.OSSProperties;
+import org.deepinthink.magoko.archive.server.condition.ConditionalOnArchiveDriver;
+import org.deepinthink.magoko.archive.server.config.ArchiveServerProperties.ArchiveDriver;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
-import lombok.Data;
-import org.deepinthink.magoko.archive.server.ArchiveServerConstants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@Data
-@ConfigurationProperties(prefix = ArchiveServerConstants.PREFIX)
-public class ArchiveServerProperties {
-  private ArchiveDriver driver = DEFAULT_ARCHIVE_SERVER_DRIVER;
-
-  public enum ArchiveDriver {
-    GROOT_OSS;
-  }
-}
+@SpringBootConfiguration(proxyBeanMethods = false)
+@ConditionalOnBean(OSSProperties.class)
+@ConditionalOnArchiveDriver(ArchiveDriver.GROOT_OSS)
+public class GrootOSSConfiguration {}

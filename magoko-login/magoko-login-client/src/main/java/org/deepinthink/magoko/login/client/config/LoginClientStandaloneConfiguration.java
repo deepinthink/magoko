@@ -15,9 +15,29 @@
  */
 package org.deepinthink.magoko.login.client.config;
 
+import static org.deepinthink.magoko.login.client.LoginClientConstants.LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME;
+
+import org.deepinthink.magoko.boot.bootstrap.BootstrapIdentity;
 import org.deepinthink.magoko.login.client.condition.ConditionalOnLoginClientStandalone;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnLoginClientStandalone
-public class LoginClientStandaloneConfiguration {}
+public class LoginClientStandaloneConfiguration {
+
+  @Bean(LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = LOGIN_CLIENT_RSOCKET_REQUESTER_BEAN_NAME)
+  public RSocketRequester loginClientStandaloneRSocketRequester(
+      RSocketRequester.Builder builder,
+      LoginClientProperties properties,
+      BootstrapIdentity identity) {
+    LoginClientProperties.Standalone standalone = properties.getStandalone();
+    return builder
+        .setupData(identity)
+        .setupRoute(standalone.getSetupRoute())
+        .tcp(standalone.getServerHost(), standalone.getServerPort());
+  }
+}

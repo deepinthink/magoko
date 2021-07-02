@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.archive.server.config;
+package org.deepinthink.magoko.login.client;
 
-import static org.deepinthink.magoko.archive.server.ArchiveServerConstants.DEFAULT_ARCHIVE_SERVER_DRIVER;
+import java.util.Objects;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
-import lombok.Data;
-import org.deepinthink.magoko.archive.server.ArchiveServerConstants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+final class RSocketLoginClient implements LoginClient {
+  private final RSocketRequester requester;
 
-@Data
-@ConfigurationProperties(prefix = ArchiveServerConstants.PREFIX)
-public class ArchiveServerProperties {
-  private ArchiveDriver driver = DEFAULT_ARCHIVE_SERVER_DRIVER;
-
-  public enum ArchiveDriver {
-    GROOT_OSS;
+  RSocketLoginClient(RSocketRequester requester) {
+    this.requester = Objects.requireNonNull(requester);
   }
 }

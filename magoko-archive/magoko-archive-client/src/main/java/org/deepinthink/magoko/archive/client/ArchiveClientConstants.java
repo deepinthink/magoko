@@ -30,7 +30,10 @@ public final class ArchiveClientConstants {
       System.getProperty(PREFIX + ".standalone.server-host", "localhost");
 
   public static final int DEFAULT_ARCHIVE_CLIENT_STANDALONE_SERVER_PORT =
-      Integer.getInteger(PREFIX + ".standalone.server-port", 8001);
+      Integer.getInteger(PREFIX + ".standalone.server-port", 8003);
+
+  public static final String DEFAULT_ARCHIVE_CLIENT_STANDALONE_SETUP_ROUTE =
+      System.getProperty(PREFIX + ".standalone.setup-route", "magoko.archive.standalone.connect");
 
   private ArchiveClientConstants() {}
 }

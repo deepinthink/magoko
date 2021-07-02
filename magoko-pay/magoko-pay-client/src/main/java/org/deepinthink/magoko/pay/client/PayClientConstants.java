@@ -15,8 +15,24 @@
  */
 package org.deepinthink.magoko.pay.client;
 
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
+
 public final class PayClientConstants {
   public static final String PREFIX = "magoko.pay.client";
+
+  public static final String PAY_CLIENT_RSOCKET_REQUESTER_BEAN_NAME = "PayClientRSocketRequester";
+
+  public static final BootstrapLaunchMode DEFAULT_PAY_CLIENT_LAUNCH_MODE =
+      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "STANDALONE"));
+
+  public static final String DEFAULT_PAY_CLIENT_STANDALONE_SERVER_HOST =
+      System.getProperty(PREFIX + ".standalone.server-host", "localhost");
+
+  public static final int DEFAULT_PAY_CLIENT_STANDALONE_SERVER_PORT =
+      Integer.getInteger(PREFIX + ".standalone.server-port", 8005);
+
+  public static final String DEFAULT_PAY_CLIENT_STANDALONE_SETUP_ROUTE =
+      System.getProperty(PREFIX + ".standalone.setup-route", "magoko.pay.standalone.connect");
 
   private PayClientConstants() {}
 }
