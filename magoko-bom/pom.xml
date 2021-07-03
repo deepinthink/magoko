@@ -67,6 +67,16 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-login-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-login-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-starter-archive-client</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -98,6 +108,16 @@
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-starter-config-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-login-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-login-server</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
