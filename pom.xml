@@ -58,6 +58,7 @@
     <module>magoko-login</module>
     <module>magoko-parent</module>
     <module>magoko-pay</module>
+    <module>magoko-stack</module>
     <module>magoko-starters</module>
   </modules>
   <build>
