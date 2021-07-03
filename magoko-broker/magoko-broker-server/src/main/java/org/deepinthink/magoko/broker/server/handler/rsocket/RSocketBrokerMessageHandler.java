@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.config;
+package org.deepinthink.magoko.broker.server.handler.rsocket;
 
-import java.net.InetAddress;
-import lombok.Data;
-import org.deepinthink.magoko.broker.server.BrokerServerConstants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.deepinthink.magoko.broker.server.handler.BrokerMessageHandler;
 
-@Data
-@ConfigurationProperties(prefix = BrokerServerConstants.PREFIX)
-public class BrokerServerProperties {
+class RSocketBrokerMessageHandler implements BrokerMessageHandler {
 
-  private final Connector connector = new Connector();
+  private final RSocketBrokerMessageHandlerRegistry registry;
 
-  @Data
-  public static class Connector {
-    private InetAddress host;
-    private int port;
+  RSocketBrokerMessageHandler(RSocketBrokerMessageHandlerRegistry registry) {
+    this.registry = registry;
   }
 }

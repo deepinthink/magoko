@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.config;
+package org.deepinthink.magoko.broker.server.connector;
 
 import java.net.InetAddress;
-import lombok.Data;
-import org.deepinthink.magoko.broker.server.BrokerServerConstants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import java.time.Duration;
 
-@Data
-@ConfigurationProperties(prefix = BrokerServerConstants.PREFIX)
-public class BrokerServerProperties {
+public interface ConfigurableBrokerConnectorServerFactory {
+  void setHost(InetAddress host);
 
-  private final Connector connector = new Connector();
+  void setPort(int port);
 
-  @Data
-  public static class Connector {
-    private InetAddress host;
-    private int port;
-  }
+  void setLifecycleTimeout(Duration lifecycleTimeout);
 }
