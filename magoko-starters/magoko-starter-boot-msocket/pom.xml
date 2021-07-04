@@ -6,23 +6,25 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.deepinthink.magoko</groupId>
-    <artifactId>magoko-parent</artifactId>
+    <artifactId>magoko-starters</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../magoko-parent/pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-boot</artifactId>
+  <artifactId>magoko-starter-boot-msocket</artifactId>
   <packaging>jar</packaging>
-  <description>MagOKO :: Boot</description>
+  <description>MagOKO Starter :: Boot MSocket</description>
   <dependencies>
+    <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-boot</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.rsocket</groupId>
       <artifactId>rsocket-transport-netty</artifactId>
-      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
