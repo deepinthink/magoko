@@ -23,5 +23,8 @@ public final class MSocketConstants {
   public static final MSocketTransportType DEFAULT_SERVER_TRANSPORT_TYPE =
       MSocketTransportType.valueOf(System.getProperty(PREFIX + ".server.transport-type", "TCP"));
 
+  public static final String DEFAULT_SERVER_MAPPING_PATH =
+      System.getProperty(PREFIX + ".server.mapping-path", "/ws");
+
   private MSocketConstants() {}
 }
