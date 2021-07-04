@@ -14,17 +14,10 @@
   <packaging>pom</packaging>
   <description>MagOKO :: BOM</description>
   <properties>
-    <dep.lombok.version>1.18.20</dep.lombok.version>
     <dep.guava.version>30.0-jre</dep.guava.version>
   </properties>
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${dep.lombok.version}</version>
-        <scope>provided</scope>
-      </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
