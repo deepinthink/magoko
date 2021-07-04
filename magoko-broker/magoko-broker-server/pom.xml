@@ -16,7 +16,7 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <artifactId>spring-boot-starter-rsocket</artifactId>
       <optional>true</optional>
     </dependency>
   </dependencies>

@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server;
+package org.deepinthink.magoko.broker.server.messaging.rsocket;
 
-public final class BrokerServerConstants {
-  public static final String PREFIX = "magoko.broker.server";
+import io.rsocket.ConnectionSetupPayload;
+import io.rsocket.RSocket;
+import org.deepinthink.magoko.broker.server.messaging.BrokerMessagingHandlerRegistry;
+import reactor.core.publisher.Mono;
 
-  public static final String RSOCKET_PROXY_SERVER_DAEMON_AWAIT_THREAD_NAME =
-      "RSocketBrokerProxyServer";
+public class RSocketBrokerMessagingHandlerRegistry implements BrokerMessagingHandlerRegistry {
 
-  private BrokerServerConstants() {}
+  @Override
+  public Mono<RSocket> accept(ConnectionSetupPayload setup, RSocket sendingSocket) {
+    return Mono.just(sendingSocket);
+  }
 }

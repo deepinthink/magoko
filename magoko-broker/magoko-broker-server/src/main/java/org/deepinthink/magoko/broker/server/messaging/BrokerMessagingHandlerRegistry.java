@@ -13,13 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server;
+package org.deepinthink.magoko.broker.server.messaging;
 
-public final class BrokerServerConstants {
-  public static final String PREFIX = "magoko.broker.server";
+import io.rsocket.SocketAcceptor;
 
-  public static final String RSOCKET_PROXY_SERVER_DAEMON_AWAIT_THREAD_NAME =
-      "RSocketBrokerProxyServer";
-
-  private BrokerServerConstants() {}
-}
+public interface BrokerMessagingHandlerRegistry extends SocketAcceptor {}

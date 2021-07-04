@@ -13,13 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server;
+package org.deepinthink.magoko.broker.server.proxy.context;
 
-public final class BrokerServerConstants {
-  public static final String PREFIX = "magoko.broker.server";
+import org.deepinthink.magoko.broker.server.proxy.BrokerProxyServer;
+import org.springframework.context.ApplicationEvent;
 
-  public static final String RSOCKET_PROXY_SERVER_DAEMON_AWAIT_THREAD_NAME =
-      "RSocketBrokerProxyServer";
+public class BrokerProxyServerInitializedEvent extends ApplicationEvent {
+  public BrokerProxyServerInitializedEvent(BrokerProxyServer proxyServer) {
+    super(proxyServer);
+  }
 
-  private BrokerServerConstants() {}
+  public BrokerProxyServer getServer() {
+    return this.getSource();
+  }
+
+  @Override
+  public BrokerProxyServer getSource() {
+    return (BrokerProxyServer) super.getSource();
+  }
 }
