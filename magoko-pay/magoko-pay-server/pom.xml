@@ -15,13 +15,14 @@
   <description>MagOKO Pay :: Server</description>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-boot</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.deepinthink.magoko</groupId>
-      <artifactId>magoko-pay-client</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-rsocket</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>

@@ -13,17 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.login.server.config;
+package org.deepinthink.magoko.archive.server.broker;
 
-import org.deepinthink.magoko.login.server.broker.LoginServerBrokerConfiguration;
-import org.deepinthink.magoko.login.server.direct.LoginServerDirectConfiguration;
+import org.deepinthink.magoko.archive.server.condition.ConditionalOnArchiveServerBroker;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnBean(LoginServerMarkerConfiguration.Marker.class)
-@EnableConfigurationProperties(LoginServerProperties.class)
-@Import({LoginServerBrokerConfiguration.class, LoginServerDirectConfiguration.class})
-public class LoginServerAutoConfiguration {}
+@ConditionalOnArchiveServerBroker
+public class ArchiveServerBrokerConfiguration {}
