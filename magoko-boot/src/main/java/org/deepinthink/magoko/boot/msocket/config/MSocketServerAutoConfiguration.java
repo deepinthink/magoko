@@ -53,6 +53,7 @@ public class MSocketServerAutoConfiguration {
     mapper.from(properties::getHost).to(serverFactory::setHost);
     mapper.from(properties::getPort).to(serverFactory::setPort);
     mapper.from(properties::getTransportType).to(serverFactory::setTransportType);
+    mapper.from(properties::getMappingPath).to(serverFactory::setMappingPath);
     customizers.orderedStream().forEach((customizer) -> customizer.customize(serverFactory));
     return serverFactory;
   }

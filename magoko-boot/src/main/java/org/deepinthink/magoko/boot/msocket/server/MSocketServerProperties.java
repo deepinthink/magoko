@@ -15,6 +15,7 @@
  */
 package org.deepinthink.magoko.boot.msocket.server;
 
+import static org.deepinthink.magoko.boot.msocket.MSocketConstants.DEFAULT_SERVER_MAPPING_PATH;
 import static org.deepinthink.magoko.boot.msocket.MSocketConstants.DEFAULT_SERVER_TRANSPORT_TYPE;
 
 import java.net.InetAddress;
@@ -24,6 +25,7 @@ public class MSocketServerProperties {
   private InetAddress host;
   private int port;
   private MSocketTransportType transportType = DEFAULT_SERVER_TRANSPORT_TYPE;
+  private String mappingPath = DEFAULT_SERVER_MAPPING_PATH;
 
   public InetAddress getHost() {
     return host;
@@ -47,5 +49,13 @@ public class MSocketServerProperties {
 
   public void setTransportType(MSocketTransportType transportType) {
     this.transportType = transportType;
+  }
+
+  public String getMappingPath() {
+    return mappingPath;
+  }
+
+  public void setMappingPath(String mappingPath) {
+    this.mappingPath = mappingPath;
   }
 }
