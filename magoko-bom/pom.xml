@@ -95,6 +95,11 @@
       </dependency>
       <dependency>
         <groupId>org.deepinthink.magoko</groupId>
+        <artifactId>magoko-starter-boot-msocket</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.deepinthink.magoko</groupId>
         <artifactId>magoko-starter-broker-client</artifactId>
         <version>${project.version}</version>
       </dependency>
