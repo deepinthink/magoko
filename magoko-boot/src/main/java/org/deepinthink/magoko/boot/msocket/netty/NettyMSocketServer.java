@@ -50,7 +50,7 @@ final class NettyMSocketServer implements MSocketServer {
 
   @Override
   public void stop() {
-    if (!this.isRunning()) {
+    if (this.isRunning()) {
       this.server.dispose();
       this.server = null;
     }

@@ -51,7 +51,7 @@ final class RSocketBrokerProxyServer implements BrokerProxyServer {
 
   @Override
   public void stop() {
-    if (!this.isRunning()) {
+    if (this.isRunning()) {
       this.serverChannel.dispose();
       this.serverChannel = null;
     }
