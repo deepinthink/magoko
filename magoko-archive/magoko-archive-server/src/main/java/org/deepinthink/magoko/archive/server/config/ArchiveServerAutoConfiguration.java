@@ -15,11 +15,15 @@
  */
 package org.deepinthink.magoko.archive.server.config;
 
+import org.deepinthink.magoko.archive.server.broker.ArchiveServerBrokerConfiguration;
+import org.deepinthink.magoko.archive.server.direct.ArchiveServerDirectConfiguration;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ArchiveServerMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(ArchiveServerProperties.class)
+@Import({ArchiveServerBrokerConfiguration.class, ArchiveServerDirectConfiguration.class})
 public class ArchiveServerAutoConfiguration {}
