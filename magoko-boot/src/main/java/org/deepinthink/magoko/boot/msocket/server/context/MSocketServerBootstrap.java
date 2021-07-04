@@ -15,6 +15,8 @@
  */
 package org.deepinthink.magoko.boot.msocket.server.context;
 
+import java.util.Objects;
+import org.deepinthink.magoko.boot.msocket.server.MSocketServer;
 import org.deepinthink.magoko.boot.msocket.server.MSocketServerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -23,9 +25,12 @@ import org.springframework.context.SmartLifecycle;
 
 public class MSocketServerBootstrap implements SmartLifecycle, ApplicationContextAware {
 
+  private final MSocketServer server;
   private ApplicationContext applicationContext;
 
-  public MSocketServerBootstrap(MSocketServerFactory serverFactory) {}
+  public MSocketServerBootstrap(MSocketServerFactory serverFactory) {
+    this.server = Objects.requireNonNull(serverFactory.createServer());
+  }
 
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -33,13 +38,18 @@ public class MSocketServerBootstrap implements SmartLifecycle, ApplicationContex
   }
 
   @Override
-  public void start() {}
+  public void start() {
+    this.server.start();
+    this.applicationContext.publishEvent(new MSocketServerInitializedEvent(this.server));
+  }
 
   @Override
-  public void stop() {}
+  public void stop() {
+    this.server.stop();
+  }
 
   @Override
   public boolean isRunning() {
-    return false;
+    return this.server.isRunning();
   }
 }
