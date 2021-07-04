@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.config;
+package org.deepinthink.magoko.broker.server.messaging;
 
-import org.deepinthink.magoko.broker.server.messaging.BrokerMessagingConfiguration;
-import org.deepinthink.magoko.broker.server.proxy.BrokerProxyServerConfiguration;
+import org.deepinthink.magoko.broker.server.messaging.rsocket.RSocketBrokerMessagingHandlerRegistry;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnBean(BrokerServerMarkerConfiguration.Marker.class)
-@EnableConfigurationProperties(BrokerServerProperties.class)
-@Import({BrokerMessagingConfiguration.class, BrokerProxyServerConfiguration.class})
-public class BrokerServerAutoConfiguration {}
+public class BrokerMessagingConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BrokerMessagingHandlerRegistry brokerMessagingHandlerRegistry() {
+    return new RSocketBrokerMessagingHandlerRegistry();
+  }
+}

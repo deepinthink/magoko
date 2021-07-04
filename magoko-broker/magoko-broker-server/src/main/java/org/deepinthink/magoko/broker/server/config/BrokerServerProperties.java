@@ -17,7 +17,15 @@ package org.deepinthink.magoko.broker.server.config;
 
 import static org.deepinthink.magoko.broker.server.BrokerServerConstants.PREFIX;
 
+import org.deepinthink.magoko.broker.server.proxy.BrokerProxyServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = PREFIX)
-public class BrokerServerProperties {}
+public class BrokerServerProperties {
+
+  private final BrokerProxyServerProperties proxy = new BrokerProxyServerProperties();
+
+  public BrokerProxyServerProperties getProxy() {
+    return proxy;
+  }
+}
