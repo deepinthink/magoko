@@ -15,6 +15,8 @@
  */
 package org.deepinthink.magoko.archive.client.broker;
 
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_RSOCKET_REQUESTER_BEAN_NAME;
+
 import org.deepinthink.magoko.archive.client.condition.ConditionalOnArchiveClientBroker;
 import org.deepinthink.magoko.broker.client.BrokerClientConstants;
 import org.deepinthink.magoko.broker.client.config.BrokerClientAutoConfiguration;
@@ -24,8 +26,6 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
-
-import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_RSOCKET_REQUESTER_BEAN_NAME;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnArchiveClientBroker

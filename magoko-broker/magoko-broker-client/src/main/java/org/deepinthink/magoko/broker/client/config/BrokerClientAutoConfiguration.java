@@ -15,6 +15,9 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.DEFAULT_RSOCKET_REQUESTER_BEAN_NAME;
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.PREFIX;
+
 import org.deepinthink.magoko.broker.client.condition.ConditionalOnBrokerClient;
 import org.deepinthink.magoko.broker.client.context.BrokerClientBootstrap;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,9 +28,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
-
-import static org.deepinthink.magoko.broker.client.BrokerClientConstants.DEFAULT_RSOCKET_REQUESTER_BEAN_NAME;
-import static org.deepinthink.magoko.broker.client.BrokerClientConstants.PREFIX;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)

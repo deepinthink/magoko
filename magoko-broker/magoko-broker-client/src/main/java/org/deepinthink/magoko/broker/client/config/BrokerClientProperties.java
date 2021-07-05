@@ -15,9 +15,9 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import static org.deepinthink.magoko.broker.client.BrokerClientConstants.*;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = PREFIX)
 public class BrokerClientProperties {
