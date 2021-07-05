@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client;
+package org.deepinthink.magoko.archive.client.template;
 
-public final class BrokerClientConstants {
-  public static final String PREFIX = "magoko.broker.client";
+import org.springframework.messaging.rsocket.RSocketRequester;
 
-  public static final String DEFAULT_RSOCKET_REQUESTER_BEAN_NAME = "BrokerClientRSocketRequester";
+final class RSocketArchiveClientTemplate implements ArchiveClientTemplate {
+  private final RSocketRequester rSocketRequester;
 
-  public static final String DEFAULT_SERVER_HOST =
-      System.getProperty(PREFIX + ".server-host", "localhost");
-
-  public static final boolean DEFAULT_AUTO_RECONNECTED =
-      Boolean.getBoolean(PREFIX + ".auto-reconnected");
-
-  private BrokerClientConstants() {}
+  RSocketArchiveClientTemplate(RSocketRequester rSocketRequester) {
+    this.rSocketRequester = rSocketRequester;
+  }
 }

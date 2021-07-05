@@ -13,18 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client;
+package org.deepinthink.magoko.archive.client.direct;
 
-public final class BrokerClientConstants {
-  public static final String PREFIX = "magoko.broker.client";
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_DIRECT_SERVER_HOST;
 
-  public static final String DEFAULT_RSOCKET_REQUESTER_BEAN_NAME = "BrokerClientRSocketRequester";
+public class ArchiveClientDirectProperties {
+  private String serverHost = DEFAULT_DIRECT_SERVER_HOST;
+  private int serverPort;
 
-  public static final String DEFAULT_SERVER_HOST =
-      System.getProperty(PREFIX + ".server-host", "localhost");
+  public String getServerHost() {
+    return serverHost;
+  }
 
-  public static final boolean DEFAULT_AUTO_RECONNECTED =
-      Boolean.getBoolean(PREFIX + ".auto-reconnected");
+  public void setServerHost(String serverHost) {
+    this.serverHost = serverHost;
+  }
 
-  private BrokerClientConstants() {}
+  public int getServerPort() {
+    return serverPort;
+  }
+
+  public void setServerPort(int serverPort) {
+    this.serverPort = serverPort;
+  }
 }

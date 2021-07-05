@@ -15,9 +15,28 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_LAUNCH_MODE;
 import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.PREFIX;
 
+import org.deepinthink.magoko.archive.client.direct.ArchiveClientDirectProperties;
+import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = PREFIX)
-public class ArchiveClientProperties {}
+public class ArchiveClientProperties {
+  private BootstrapLaunchMode launchMode = DEFAULT_LAUNCH_MODE;
+
+  private final ArchiveClientDirectProperties direct = new ArchiveClientDirectProperties();
+
+  public BootstrapLaunchMode getLaunchMode() {
+    return launchMode;
+  }
+
+  public void setLaunchMode(BootstrapLaunchMode launchMode) {
+    this.launchMode = launchMode;
+  }
+
+  public ArchiveClientDirectProperties getDirect() {
+    return direct;
+  }
+}
