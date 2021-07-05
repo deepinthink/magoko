@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client.config;
+package org.deepinthink.magoko.archive.client.direct;
 
-import static org.deepinthink.magoko.broker.client.BrokerClientConstants.*;
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.DEFAULT_DIRECT_SERVER_HOST;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@ConfigurationProperties(prefix = PREFIX)
-public class BrokerClientProperties {
-  private String serverHost = DEFAULT_SERVER_HOST;
+public class ArchiveClientDirectProperties {
+  private String serverHost = DEFAULT_DIRECT_SERVER_HOST;
   private int serverPort;
-  private boolean autoReconnected = DEFAULT_AUTO_RECONNECTED;
 
   public String getServerHost() {
     return serverHost;
@@ -39,13 +35,5 @@ public class BrokerClientProperties {
 
   public void setServerPort(int serverPort) {
     this.serverPort = serverPort;
-  }
-
-  public boolean isAutoReconnected() {
-    return autoReconnected;
-  }
-
-  public void setAutoReconnected(boolean autoReconnected) {
-    this.autoReconnected = autoReconnected;
   }
 }

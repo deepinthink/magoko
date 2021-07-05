@@ -15,11 +15,40 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.DEFAULT_RSOCKET_REQUESTER_BEAN_NAME;
+import static org.deepinthink.magoko.broker.client.BrokerClientConstants.PREFIX;
+
+import org.deepinthink.magoko.broker.client.condition.ConditionalOnBrokerClient;
+import org.deepinthink.magoko.broker.client.context.BrokerClientBootstrap;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(BrokerClientProperties.class)
-public class BrokerClientAutoConfiguration {}
+@ConditionalOnBrokerClient
+public class BrokerClientAutoConfiguration {
+
+  @Bean(DEFAULT_RSOCKET_REQUESTER_BEAN_NAME)
+  @ConditionalOnMissingBean(name = DEFAULT_RSOCKET_REQUESTER_BEAN_NAME)
+  public RSocketRequester brokerClientRSocketRequester(
+      BrokerClientProperties properties, RSocketRequester.Builder builder) {
+    RSocketRequester rSocketRequester =
+        builder.tcp(properties.getServerHost(), properties.getServerPort());
+    return rSocketRequester;
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  @ConditionalOnProperty(prefix = PREFIX, name = "auto-reconnected", value = "true")
+  public BrokerClientBootstrap brokerClientBootstrap(
+      @Qualifier(DEFAULT_RSOCKET_REQUESTER_BEAN_NAME) RSocketRequester rSocketRequester) {
+    return new BrokerClientBootstrap(rSocketRequester);
+  }
+}

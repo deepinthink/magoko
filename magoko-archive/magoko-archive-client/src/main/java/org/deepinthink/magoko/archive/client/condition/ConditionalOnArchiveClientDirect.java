@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client;
+package org.deepinthink.magoko.archive.client.condition;
 
-public final class BrokerClientConstants {
-  public static final String PREFIX = "magoko.broker.client";
+import static org.deepinthink.magoko.archive.client.ArchiveClientConstants.PREFIX;
+import static org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode.DIRECT;
 
-  public static final String DEFAULT_RSOCKET_REQUESTER_BEAN_NAME = "BrokerClientRSocketRequester";
+import java.lang.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
-  public static final String DEFAULT_SERVER_HOST =
-      System.getProperty(PREFIX + ".server-host", "localhost");
-
-  public static final boolean DEFAULT_AUTO_RECONNECTED =
-      Boolean.getBoolean(PREFIX + ".auto-reconnected");
-
-  private BrokerClientConstants() {}
-}
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@ConditionalOnArchiveClientLaunchMode(DIRECT)
+@ConditionalOnProperty(prefix = PREFIX + ".direct", name = "port")
+public @interface ConditionalOnArchiveClientDirect {}

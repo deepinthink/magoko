@@ -15,8 +15,18 @@
   <description>MagOKO Broker:: Client</description>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-boot</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-messaging</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.rsocket</groupId>
+      <artifactId>rsocket-core</artifactId>
       <optional>true</optional>
     </dependency>
   </dependencies>
