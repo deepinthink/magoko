@@ -19,5 +19,10 @@
       <artifactId>spring-boot-starter</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.deepinthink.magoko</groupId>
+      <artifactId>magoko-starter-broker-client</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 </project>
