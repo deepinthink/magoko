@@ -59,6 +59,6 @@ public final class BrokerClientBootstrap implements SmartLifecycle {
 
   @Override
   public boolean isRunning() {
-    return !this.requesterBootstrapMap.isEmpty();
+    return this.requesterBootstrapMap.isEmpty();
   }
 }

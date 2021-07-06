@@ -15,6 +15,9 @@
  */
 package org.deepinthink.magoko.broker.client.context;
 
+import io.rsocket.exceptions.ConnectionErrorException;
+import java.net.ConnectException;
+import java.nio.channels.ClosedChannelException;
 import org.deepinthink.magoko.broker.client.BrokerServerTarget;
 import org.deepinthink.magoko.broker.client.rsocket.loadbalance.BrokerClientRSocketPool;
 import org.springframework.context.SmartLifecycle;
@@ -40,13 +43,24 @@ final class BrokerClientRSocketRequesterBootstrap implements SmartLifecycle {
     this.rSocketRequester
         .rsocketClient()
         .source()
-        .doOnTerminate(
-            () -> {
-              this.rSocketPool.removeRSocket(this.serverTarget.getKey());
-              this.start();
+        .doOnError(
+            (e) -> {
+              if (e instanceof ClosedChannelException
+                  || e instanceof ConnectionErrorException
+                  || e instanceof ConnectException) {
+                this.tryReconnect();
+              }
             })
-        .doOnSuccess((rSocket) -> this.rSocketPool.addRSocket(this.serverTarget.getKey(), rSocket))
-        .subscribe();
+        .subscribe(
+            (rSocket) -> {
+              this.rSocketPool.addRSocket(this.serverTarget.getKey(), rSocket);
+              rSocket.onClose().doFinally((__) -> this.tryReconnect()).subscribe();
+            });
+  }
+
+  private void tryReconnect() {
+    this.rSocketPool.removeRSocket(this.serverTarget.getKey());
+    this.start();
   }
 
   @Override

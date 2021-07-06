@@ -17,7 +17,6 @@ package org.deepinthink.magoko.broker.client.rsocket.loadbalance;
 
 import io.rsocket.RSocket;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,9 +38,8 @@ public class BrokerClientRSocketPool implements BrokerClientRSocketSelector {
 
   @Override
   public RSocket select() {
-    List<RSocket> rSocketList = new ArrayList<>(this.rSocketMap.values());
-    return rSocketList.isEmpty()
-        ? this.loadbalanceStrategy.select(rSocketList)
+    return !this.rSocketMap.isEmpty()
+        ? this.loadbalanceStrategy.select(new ArrayList<>(this.rSocketMap.values()))
         : NO_AVAILABLE_RSOCKET;
   }
 
