@@ -15,18 +15,10 @@
  */
 package org.deepinthink.magoko.archive.client;
 
-import org.deepinthink.magoko.boot.bootstrap.BootstrapLaunchMode;
-
 public final class ArchiveClientConstants {
   public static final String PREFIX = "magoko.archive.client";
 
-  public static final BootstrapLaunchMode DEFAULT_LAUNCH_MODE =
-      BootstrapLaunchMode.valueOf(System.getProperty(PREFIX + ".launch-mode", "DIRECT"));
-
   public static final String DEFAULT_RSOCKET_REQUESTER_BEAN_NAME = "ArchiveClientRSocketRequester";
-
-  public static final String DEFAULT_DIRECT_SERVER_HOST =
-      System.getProperty(PREFIX + ".direct.server-host", "localhost");
 
   private ArchiveClientConstants() {}
 }
