@@ -16,8 +16,8 @@
 package org.deepinthink.magoko.pay.client.config;
 
 import org.deepinthink.magoko.broker.client.config.BrokerClientAutoConfiguration;
-import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilder;
-import org.deepinthink.magoko.pay.client.rsocket.LoginClientRSocketRequesterBuilderCustomizer;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilder;
+import org.deepinthink.magoko.pay.client.rsocket.LoginClientRSocketRequesterWrapBuilderCustomizer;
 import org.deepinthink.magoko.pay.client.template.PayClientTemplate;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnClass({BrokerClientRSocketRequesterBuilder.class, RSocketRequester.class})
+@ConditionalOnClass({BrokerClientRSocketRequesterWrapBuilder.class, RSocketRequester.class})
 @ConditionalOnBean(PayClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(PayClientProperties.class)
 @AutoConfigureAfter(BrokerClientAutoConfiguration.class)
@@ -39,8 +39,8 @@ public class PayClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public PayClientTemplate payClientTemplate(
-      BrokerClientRSocketRequesterBuilder builder,
-      ObjectProvider<LoginClientRSocketRequesterBuilderCustomizer> customizers) {
+      BrokerClientRSocketRequesterWrapBuilder builder,
+      ObjectProvider<LoginClientRSocketRequesterWrapBuilderCustomizer> customizers) {
     customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
     return PayClientTemplate.create(builder.build());
   }

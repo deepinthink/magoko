@@ -29,5 +29,10 @@
       <artifactId>rsocket-core</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>io.rsocket</groupId>
+      <artifactId>rsocket-transport-netty</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 </project>

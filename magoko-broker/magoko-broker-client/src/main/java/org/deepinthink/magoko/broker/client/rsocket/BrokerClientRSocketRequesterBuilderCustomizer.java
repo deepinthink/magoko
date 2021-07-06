@@ -15,6 +15,9 @@
  */
 package org.deepinthink.magoko.broker.client.rsocket;
 
+import org.springframework.messaging.rsocket.RSocketRequester;
+
+@FunctionalInterface
 public interface BrokerClientRSocketRequesterBuilderCustomizer {
-  void customize(BrokerClientRSocketRequesterBuilder builder);
+  void customize(RSocketRequester.Builder builder);
 }

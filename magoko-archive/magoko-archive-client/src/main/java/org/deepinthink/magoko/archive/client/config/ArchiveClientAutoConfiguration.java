@@ -15,9 +15,9 @@
  */
 package org.deepinthink.magoko.archive.client.config;
 
-import org.deepinthink.magoko.archive.client.rsocket.ArchiveClientRSocketRequesterBuilderCustomizer;
+import org.deepinthink.magoko.archive.client.rsocket.ArchiveClientRSocketRequesterWrapBuilderCustomizer;
 import org.deepinthink.magoko.archive.client.template.ArchiveClientTemplate;
-import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilder;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilder;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnClass({BrokerClientRSocketRequesterBuilder.class, RSocketRequester.class})
+@ConditionalOnClass({BrokerClientRSocketRequesterWrapBuilder.class, RSocketRequester.class})
 @ConditionalOnBean(ArchiveClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(ArchiveClientProperties.class)
 public class ArchiveClientAutoConfiguration {
@@ -36,8 +36,8 @@ public class ArchiveClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ArchiveClientTemplate archiveClientTemplate(
-      BrokerClientRSocketRequesterBuilder builder,
-      ObjectProvider<ArchiveClientRSocketRequesterBuilderCustomizer> customizers) {
+      BrokerClientRSocketRequesterWrapBuilder builder,
+      ObjectProvider<ArchiveClientRSocketRequesterWrapBuilderCustomizer> customizers) {
     customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
     return ArchiveClientTemplate.create(builder.build());
   }
