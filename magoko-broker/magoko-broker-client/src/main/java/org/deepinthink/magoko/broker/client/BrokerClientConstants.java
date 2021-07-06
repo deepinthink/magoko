@@ -18,13 +18,5 @@ package org.deepinthink.magoko.broker.client;
 public final class BrokerClientConstants {
   public static final String PREFIX = "magoko.broker.client";
 
-  public static final String DEFAULT_RSOCKET_REQUESTER_BEAN_NAME = "BrokerClientRSocketRequester";
-
-  public static final String DEFAULT_SERVER_HOST =
-      System.getProperty(PREFIX + ".server-host", "localhost");
-
-  public static final boolean DEFAULT_AUTO_RECONNECTED =
-      Boolean.getBoolean(PREFIX + ".auto-reconnected");
-
   private BrokerClientConstants() {}
 }

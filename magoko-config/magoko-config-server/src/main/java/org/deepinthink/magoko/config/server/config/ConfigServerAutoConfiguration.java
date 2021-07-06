@@ -15,15 +15,11 @@
  */
 package org.deepinthink.magoko.config.server.config;
 
-import org.deepinthink.magoko.config.server.broker.ConfigServerBrokerConfiguration;
-import org.deepinthink.magoko.config.server.direct.ConfigServerDirectConfiguration;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(ConfigServerMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(ConfigServerProperties.class)
-@Import({ConfigServerBrokerConfiguration.class, ConfigServerDirectConfiguration.class})
 public class ConfigServerAutoConfiguration {}

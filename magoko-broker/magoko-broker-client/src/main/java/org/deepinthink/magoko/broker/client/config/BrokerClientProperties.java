@@ -20,32 +20,4 @@ import static org.deepinthink.magoko.broker.client.BrokerClientConstants.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = PREFIX)
-public class BrokerClientProperties {
-  private String serverHost = DEFAULT_SERVER_HOST;
-  private int serverPort;
-  private boolean autoReconnected = DEFAULT_AUTO_RECONNECTED;
-
-  public String getServerHost() {
-    return serverHost;
-  }
-
-  public void setServerHost(String serverHost) {
-    this.serverHost = serverHost;
-  }
-
-  public int getServerPort() {
-    return serverPort;
-  }
-
-  public void setServerPort(int serverPort) {
-    this.serverPort = serverPort;
-  }
-
-  public boolean isAutoReconnected() {
-    return autoReconnected;
-  }
-
-  public void setAutoReconnected(boolean autoReconnected) {
-    this.autoReconnected = autoReconnected;
-  }
-}
+public class BrokerClientProperties {}

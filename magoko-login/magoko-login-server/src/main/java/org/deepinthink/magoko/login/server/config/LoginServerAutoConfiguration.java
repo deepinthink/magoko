@@ -15,15 +15,11 @@
  */
 package org.deepinthink.magoko.login.server.config;
 
-import org.deepinthink.magoko.login.server.broker.LoginServerBrokerConfiguration;
-import org.deepinthink.magoko.login.server.direct.LoginServerDirectConfiguration;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(LoginServerMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(LoginServerProperties.class)
-@Import({LoginServerBrokerConfiguration.class, LoginServerDirectConfiguration.class})
 public class LoginServerAutoConfiguration {}
