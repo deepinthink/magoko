@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client.rsocket;
+package org.deepinthink.magoko.broker.client.rsocket.loadbalance;
 
-import io.rsocket.RSocket;
+import java.util.function.Supplier;
 
-public interface BrokerClientLoadbalancedRSocket extends RSocket {}
+@FunctionalInterface
+public interface BrokerClientLoadbalanceStrategyProvider
+    extends Supplier<BrokerClientLoadbalanceStrategy> {}

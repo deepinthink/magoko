@@ -16,6 +16,7 @@
 package org.deepinthink.magoko.broker.client.rsocket;
 
 import java.util.Objects;
+import org.deepinthink.magoko.broker.client.rsocket.loadbalance.BrokerClientLoadbalancedRSocket;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.messaging.rsocket.RSocketStrategies;
 import org.springframework.util.MimeType;

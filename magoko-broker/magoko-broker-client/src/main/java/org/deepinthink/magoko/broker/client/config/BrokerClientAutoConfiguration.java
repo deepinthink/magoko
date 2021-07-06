@@ -15,9 +15,9 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
-import org.deepinthink.magoko.broker.client.rsocket.BrokerClientLoadbalancedRSocket;
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilder;
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilderCustomizer;
+import org.deepinthink.magoko.broker.client.rsocket.loadbalance.*;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -30,6 +30,30 @@ import org.springframework.context.annotation.Scope;
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(BrokerClientProperties.class)
 public class BrokerClientAutoConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BrokerClientLoadbalanceStrategyProvider
+      brokerClientRoundRobinLoadbalanceStrategyProvider() {
+    return BrokerClientRoundRobinLoadbalanceStrategy::new;
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BrokerClientRSocketPool brokerClientRSocketPool(
+      ObjectProvider<BrokerClientLoadbalanceStrategyProvider> providers) {
+    BrokerClientLoadbalanceStrategyProvider provider =
+        providers.getIfAvailable(this::brokerClientRoundRobinLoadbalanceStrategyProvider);
+    BrokerClientLoadbalanceStrategy loadbalanceStrategy = provider.get();
+    return BrokerClientRSocketPool.create(loadbalanceStrategy);
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public BrokerClientLoadbalancedRSocket brokerClientLoadbalancedRSocket(
+      BrokerClientRSocketPool rSocketPool) {
+    return BrokerClientLoadbalancedRSocket.create(rSocketPool);
+  }
 
   @Bean
   @Scope("prototype")
