@@ -16,8 +16,8 @@
 package org.deepinthink.magoko.login.client.config;
 
 import org.deepinthink.magoko.broker.client.config.BrokerClientAutoConfiguration;
-import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilder;
-import org.deepinthink.magoko.login.client.rsocket.LoginClientRSocketRequesterBuilderCustomizer;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilder;
+import org.deepinthink.magoko.login.client.rsocket.LoginClientRSocketRequesterWrapBuilderCustomizer;
 import org.deepinthink.magoko.login.client.template.LoginClientTemplate;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@ConditionalOnClass({BrokerClientRSocketRequesterBuilder.class, RSocketRequester.class})
+@ConditionalOnClass({BrokerClientRSocketRequesterWrapBuilder.class, RSocketRequester.class})
 @ConditionalOnBean(LoginClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(LoginClientProperties.class)
 @AutoConfigureAfter(BrokerClientAutoConfiguration.class)
@@ -39,8 +39,8 @@ public class LoginClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public LoginClientTemplate loginClientTemplate(
-      BrokerClientRSocketRequesterBuilder builder,
-      ObjectProvider<LoginClientRSocketRequesterBuilderCustomizer> customizers) {
+      BrokerClientRSocketRequesterWrapBuilder builder,
+      ObjectProvider<LoginClientRSocketRequesterWrapBuilderCustomizer> customizers) {
     customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
     return LoginClientTemplate.create(builder.build());
   }

@@ -21,32 +21,32 @@ import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.messaging.rsocket.RSocketStrategies;
 import org.springframework.util.MimeType;
 
-public final class BrokerClientRSocketRequesterBuilder {
+public final class BrokerClientRSocketRequesterWrapBuilder {
   private final BrokerClientLoadbalancedRSocket loadbalancedRSocket;
   private MimeType dataMimeType;
   private MimeType metadataMimeType;
   private RSocketStrategies rSocketStrategies;
 
-  public static BrokerClientRSocketRequesterBuilder newBuilder(
+  public static BrokerClientRSocketRequesterWrapBuilder newBuilder(
       BrokerClientLoadbalancedRSocket loadbalancedRSocket) {
-    return new BrokerClientRSocketRequesterBuilder(loadbalancedRSocket);
+    return new BrokerClientRSocketRequesterWrapBuilder(loadbalancedRSocket);
   }
 
-  BrokerClientRSocketRequesterBuilder(BrokerClientLoadbalancedRSocket loadbalancedRSocket) {
+  BrokerClientRSocketRequesterWrapBuilder(BrokerClientLoadbalancedRSocket loadbalancedRSocket) {
     this.loadbalancedRSocket = Objects.requireNonNull(loadbalancedRSocket);
   }
 
-  public BrokerClientRSocketRequesterBuilder dataMimeType(MimeType dataMimeType) {
+  public BrokerClientRSocketRequesterWrapBuilder dataMimeType(MimeType dataMimeType) {
     this.dataMimeType = Objects.requireNonNull(dataMimeType);
     return this;
   }
 
-  public BrokerClientRSocketRequesterBuilder metadataMimeType(MimeType metadataMimeType) {
+  public BrokerClientRSocketRequesterWrapBuilder metadataMimeType(MimeType metadataMimeType) {
     this.metadataMimeType = Objects.requireNonNull(metadataMimeType);
     return this;
   }
 
-  public BrokerClientRSocketRequesterBuilder rsocketStrategies(
+  public BrokerClientRSocketRequesterWrapBuilder rsocketStrategies(
       RSocketStrategies rSocketStrategies) {
     this.rSocketStrategies = rSocketStrategies;
     return null;

@@ -13,21 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client.config;
+package org.deepinthink.magoko.broker.client.rsocket;
 
-import static org.deepinthink.magoko.broker.client.BrokerClientConstants.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.deepinthink.magoko.broker.client.BrokerServerTarget;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@ConfigurationProperties(prefix = PREFIX)
-public class BrokerClientProperties {
-
-  private final List<BrokerServerTarget> serverTargets = new ArrayList<>();
-
-  public List<BrokerServerTarget> getServerTargets() {
-    return serverTargets;
-  }
+public interface BrokerClientRSocketRequesterWrapBuilderCustomizer {
+  void customize(BrokerClientRSocketRequesterWrapBuilder builder);
 }

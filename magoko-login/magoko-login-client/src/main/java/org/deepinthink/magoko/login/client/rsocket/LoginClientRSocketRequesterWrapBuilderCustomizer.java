@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.login.client.rsocket;
 
-import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilderCustomizer;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilderCustomizer;
 
-public interface LoginClientRSocketRequesterBuilderCustomizer
-    extends BrokerClientRSocketRequesterBuilderCustomizer {}
+public interface LoginClientRSocketRequesterWrapBuilderCustomizer
+    extends BrokerClientRSocketRequesterWrapBuilderCustomizer {}

@@ -13,21 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.client.config;
+package org.deepinthink.magoko.broker.client;
 
-import static org.deepinthink.magoko.broker.client.BrokerClientConstants.*;
+public class BrokerServerTarget {
+  private String key;
+  private String host;
+  private int port;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.deepinthink.magoko.broker.client.BrokerServerTarget;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+  public String getKey() {
+    return key;
+  }
 
-@ConfigurationProperties(prefix = PREFIX)
-public class BrokerClientProperties {
+  public void setKey(String key) {
+    this.key = key;
+  }
 
-  private final List<BrokerServerTarget> serverTargets = new ArrayList<>();
+  public String getHost() {
+    return host;
+  }
 
-  public List<BrokerServerTarget> getServerTargets() {
-    return serverTargets;
+  public void setHost(String host) {
+    this.host = host;
+  }
+
+  public int getPort() {
+    return port;
+  }
+
+  public void setPort(int port) {
+    this.port = port;
   }
 }

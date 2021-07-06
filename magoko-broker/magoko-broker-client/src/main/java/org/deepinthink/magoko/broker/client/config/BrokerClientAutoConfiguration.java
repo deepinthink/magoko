@@ -15,20 +15,26 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
-import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilder;
+import org.deepinthink.magoko.broker.client.context.BrokerClientBootstrap;
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilderCustomizer;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilder;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilderCustomizer;
 import org.deepinthink.magoko.broker.client.rsocket.loadbalance.*;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.rsocket.RSocketRequesterAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import org.springframework.messaging.rsocket.RSocketRequester;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(BrokerClientProperties.class)
+@AutoConfigureAfter(RSocketRequesterAutoConfiguration.class)
 public class BrokerClientAutoConfiguration {
 
   @Bean
@@ -56,13 +62,24 @@ public class BrokerClientAutoConfiguration {
   }
 
   @Bean
+  @ConditionalOnMissingBean
+  public BrokerClientBootstrap brokerClientBootstrap(
+      RSocketRequester.Builder builder,
+      BrokerClientRSocketPool rSocketPool,
+      BrokerClientProperties properties,
+      ObjectProvider<BrokerClientRSocketRequesterBuilderCustomizer> customizers) {
+    customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
+    return new BrokerClientBootstrap(builder, rSocketPool, properties.getServerTargets());
+  }
+
+  @Bean
   @Scope("prototype")
   @ConditionalOnMissingBean
-  public BrokerClientRSocketRequesterBuilder brokerClientRSocketRequesterBuilder(
+  public BrokerClientRSocketRequesterWrapBuilder brokerClientRSocketRequesterBuilder(
       BrokerClientLoadbalancedRSocket loadbalancedRSocket,
-      ObjectProvider<BrokerClientRSocketRequesterBuilderCustomizer> customizers) {
-    BrokerClientRSocketRequesterBuilder builder =
-        BrokerClientRSocketRequesterBuilder.newBuilder(loadbalancedRSocket);
+      ObjectProvider<BrokerClientRSocketRequesterWrapBuilderCustomizer> customizers) {
+    BrokerClientRSocketRequesterWrapBuilder builder =
+        BrokerClientRSocketRequesterWrapBuilder.newBuilder(loadbalancedRSocket);
     customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
     return builder;
   }
