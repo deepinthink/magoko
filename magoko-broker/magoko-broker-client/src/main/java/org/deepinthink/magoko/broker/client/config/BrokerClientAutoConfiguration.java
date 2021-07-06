@@ -15,11 +15,31 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientLoadbalancedRSocket;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilder;
+import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilderCustomizer;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(BrokerClientProperties.class)
-public class BrokerClientAutoConfiguration {}
+public class BrokerClientAutoConfiguration {
+
+  @Bean
+  @Scope("prototype")
+  @ConditionalOnMissingBean
+  public BrokerClientRSocketRequesterBuilder brokerClientRSocketRequesterBuilder(
+      BrokerClientLoadbalancedRSocket loadbalancedRSocket,
+      ObjectProvider<BrokerClientRSocketRequesterBuilderCustomizer> customizers) {
+    BrokerClientRSocketRequesterBuilder builder =
+        BrokerClientRSocketRequesterBuilder.newBuilder(loadbalancedRSocket);
+    customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
+    return builder;
+  }
+}
