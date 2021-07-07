@@ -15,6 +15,8 @@
  */
 package org.deepinthink.magoko.broker.client.config;
 
+import io.rsocket.RSocket;
+import io.rsocket.metadata.WellKnownMimeType;
 import org.deepinthink.magoko.broker.client.context.BrokerClientBootstrap;
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterBuilderCustomizer;
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilder;
@@ -24,15 +26,20 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.rsocket.RSocketRequesterAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.messaging.rsocket.RSocketRequester;
+import org.springframework.messaging.rsocket.RSocketStrategies;
+import org.springframework.util.MimeType;
+import org.springframework.util.MimeTypeUtils;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
+@ConditionalOnClass({RSocketRequester.class, RSocket.class, RSocketStrategies.class})
 @EnableConfigurationProperties(BrokerClientProperties.class)
 @AutoConfigureAfter(RSocketRequesterAutoConfiguration.class)
 public class BrokerClientAutoConfiguration {
@@ -48,7 +55,8 @@ public class BrokerClientAutoConfiguration {
   @ConditionalOnMissingBean
   public BrokerClientRSocketPool brokerClientRSocketPool(
       ObjectProvider<BrokerClientLoadbalanceStrategyProvider> providers) {
-    BrokerClientLoadbalanceStrategyProvider provider =
+    BrokerClientLoadbalanceStrategyProvider
+        provider = // using Round-Robin as default loadbalance strategy
         providers.getIfAvailable(this::brokerClientRoundRobinLoadbalanceStrategyProvider);
     BrokerClientLoadbalanceStrategy loadbalanceStrategy = provider.get();
     return BrokerClientRSocketPool.create(loadbalanceStrategy);
@@ -64,7 +72,7 @@ public class BrokerClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public BrokerClientBootstrap brokerClientBootstrap(
-      RSocketRequester.Builder builder,
+      RSocketRequester.Builder builder, // inject from RSocketRequesterAutoConfiguration
       BrokerClientRSocketPool rSocketPool,
       BrokerClientProperties properties,
       ObjectProvider<BrokerClientRSocketRequesterBuilderCustomizer> customizers) {
@@ -77,9 +85,14 @@ public class BrokerClientAutoConfiguration {
   @ConditionalOnMissingBean
   public BrokerClientRSocketRequesterWrapBuilder brokerClientRSocketRequesterBuilder(
       BrokerClientLoadbalancedRSocket loadbalancedRSocket,
+      RSocketStrategies strategies, //  inject from RSocketStrategiesAutoConfiguration
       ObjectProvider<BrokerClientRSocketRequesterWrapBuilderCustomizer> customizers) {
     BrokerClientRSocketRequesterWrapBuilder builder =
-        BrokerClientRSocketRequesterWrapBuilder.newBuilder(loadbalancedRSocket);
+        BrokerClientRSocketRequesterWrapBuilder.newBuilder(loadbalancedRSocket)
+            .dataMimeType(MimeTypeUtils.APPLICATION_JSON) // "application/json"
+            .metadataMimeType( // "message/x.rsocket.composite-metadata.v0"
+                MimeType.valueOf(WellKnownMimeType.MESSAGE_RSOCKET_COMPOSITE_METADATA.getString()))
+            .rsocketStrategies(strategies);
     customizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
     return builder;
   }
