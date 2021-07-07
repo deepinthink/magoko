@@ -24,11 +24,14 @@ import org.deepinthink.magoko.broker.client.rsocket.loadbalance.BrokerClientRSoc
 import org.springframework.context.SmartLifecycle;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.util.Assert;
+import reactor.core.publisher.Flux;
 
 public final class BrokerClientBootstrap implements SmartLifecycle {
 
   private final Map<String, BrokerClientRSocketRequesterBootstrap> requesterBootstrapMap =
       new HashMap<>();
+
+  private volatile boolean running = false;
 
   public BrokerClientBootstrap(
       RSocketRequester.Builder builder,
@@ -49,16 +52,22 @@ public final class BrokerClientBootstrap implements SmartLifecycle {
 
   @Override
   public void start() {
-    this.requesterBootstrapMap.values().forEach(BrokerClientRSocketRequesterBootstrap::start);
+    Flux.fromIterable(this.requesterBootstrapMap.values())
+        .doOnNext(BrokerClientRSocketRequesterBootstrap::start)
+        .doFinally((__) -> this.running = true)
+        .subscribe();
   }
 
   @Override
   public void stop() {
-    this.requesterBootstrapMap.values().forEach(BrokerClientRSocketRequesterBootstrap::stop);
+    Flux.fromIterable(this.requesterBootstrapMap.values())
+        .doOnNext(BrokerClientRSocketRequesterBootstrap::stop)
+        .doFinally((__) -> this.running = false)
+        .subscribe();
   }
 
   @Override
   public boolean isRunning() {
-    return this.requesterBootstrapMap.isEmpty();
+    return this.running;
   }
 }

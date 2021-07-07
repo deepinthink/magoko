@@ -15,14 +15,17 @@
  */
 package org.deepinthink.magoko.stack.login.server;
 
+import org.deepinthink.magoko.broker.client.EnableBrokerClient;
 import org.deepinthink.magoko.login.server.EnableLoginServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableBrokerClient
 @EnableLoginServer
 @SpringBootApplication
 public class LoginServerApplication {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     SpringApplication.run(LoginServerApplication.class, args);
+    Thread.currentThread().join();
   }
 }
