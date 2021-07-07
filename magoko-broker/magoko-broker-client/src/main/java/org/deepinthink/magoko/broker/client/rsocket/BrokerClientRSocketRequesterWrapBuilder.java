@@ -49,7 +49,7 @@ public final class BrokerClientRSocketRequesterWrapBuilder {
   public BrokerClientRSocketRequesterWrapBuilder rsocketStrategies(
       RSocketStrategies rSocketStrategies) {
     this.rSocketStrategies = rSocketStrategies;
-    return null;
+    return this;
   }
 
   public RSocketRequester build() {
