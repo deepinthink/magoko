@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.messaging;
+package org.deepinthink.magoko.broker.client.config;
 
-import org.deepinthink.magoko.broker.server.config.BrokerServerRSocketStrategyConfiguration;
-import org.deepinthink.magoko.broker.server.messaging.rsocket.RSocketBrokerMessagingHandlerRegistry;
+import org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingFrameDecoder;
+import org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingFrameEncoder;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.rsocket.RSocketStrategiesAutoConfiguration;
+import org.springframework.boot.rsocket.messaging.RSocketStrategiesCustomizer;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@AutoConfigureAfter(BrokerServerRSocketStrategyConfiguration.class)
-public class BrokerMessagingConfiguration {
-
+@AutoConfigureAfter(RSocketStrategiesAutoConfiguration.class)
+public class BrokerClientRSocketStrategyConfiguration {
   @Bean
-  @ConditionalOnMissingBean
-  public BrokerMessagingHandlerRegistry brokerMessagingHandlerRegistry() {
-    return new RSocketBrokerMessagingHandlerRegistry();
+  public RSocketStrategiesCustomizer brokerClientRSocketStrategiesCustomizer() {
+    return strategies ->
+        strategies
+            .decoder(new RSocketRoutingFrameDecoder())
+            .encoder(new RSocketRoutingFrameEncoder());
   }
 }

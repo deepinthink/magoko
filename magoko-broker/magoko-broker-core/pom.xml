@@ -10,33 +10,21 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko-broker-client</artifactId>
+  <artifactId>magoko-broker-core</artifactId>
   <packaging>jar</packaging>
-  <description>MagOKO Broker:: Client</description>
+  <description>MagOKO Broker:: Core</description>
   <dependencies>
     <dependency>
       <groupId>org.deepinthink.magoko</groupId>
       <artifactId>magoko-starter-boot</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.deepinthink.magoko</groupId>
-      <artifactId>magoko-broker-core</artifactId>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-messaging</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.rsocket</groupId>
-      <artifactId>rsocket-core</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.rsocket</groupId>
-      <artifactId>rsocket-transport-netty</artifactId>
-      <optional>true</optional>
+      <groupId>io.projectreactor.netty</groupId>
+      <artifactId>reactor-netty</artifactId>
     </dependency>
   </dependencies>
 </project>

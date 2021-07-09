@@ -41,7 +41,10 @@ import org.springframework.util.MimeTypeUtils;
 @ConditionalOnBean(BrokerClientMarkerConfiguration.Marker.class)
 @ConditionalOnClass({RSocketRequester.class, RSocket.class, RSocketStrategies.class})
 @EnableConfigurationProperties(BrokerClientProperties.class)
-@AutoConfigureAfter(RSocketRequesterAutoConfiguration.class)
+@AutoConfigureAfter({
+  RSocketRequesterAutoConfiguration.class,
+  BrokerClientRSocketStrategyConfiguration.class
+})
 public class BrokerClientAutoConfiguration {
 
   @Bean
