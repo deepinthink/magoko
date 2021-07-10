@@ -15,7 +15,7 @@
  */
 package org.deepinthink.magoko.broker.server.messaging;
 
-import org.deepinthink.magoko.broker.server.config.BrokerServerRSocketStrategyConfiguration;
+import org.deepinthink.magoko.broker.core.routing.config.BrokerRSocketStrategiesAutoConfiguration;
 import org.deepinthink.magoko.broker.server.messaging.rsocket.RSocketBrokerMessagingHandlerRegistry;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -23,7 +23,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
-@AutoConfigureAfter(BrokerServerRSocketStrategyConfiguration.class)
+@AutoConfigureAfter(BrokerRSocketStrategiesAutoConfiguration.class)
 public class BrokerMessagingConfiguration {
 
   @Bean

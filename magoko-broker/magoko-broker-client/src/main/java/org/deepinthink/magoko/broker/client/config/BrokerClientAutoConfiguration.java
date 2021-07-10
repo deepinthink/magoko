@@ -22,6 +22,7 @@ import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequester
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilder;
 import org.deepinthink.magoko.broker.client.rsocket.BrokerClientRSocketRequesterWrapBuilderCustomizer;
 import org.deepinthink.magoko.broker.client.rsocket.loadbalance.*;
+import org.deepinthink.magoko.broker.core.routing.config.BrokerRSocketStrategiesAutoConfiguration;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -43,7 +44,7 @@ import org.springframework.util.MimeTypeUtils;
 @EnableConfigurationProperties(BrokerClientProperties.class)
 @AutoConfigureAfter({
   RSocketRequesterAutoConfiguration.class,
-  BrokerClientRSocketStrategyConfiguration.class
+  BrokerRSocketStrategiesAutoConfiguration.class
 })
 public class BrokerClientAutoConfiguration {
 
