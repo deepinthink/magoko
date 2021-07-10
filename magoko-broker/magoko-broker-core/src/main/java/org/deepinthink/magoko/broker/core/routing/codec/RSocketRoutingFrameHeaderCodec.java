@@ -18,7 +18,7 @@ package org.deepinthink.magoko.broker.core.routing.codec;
 import io.netty.buffer.ByteBuf;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
 
-public class RSocketRoutingFrameHeaderCodec {
+public final class RSocketRoutingFrameHeaderCodec {
 
   public static int flags(ByteBuf byteBuf) {
     return 0;
@@ -27,4 +27,6 @@ public class RSocketRoutingFrameHeaderCodec {
   public static RSocketRoutingFrameType frameType(ByteBuf byteBuf) {
     return null;
   }
+
+  private RSocketRoutingFrameHeaderCodec() {}
 }

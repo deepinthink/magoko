@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.core.routing.codec;
+package org.deepinthink.magoko.broker.core.routing;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 
-public final class RSocketRoutingRouteSetupCodec {
+public class RSocketRoutingAddress extends RSocketRoutingFrame {
 
-  public static ByteBuf encode(ByteBufAllocator allocator) {
-    return null;
+  public RSocketRoutingAddress(RSocketRoutingFrameType frameType, int flags) {
+    super(frameType, flags);
   }
 
-  private RSocketRoutingRouteSetupCodec() {}
+  public static RSocketRoutingAddress from(ByteBuf byteBuf) {
+    return null;
+  }
 }

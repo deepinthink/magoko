@@ -21,6 +21,7 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.rsocket.RSocketStrategies;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @AutoConfigureAfter(BrokerRSocketStrategiesAutoConfiguration.class)
@@ -28,7 +29,8 @@ public class BrokerMessagingConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
-  public BrokerMessagingHandlerRegistry brokerMessagingHandlerRegistry() {
-    return new RSocketBrokerMessagingHandlerRegistry();
+  public BrokerMessagingHandlerRegistry brokerMessagingHandlerRegistry(
+      RSocketStrategies rSocketStrategies) {
+    return new RSocketBrokerMessagingHandlerRegistry(rSocketStrategies.metadataExtractor());
   }
 }
