@@ -25,9 +25,5 @@ import org.springframework.context.annotation.Import;
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerServerMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(BrokerServerProperties.class)
-@Import({
-  BrokerServerRSocketStrategyConfiguration.class,
-  BrokerMessagingConfiguration.class,
-  BrokerProxyServerConfiguration.class
-})
+@Import({BrokerMessagingConfiguration.class, BrokerProxyServerConfiguration.class})
 public class BrokerServerAutoConfiguration {}
