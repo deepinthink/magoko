@@ -15,14 +15,6 @@
  */
 package org.deepinthink.magoko.broker.core.routing.codec;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-
-public final class RSocketRoutingRouteSetupCodec {
-
-  public static ByteBuf encode(ByteBufAllocator allocator) {
-    return null;
-  }
-
-  private RSocketRoutingRouteSetupCodec() {}
+public final class RSocketRoutingAddressCodec {
+  private RSocketRoutingAddressCodec() {}
 }

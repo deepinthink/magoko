@@ -15,12 +15,11 @@
  */
 package org.deepinthink.magoko.broker.core.routing;
 
-/**
- * https://github.com/rsocket/rsocket/blob/feature/rf/Extensions/Routing-And-Forwarding.md#framing-header-format
- */
+/** https://github.com/rsocket/rsocket/blob/feature/rf/Extensions/Routing-And-Forwarding.md */
 public enum RSocketRoutingFrameType {
   RESERVED(0x00), // reserved
-  ROUTE_SETUP(0x01); // service setup up metadata frame
+  ROUTE_SETUP(0x01), // service setup up metadata frame
+  ADDRESS(0x02); // routing forward destination metadata frame
 
   private static RSocketRoutingFrameType[] FRAME_TYPES;
 
