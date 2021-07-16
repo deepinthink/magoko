@@ -61,7 +61,7 @@ public class RSocketRoutingFrameDecoder extends AbstractDecoder<RSocketRoutingFr
       case ROUTE_SETUP:
         return RSocketRoutingRouteSetup.from(byteBuf);
       case ADDRESS:
-        return RSocketRoutingAddress.from(byteBuf);
+        return RSocketRoutingAddress.from(byteBuf, flags);
     }
     throw new IllegalArgumentException("Unknown rsocket routing frame type " + frameType);
   }

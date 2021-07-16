@@ -16,14 +16,45 @@
 package org.deepinthink.magoko.broker.core.routing;
 
 import io.netty.buffer.ByteBuf;
+import java.util.Objects;
+import org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCodec;
 
 public class RSocketRoutingAddress extends RSocketRoutingFrame {
 
-  public RSocketRoutingAddress(RSocketRoutingFrameType frameType, int flags) {
-    super(frameType, flags);
+  private RSocketRoutingAddress(int flags) {
+    super(RSocketRoutingFrameType.ADDRESS, flags);
   }
 
-  public static RSocketRoutingAddress from(ByteBuf byteBuf) {
-    return null;
+  public RSocketRoutingType getRoutingType() {
+    int routingType = getFlags() & (~RSocketRoutingAddressCodec.ROUTING_TYPE_MASK);
+    return RSocketRoutingType.from(routingType);
+  }
+
+  public static RSocketRoutingAddress from(ByteBuf byteBuf, int flags) {
+    return new Builder().flags(flags).build();
+  }
+
+  public static class Builder {
+
+    private int flags = RSocketRoutingAddressCodec.FLAGS_U; // default UNICAST
+
+    private Builder() {}
+
+    public Builder flags(int flags) {
+      this.flags = flags;
+      return this;
+    }
+
+    public Builder routingType(RSocketRoutingType routingType) {
+      if (Objects.nonNull(routingType)) {
+        flags &= RSocketRoutingAddressCodec.ROUTING_TYPE_MASK;
+        flags |= routingType.getFlag();
+      }
+      return this;
+    }
+
+    public RSocketRoutingAddress build() {
+      return new RSocketRoutingAddress(this.flags);
+    }
   }
 }
