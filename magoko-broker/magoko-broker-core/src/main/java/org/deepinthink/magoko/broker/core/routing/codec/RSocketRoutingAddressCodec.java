@@ -20,6 +20,11 @@ import io.netty.buffer.ByteBufAllocator;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
 
 public final class RSocketRoutingAddressCodec {
+
+  public static final int FLAGS_U = 0b10_0000_0000;
+  public static final int FLAGS_M = 0b01_0000_0000;
+  public static final int ROUTING_TYPE_MASK = 0b11_1111_1111;
+
   private RSocketRoutingAddressCodec() {}
 
   public static ByteBuf encode(ByteBufAllocator allocator, int flags) {

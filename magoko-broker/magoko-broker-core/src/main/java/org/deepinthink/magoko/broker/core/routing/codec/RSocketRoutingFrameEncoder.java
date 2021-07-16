@@ -55,7 +55,7 @@ public class RSocketRoutingFrameEncoder extends AbstractEncoder<RSocketRoutingFr
     NettyDataBufferFactory factory = (NettyDataBufferFactory) bufferFactory;
     ByteBufAllocator allocator = factory.getByteBufAllocator();
     RSocketRoutingFrameType frameType = routingFrame.getFrameType();
-    ByteBuf encoded = null;
+    ByteBuf encoded;
     switch (frameType) {
       case ROUTE_SETUP:
         RSocketRoutingRouteSetup routeSetup = (RSocketRoutingRouteSetup) routingFrame;
