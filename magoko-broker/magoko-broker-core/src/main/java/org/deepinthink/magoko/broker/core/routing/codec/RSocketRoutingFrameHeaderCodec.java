@@ -16,16 +16,34 @@
 package org.deepinthink.magoko.broker.core.routing.codec;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
 
 public final class RSocketRoutingFrameHeaderCodec {
 
+  public static final int FRAME_TYPE_SIZE = Short.BYTES; // 2bytes
+  public static final int FLAGS_BITS = 10; // 10 bit flags
+  public static final int FRAME_FLAGS_MASK = 0b0000_0011_1111_1111;
+
+  public static ByteBuf encode(
+      ByteBufAllocator allocator, RSocketRoutingFrameType frameType, int flags) {
+    int frameId = frameType.getId() << FLAGS_BITS;
+    short typeAndFlags = (short) (frameId | (short) flags);
+    return allocator.buffer().writeShort(typeAndFlags);
+  }
+
   public static int flags(ByteBuf byteBuf) {
-    return 0;
+    byteBuf.markReaderIndex();
+    short typeAndFlags = byteBuf.readShort();
+    byteBuf.resetReaderIndex();
+    return typeAndFlags & FRAME_FLAGS_MASK;
   }
 
   public static RSocketRoutingFrameType frameType(ByteBuf byteBuf) {
-    return null;
+    byteBuf.markReaderIndex();
+    short typeAndFlags = byteBuf.readShort();
+    byteBuf.resetReaderIndex();
+    return RSocketRoutingFrameType.from(typeAndFlags >> FLAGS_BITS);
   }
 
   private RSocketRoutingFrameHeaderCodec() {}

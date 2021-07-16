@@ -15,6 +15,16 @@
  */
 package org.deepinthink.magoko.broker.core.routing.codec;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
+
 public final class RSocketRoutingAddressCodec {
   private RSocketRoutingAddressCodec() {}
+
+  public static ByteBuf encode(ByteBufAllocator allocator, int flags) {
+    ByteBuf byteBuf =
+        RSocketRoutingFrameHeaderCodec.encode(allocator, RSocketRoutingFrameType.ADDRESS, flags);
+    return byteBuf;
+  }
 }

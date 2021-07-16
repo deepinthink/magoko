@@ -18,10 +18,7 @@ package org.deepinthink.magoko.broker.core.routing.codec;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import java.util.Map;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrame;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingMimeTypes;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingRouteSetup;
+import org.deepinthink.magoko.broker.core.routing.*;
 import org.reactivestreams.Publisher;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.codec.AbstractEncoder;
@@ -62,7 +59,11 @@ public class RSocketRoutingFrameEncoder extends AbstractEncoder<RSocketRoutingFr
     switch (frameType) {
       case ROUTE_SETUP:
         RSocketRoutingRouteSetup routeSetup = (RSocketRoutingRouteSetup) routingFrame;
-        encoded = RSocketRoutingRouteSetupCodec.encode(allocator);
+        encoded = RSocketRoutingRouteSetupCodec.encode(allocator, routingFrame.getFlags());
+        break;
+      case ADDRESS:
+        RSocketRoutingAddress address = (RSocketRoutingAddress) routingFrame;
+        encoded = RSocketRoutingAddressCodec.encode(allocator, routingFrame.getFlags());
         break;
       default:
         throw new IllegalArgumentException("Unknown rsocket routing frame type " + frameType);

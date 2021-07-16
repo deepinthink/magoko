@@ -19,10 +19,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import java.util.Map;
 import java.util.Objects;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrame;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingMimeTypes;
-import org.deepinthink.magoko.broker.core.routing.RSocketRoutingRouteSetup;
+import org.deepinthink.magoko.broker.core.routing.*;
 import org.reactivestreams.Publisher;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.codec.AbstractDecoder;
@@ -63,6 +60,8 @@ public class RSocketRoutingFrameDecoder extends AbstractDecoder<RSocketRoutingFr
     switch (frameType) {
       case ROUTE_SETUP:
         return RSocketRoutingRouteSetup.from(byteBuf);
+      case ADDRESS:
+        return RSocketRoutingAddress.from(byteBuf);
     }
     throw new IllegalArgumentException("Unknown rsocket routing frame type " + frameType);
   }
