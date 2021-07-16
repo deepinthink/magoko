@@ -17,13 +17,21 @@ package org.deepinthink.magoko.broker.core.routing;
 
 import io.netty.buffer.ByteBuf;
 
-public class RSocketRoutingRouteSetup extends RSocketRoutingFrame {
+public final class RSocketRoutingRouteSetup extends RSocketRoutingFrame {
 
-  RSocketRoutingRouteSetup(RSocketRoutingFrameType frameType, int flags) {
-    super(frameType, flags);
+  private RSocketRoutingRouteSetup(RSocketRoutingFrameType frameType) {
+    super(frameType, 0);
   }
 
   public static RSocketRoutingRouteSetup from(ByteBuf byteBuf) {
-    return null;
+    return new Builder().build();
+  }
+
+  public static final class Builder {
+    private Builder() {}
+
+    public RSocketRoutingRouteSetup build() {
+      return new RSocketRoutingRouteSetup(null);
+    }
   }
 }
