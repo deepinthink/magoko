@@ -19,19 +19,33 @@ import io.netty.buffer.ByteBuf;
 
 public final class RSocketRoutingRouteSetup extends RSocketRoutingFrame {
 
-  private RSocketRoutingRouteSetup(RSocketRoutingFrameType frameType) {
-    super(frameType, 0);
-  }
+  private final int routeId;
 
   public static RSocketRoutingRouteSetup from(ByteBuf byteBuf) {
-    return new Builder().build();
+    return new Builder().routeId(byteBuf.readInt()).build();
+  }
+
+  private RSocketRoutingRouteSetup(int routeId) {
+    super(RSocketRoutingFrameType.ROUTE_SETUP, 0);
+    this.routeId = routeId;
+  }
+
+  public int getRouteId() {
+    return routeId;
   }
 
   public static final class Builder {
+    private int routeId;
+
     private Builder() {}
 
+    public Builder routeId(int routeId) {
+      this.routeId = routeId;
+      return this;
+    }
+
     public RSocketRoutingRouteSetup build() {
-      return new RSocketRoutingRouteSetup(null);
+      return new RSocketRoutingRouteSetup(this.routeId);
     }
   }
 }

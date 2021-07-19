@@ -21,8 +21,15 @@ import org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCod
 
 public class RSocketRoutingAddress extends RSocketRoutingFrame {
 
-  private RSocketRoutingAddress(int flags) {
+  private final int routeId;
+
+  public static RSocketRoutingAddress from(ByteBuf byteBuf, int flags) {
+    return new Builder().flags(flags).routeId(byteBuf.readInt()).build();
+  }
+
+  private RSocketRoutingAddress(int flags, int routeId) {
     super(RSocketRoutingFrameType.ADDRESS, flags);
+    this.routeId = routeId;
   }
 
   public RSocketRoutingType getRoutingType() {
@@ -30,18 +37,23 @@ public class RSocketRoutingAddress extends RSocketRoutingFrame {
     return RSocketRoutingType.from(routingType);
   }
 
-  public static RSocketRoutingAddress from(ByteBuf byteBuf, int flags) {
-    return new Builder().flags(flags).build();
+  public int getRouteId() {
+    return routeId;
   }
 
   public static class Builder {
-
     private int flags = RSocketRoutingAddressCodec.FLAGS_U; // default UNICAST
+    private int routeId;
 
     private Builder() {}
 
     public Builder flags(int flags) {
       this.flags = flags;
+      return this;
+    }
+
+    public Builder routeId(int routeId) {
+      this.routeId = routeId;
       return this;
     }
 
@@ -54,7 +66,7 @@ public class RSocketRoutingAddress extends RSocketRoutingFrame {
     }
 
     public RSocketRoutingAddress build() {
-      return new RSocketRoutingAddress(this.flags);
+      return new RSocketRoutingAddress(this.flags, this.routeId);
     }
   }
 }
