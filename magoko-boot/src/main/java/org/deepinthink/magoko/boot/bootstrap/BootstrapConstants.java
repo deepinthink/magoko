@@ -29,5 +29,8 @@ public final class BootstrapConstants {
   public static final String DEFAULT_BOOTSTRAP_CONFIG_PROPERTY_SOURCE_NAME =
       System.getProperty(PREFIX + ".config-property-source", "bootstrap.config.properties");
 
+  public static final int DEFAULT_BOOTSTRAP_IDENTITY_SID_BITS =
+      Integer.getInteger(PREFIX + "identity-sid-bits", 24);
+
   private BootstrapConstants() {}
 }
