@@ -28,6 +28,12 @@ public class BootstrapAutoConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
+  public BootstrapInstance bootstrapInstance(BootstrapProperties properties) {
+    return properties.getInstance();
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
   public BootstrapIdentity bootstrapIdentity(BootstrapInstance instance) {
     return BootstrapIdentity.from(instance);
   }
