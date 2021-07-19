@@ -27,9 +27,10 @@ public final class RSocketRoutingAddressCodec {
 
   private RSocketRoutingAddressCodec() {}
 
-  public static ByteBuf encode(ByteBufAllocator allocator, int flags) {
+  public static ByteBuf encode(ByteBufAllocator allocator, int flags, int routeId) {
     ByteBuf byteBuf =
         RSocketRoutingFrameHeaderCodec.encode(allocator, RSocketRoutingFrameType.ADDRESS, flags);
+    byteBuf.writeInt(routeId);
     return byteBuf;
   }
 }
