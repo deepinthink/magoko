@@ -50,6 +50,7 @@ public class RSocketBrokerMessagingHandlerRegistry implements BrokerMessagingHan
         RSocketRoutingFrame routingFrame =
             (RSocketRoutingFrame) setupMetadataMap.get(ROUTING_FRAME_MIME_TYPE);
         if (routingFrame instanceof RSocketRoutingRouteSetup) { // RouteSetup frame required
+          RSocketRoutingRouteSetup routeSetup = (RSocketRoutingRouteSetup) routingFrame;
           return Mono.just(sendingSocket);
         }
       }

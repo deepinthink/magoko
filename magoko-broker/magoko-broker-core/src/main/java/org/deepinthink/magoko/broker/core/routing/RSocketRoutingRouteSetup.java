@@ -15,33 +15,37 @@
  */
 package org.deepinthink.magoko.broker.core.routing;
 
+import static org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingRouteSetupCodec.routeId;
+
 import io.netty.buffer.ByteBuf;
+import java.util.Objects;
 
 public final class RSocketRoutingRouteSetup extends RSocketRoutingFrame {
 
-  private final int routeId;
+  private final RSocketRoutingRouteId routeId;
 
-  public static RSocketRoutingRouteSetup from(ByteBuf byteBuf) {
-    return new Builder().routeId(byteBuf.readInt()).build();
+  public static Builder from(RSocketRoutingRouteId routeId) {
+    return new Builder(routeId);
   }
 
-  private RSocketRoutingRouteSetup(int routeId) {
+  public static RSocketRoutingRouteSetup from(ByteBuf byteBuf) {
+    return from(routeId(byteBuf)).build();
+  }
+
+  private RSocketRoutingRouteSetup(RSocketRoutingRouteId routeId) {
     super(RSocketRoutingFrameType.ROUTE_SETUP, 0);
     this.routeId = routeId;
   }
 
-  public int getRouteId() {
+  public RSocketRoutingRouteId getRouteId() {
     return routeId;
   }
 
   public static final class Builder {
-    private int routeId;
+    private final RSocketRoutingRouteId routeId;
 
-    private Builder() {}
-
-    public Builder routeId(int routeId) {
-      this.routeId = routeId;
-      return this;
+    private Builder(RSocketRoutingRouteId routeId) {
+      this.routeId = Objects.requireNonNull(routeId);
     }
 
     public RSocketRoutingRouteSetup build() {
