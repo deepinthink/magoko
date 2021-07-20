@@ -15,21 +15,27 @@
  */
 package org.deepinthink.magoko.broker.core.routing;
 
+import static org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCodec.originRouteId;
+
 import io.netty.buffer.ByteBuf;
 import java.util.Objects;
 import org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCodec;
 
 public class RSocketRoutingAddress extends RSocketRoutingFrame {
 
-  private final int routeId;
+  private final RSocketRoutingRouteId originRouteId;
 
-  public static RSocketRoutingAddress from(ByteBuf byteBuf, int flags) {
-    return new Builder().flags(flags).routeId(byteBuf.readInt()).build();
+  public static Builder from(RSocketRoutingRouteId originRouteId) {
+    return new Builder(originRouteId);
   }
 
-  private RSocketRoutingAddress(int flags, int routeId) {
+  public static RSocketRoutingAddress from(ByteBuf byteBuf, int flags) {
+    return new Builder(originRouteId(byteBuf)).flags(flags).build();
+  }
+
+  private RSocketRoutingAddress(RSocketRoutingRouteId originRouteId, int flags) {
     super(RSocketRoutingFrameType.ADDRESS, flags);
-    this.routeId = routeId;
+    this.originRouteId = originRouteId;
   }
 
   public RSocketRoutingType getRoutingType() {
@@ -37,23 +43,20 @@ public class RSocketRoutingAddress extends RSocketRoutingFrame {
     return RSocketRoutingType.from(routingType);
   }
 
-  public int getRouteId() {
-    return routeId;
+  public RSocketRoutingRouteId getOriginRouteId() {
+    return originRouteId;
   }
 
   public static class Builder {
+    private final RSocketRoutingRouteId originRouteId;
     private int flags = RSocketRoutingAddressCodec.FLAGS_U; // default UNICAST
-    private int routeId;
 
-    private Builder() {}
+    private Builder(RSocketRoutingRouteId originRouteId) {
+      this.originRouteId = Objects.requireNonNull(originRouteId);
+    }
 
     public Builder flags(int flags) {
       this.flags = flags;
-      return this;
-    }
-
-    public Builder routeId(int routeId) {
-      this.routeId = routeId;
       return this;
     }
 
@@ -66,7 +69,7 @@ public class RSocketRoutingAddress extends RSocketRoutingFrame {
     }
 
     public RSocketRoutingAddress build() {
-      return new RSocketRoutingAddress(this.flags, this.routeId);
+      return new RSocketRoutingAddress(this.originRouteId, this.flags);
     }
   }
 }

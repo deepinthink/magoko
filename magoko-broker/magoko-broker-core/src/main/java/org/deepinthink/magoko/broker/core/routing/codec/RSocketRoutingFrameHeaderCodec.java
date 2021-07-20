@@ -25,6 +25,8 @@ public final class RSocketRoutingFrameHeaderCodec {
   public static final int FLAGS_BITS = 10; // 10 bit flags
   public static final int FRAME_FLAGS_MASK = 0b0000_0011_1111_1111;
 
+  public static final int BYTES = FRAME_TYPE_SIZE;
+
   public static ByteBuf encode(
       ByteBufAllocator allocator, RSocketRoutingFrameType frameType, int flags) {
     int frameId = frameType.getId() << FLAGS_BITS;
