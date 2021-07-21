@@ -16,26 +16,28 @@
 package org.deepinthink.magoko.broker.core.routing;
 
 import static org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCodec.originRouteId;
+import static org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCodec.tags;
 
 import io.netty.buffer.ByteBuf;
-import java.util.Objects;
 import org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingAddressCodec;
 
 public class RSocketRoutingAddress extends RSocketRoutingFrame {
 
   private final RSocketRoutingRouteId originRouteId;
+  private final RSocketRoutingTags tags;
 
-  public static Builder from(RSocketRoutingRouteId originRouteId) {
-    return new Builder(originRouteId);
+  public static RSocketRoutingAddressBuilder from(RSocketRoutingRouteId originRouteId) {
+    return new RSocketRoutingAddressBuilder(originRouteId);
   }
 
   public static RSocketRoutingAddress from(ByteBuf byteBuf, int flags) {
-    return new Builder(originRouteId(byteBuf)).flags(flags).build();
+    return from(originRouteId(byteBuf)).with(tags(byteBuf)).flags(flags).build();
   }
 
-  private RSocketRoutingAddress(RSocketRoutingRouteId originRouteId, int flags) {
+  RSocketRoutingAddress(RSocketRoutingRouteId originRouteId, RSocketRoutingTags tags, int flags) {
     super(RSocketRoutingFrameType.ADDRESS, flags);
     this.originRouteId = originRouteId;
+    this.tags = tags;
   }
 
   public RSocketRoutingType getRoutingType() {
@@ -47,29 +49,7 @@ public class RSocketRoutingAddress extends RSocketRoutingFrame {
     return originRouteId;
   }
 
-  public static class Builder {
-    private final RSocketRoutingRouteId originRouteId;
-    private int flags = RSocketRoutingAddressCodec.FLAGS_U; // default UNICAST
-
-    private Builder(RSocketRoutingRouteId originRouteId) {
-      this.originRouteId = Objects.requireNonNull(originRouteId);
-    }
-
-    public Builder flags(int flags) {
-      this.flags = flags;
-      return this;
-    }
-
-    public Builder routingType(RSocketRoutingType routingType) {
-      if (Objects.nonNull(routingType)) {
-        flags &= RSocketRoutingAddressCodec.ROUTING_TYPE_MASK;
-        flags |= routingType.getFlag();
-      }
-      return this;
-    }
-
-    public RSocketRoutingAddress build() {
-      return new RSocketRoutingAddress(this.originRouteId, this.flags);
-    }
+  public RSocketRoutingTags getTags() {
+    return tags;
   }
 }
