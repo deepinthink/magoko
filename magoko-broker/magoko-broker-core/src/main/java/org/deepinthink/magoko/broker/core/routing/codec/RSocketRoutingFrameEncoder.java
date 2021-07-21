@@ -61,7 +61,7 @@ public class RSocketRoutingFrameEncoder extends AbstractEncoder<RSocketRoutingFr
         RSocketRoutingRouteSetup routeSetup = (RSocketRoutingRouteSetup) routingFrame;
         encoded =
             RSocketRoutingRouteSetupCodec.encode(
-                allocator, routeSetup.getRouteId(), routingFrame.getFlags());
+                allocator, routeSetup.getRouteId(), routeSetup.getTags(), routingFrame.getFlags());
         break;
       case ADDRESS:
         RSocketRoutingAddress address = (RSocketRoutingAddress) routingFrame;

@@ -16,40 +16,39 @@
 package org.deepinthink.magoko.broker.core.routing;
 
 import static org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingRouteSetupCodec.routeId;
+import static org.deepinthink.magoko.broker.core.routing.codec.RSocketRoutingRouteSetupCodec.tags;
 
 import io.netty.buffer.ByteBuf;
-import java.util.Objects;
 
 public final class RSocketRoutingRouteSetup extends RSocketRoutingFrame {
 
   private final RSocketRoutingRouteId routeId;
+  private final RSocketRoutingTags tags;
 
-  public static Builder from(RSocketRoutingRouteId routeId) {
-    return new Builder(routeId);
+  public static RSocketRoutingRouteSetupBuilder from(RSocketRoutingRouteId routeId) {
+    return new RSocketRoutingRouteSetupBuilder(routeId);
   }
 
   public static RSocketRoutingRouteSetup from(ByteBuf byteBuf) {
-    return from(routeId(byteBuf)).build();
+    return from(routeId(byteBuf)).with(tags(byteBuf)).build();
   }
 
-  private RSocketRoutingRouteSetup(RSocketRoutingRouteId routeId) {
+  RSocketRoutingRouteSetup(RSocketRoutingRouteId routeId, RSocketRoutingTags tags) {
     super(RSocketRoutingFrameType.ROUTE_SETUP, 0);
     this.routeId = routeId;
+    this.tags = tags;
   }
 
   public RSocketRoutingRouteId getRouteId() {
     return routeId;
   }
 
-  public static final class Builder {
-    private final RSocketRoutingRouteId routeId;
+  public RSocketRoutingTags getTags() {
+    return tags;
+  }
 
-    private Builder(RSocketRoutingRouteId routeId) {
-      this.routeId = Objects.requireNonNull(routeId);
-    }
-
-    public RSocketRoutingRouteSetup build() {
-      return new RSocketRoutingRouteSetup(this.routeId);
-    }
+  @Override
+  public String toString() {
+    return "RSocketRoutingRouteSetup{" + "routeId=" + routeId + ", tags=" + tags + '}';
   }
 }
