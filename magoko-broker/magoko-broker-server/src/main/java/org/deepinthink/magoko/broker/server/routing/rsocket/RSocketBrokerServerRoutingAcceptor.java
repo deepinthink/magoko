@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.messaging.rsocket;
+package org.deepinthink.magoko.broker.server.routing.rsocket;
 
 import static org.deepinthink.magoko.broker.core.routing.RSocketRoutingMimeTypes.ROUTING_FRAME_MIME_TYPE;
 
@@ -23,20 +23,20 @@ import java.util.Map;
 import java.util.Objects;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrame;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingRouteSetup;
-import org.deepinthink.magoko.broker.server.messaging.BrokerMessagingHandlerRegistry;
+import org.deepinthink.magoko.broker.server.routing.BrokerServerRoutingAcceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.rsocket.MetadataExtractor;
 import org.springframework.util.MimeType;
 import reactor.core.publisher.Mono;
 
-public class RSocketBrokerMessagingHandlerRegistry implements BrokerMessagingHandlerRegistry {
+public class RSocketBrokerServerRoutingAcceptor implements BrokerServerRoutingAcceptor {
   private static final Logger logger =
-      LoggerFactory.getLogger(RSocketBrokerMessagingHandlerRegistry.class);
+      LoggerFactory.getLogger(RSocketBrokerServerRoutingAcceptor.class);
 
   private final MetadataExtractor metadataExtractor;
 
-  public RSocketBrokerMessagingHandlerRegistry(MetadataExtractor metadataExtractor) {
+  public RSocketBrokerServerRoutingAcceptor(MetadataExtractor metadataExtractor) {
     this.metadataExtractor = Objects.requireNonNull(metadataExtractor);
   }
 

@@ -19,11 +19,11 @@ import static org.deepinthink.magoko.broker.server.BrokerServerConstants.PREFIX;
 
 import io.rsocket.transport.netty.server.TcpServerTransport;
 import org.deepinthink.magoko.broker.server.config.BrokerServerProperties;
-import org.deepinthink.magoko.broker.server.messaging.BrokerMessagingConfiguration;
-import org.deepinthink.magoko.broker.server.messaging.BrokerMessagingHandlerRegistry;
 import org.deepinthink.magoko.broker.server.proxy.context.BrokerProxyServerBootstrap;
 import org.deepinthink.magoko.broker.server.proxy.rsocket.RSocketBrokerProxyServerFactory;
 import org.deepinthink.magoko.broker.server.proxy.rsocket.RSocketBrokerProxyServerFactoryCustomizer;
+import org.deepinthink.magoko.broker.server.routing.BrokerServerRoutingAcceptor;
+import org.deepinthink.magoko.broker.server.routing.BrokerServerRoutingConfiguration;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -36,7 +36,7 @@ import reactor.netty.tcp.TcpServer;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnClass({TcpServerTransport.class, TcpServer.class})
-@AutoConfigureAfter(BrokerMessagingConfiguration.class)
+@AutoConfigureAfter(BrokerServerRoutingConfiguration.class)
 @ConditionalOnProperty(prefix = PREFIX + ".proxy", name = "port")
 public class BrokerProxyServerConfiguration {
 
@@ -63,7 +63,7 @@ public class BrokerProxyServerConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public BrokerProxyServerBootstrap brokerProxyServerBootstrap(
-      BrokerProxyServerFactory serverFactory, BrokerMessagingHandlerRegistry registry) {
+      BrokerProxyServerFactory serverFactory, BrokerServerRoutingAcceptor registry) {
     return new BrokerProxyServerBootstrap(serverFactory, registry);
   }
 }
