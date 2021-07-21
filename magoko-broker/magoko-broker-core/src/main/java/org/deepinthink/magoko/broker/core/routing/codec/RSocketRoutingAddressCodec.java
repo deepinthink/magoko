@@ -20,6 +20,7 @@ import io.netty.buffer.ByteBufAllocator;
 import java.util.Objects;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingRouteId;
+import org.deepinthink.magoko.broker.core.routing.RSocketRoutingTags;
 
 public final class RSocketRoutingAddressCodec {
 
@@ -30,15 +31,24 @@ public final class RSocketRoutingAddressCodec {
   private RSocketRoutingAddressCodec() {}
 
   public static ByteBuf encode(
-      ByteBufAllocator allocator, RSocketRoutingRouteId originRouteId, int flags) {
+      ByteBufAllocator allocator,
+      RSocketRoutingTags tags,
+      RSocketRoutingRouteId originRouteId,
+      int flags) {
     Objects.requireNonNull(originRouteId);
     ByteBuf byteBuf =
         RSocketRoutingFrameHeaderCodec.encode(allocator, RSocketRoutingFrameType.ADDRESS, flags);
     RSocketRoutingCodecUtils.encodeRouteId(byteBuf, originRouteId);
+    RSocketRoutingTagsCodec.encodeTag(byteBuf, tags);
     return byteBuf;
   }
 
   public static RSocketRoutingRouteId originRouteId(ByteBuf byteBuf) {
     return RSocketRoutingCodecUtils.decodeRouteId(byteBuf, RSocketRoutingFrameHeaderCodec.BYTES);
+  }
+
+  public static RSocketRoutingTags tags(ByteBuf byteBuf) {
+    int offset = RSocketRoutingFrameHeaderCodec.BYTES + 16;
+    return RSocketRoutingTagsCodec.decodeTag(offset, byteBuf);
   }
 }
