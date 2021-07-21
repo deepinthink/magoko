@@ -15,8 +15,8 @@
  */
 package org.deepinthink.magoko.broker.server.config;
 
-import org.deepinthink.magoko.broker.server.messaging.BrokerMessagingConfiguration;
 import org.deepinthink.magoko.broker.server.proxy.BrokerProxyServerConfiguration;
+import org.deepinthink.magoko.broker.server.routing.BrokerServerRoutingConfiguration;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,5 +25,5 @@ import org.springframework.context.annotation.Import;
 @SpringBootConfiguration(proxyBeanMethods = false)
 @ConditionalOnBean(BrokerServerMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(BrokerServerProperties.class)
-@Import({BrokerMessagingConfiguration.class, BrokerProxyServerConfiguration.class})
+@Import({BrokerServerRoutingConfiguration.class, BrokerProxyServerConfiguration.class})
 public class BrokerServerAutoConfiguration {}

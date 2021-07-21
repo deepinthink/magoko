@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.messaging;
+package org.deepinthink.magoko.broker.server.routing;
 
 import org.deepinthink.magoko.broker.core.routing.config.BrokerRSocketStrategiesAutoConfiguration;
-import org.deepinthink.magoko.broker.server.messaging.rsocket.RSocketBrokerMessagingHandlerRegistry;
+import org.deepinthink.magoko.broker.server.routing.rsocket.RSocketBrokerServerRoutingAcceptor;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -25,12 +25,12 @@ import org.springframework.messaging.rsocket.RSocketStrategies;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
 @AutoConfigureAfter(BrokerRSocketStrategiesAutoConfiguration.class)
-public class BrokerMessagingConfiguration {
+public class BrokerServerRoutingConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
-  public BrokerMessagingHandlerRegistry brokerMessagingHandlerRegistry(
+  public BrokerServerRoutingAcceptor brokerServerRoutingAcceptor(
       RSocketStrategies rSocketStrategies) {
-    return new RSocketBrokerMessagingHandlerRegistry(rSocketStrategies.metadataExtractor());
+    return new RSocketBrokerServerRoutingAcceptor(rSocketStrategies.metadataExtractor());
   }
 }

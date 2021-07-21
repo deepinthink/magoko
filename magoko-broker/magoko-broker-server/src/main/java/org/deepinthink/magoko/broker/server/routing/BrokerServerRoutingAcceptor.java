@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.broker.server.messaging;
+package org.deepinthink.magoko.broker.server.routing;
 
 import io.rsocket.SocketAcceptor;
 
-public interface BrokerMessagingHandlerRegistry extends SocketAcceptor {}
+public interface BrokerServerRoutingAcceptor extends SocketAcceptor {}
