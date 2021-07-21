@@ -20,6 +20,8 @@ import org.deepinthink.magoko.broker.core.routing.RSocketRoutingRouteId;
 
 public final class RSocketRoutingCodecUtils {
 
+  public static final int ROUTE_ID_BITS = 16; // MSB(8bytes), LSB(8bytes)
+
   static RSocketRoutingRouteId decodeRouteId(ByteBuf byteBuf, int offset) {
     long msb = byteBuf.getLong(offset);
     long lsb = byteBuf.getLong(offset + Long.BYTES);

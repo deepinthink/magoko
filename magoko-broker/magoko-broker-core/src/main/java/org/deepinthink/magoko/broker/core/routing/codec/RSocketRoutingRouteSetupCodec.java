@@ -22,21 +22,31 @@ import io.netty.buffer.ByteBufAllocator;
 import java.util.Objects;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingFrameType;
 import org.deepinthink.magoko.broker.core.routing.RSocketRoutingRouteId;
+import org.deepinthink.magoko.broker.core.routing.RSocketRoutingTags;
 
 public final class RSocketRoutingRouteSetupCodec {
 
   public static ByteBuf encode(
-      ByteBufAllocator allocator, RSocketRoutingRouteId routeId, int flags) {
+      ByteBufAllocator allocator,
+      RSocketRoutingRouteId routeId,
+      RSocketRoutingTags tags,
+      int flags) {
     Objects.requireNonNull(routeId);
     ByteBuf byteBuf =
         RSocketRoutingFrameHeaderCodec.encode(
             allocator, RSocketRoutingFrameType.ROUTE_SETUP, flags);
     RSocketRoutingCodecUtils.encodeRouteId(byteBuf, routeId);
+    RSocketRoutingTagsCodec.encodeTag(byteBuf, tags);
     return byteBuf;
   }
 
   public static RSocketRoutingRouteId routeId(ByteBuf byteBuf) {
     return decodeRouteId(byteBuf, RSocketRoutingFrameHeaderCodec.BYTES);
+  }
+
+  public static RSocketRoutingTags tags(ByteBuf byteBuf) {
+    int offset = RSocketRoutingFrameHeaderCodec.BYTES + RSocketRoutingCodecUtils.ROUTE_ID_BITS;
+    return RSocketRoutingTagsCodec.decodeTag(offset, byteBuf);
   }
 
   private RSocketRoutingRouteSetupCodec() {}

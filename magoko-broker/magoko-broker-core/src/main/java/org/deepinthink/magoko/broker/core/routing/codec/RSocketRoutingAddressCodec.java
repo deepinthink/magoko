@@ -48,7 +48,7 @@ public final class RSocketRoutingAddressCodec {
   }
 
   public static RSocketRoutingTags tags(ByteBuf byteBuf) {
-    int offset = RSocketRoutingFrameHeaderCodec.BYTES + 16;
+    int offset = RSocketRoutingFrameHeaderCodec.BYTES + RSocketRoutingCodecUtils.ROUTE_ID_BITS;
     return RSocketRoutingTagsCodec.decodeTag(offset, byteBuf);
   }
 }
