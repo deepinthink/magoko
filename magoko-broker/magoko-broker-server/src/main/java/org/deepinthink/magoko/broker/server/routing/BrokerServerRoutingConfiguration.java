@@ -16,6 +16,8 @@
 package org.deepinthink.magoko.broker.server.routing;
 
 import org.deepinthink.magoko.broker.core.routing.config.BrokerRSocketStrategiesAutoConfiguration;
+import org.deepinthink.magoko.broker.server.routing.rsocket.BrokerRSocketRoutingIndex;
+import org.deepinthink.magoko.broker.server.routing.rsocket.BrokerRoutingRSocketFactory;
 import org.deepinthink.magoko.broker.server.routing.rsocket.RSocketBrokerServerRoutingAcceptor;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -29,8 +31,17 @@ public class BrokerServerRoutingConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
+  public BrokerRSocketRoutingIndex brokerRSocketRoutingIndex() {
+    return new BrokerRSocketRoutingIndex();
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
   public BrokerServerRoutingAcceptor brokerServerRoutingAcceptor(
+      BrokerRSocketRoutingIndex routingIndex,
+      BrokerRoutingRSocketFactory routingRSocketFactory,
       RSocketStrategies rSocketStrategies) {
-    return new RSocketBrokerServerRoutingAcceptor(rSocketStrategies.metadataExtractor());
+    return new RSocketBrokerServerRoutingAcceptor(
+        routingIndex, routingRSocketFactory, rSocketStrategies.metadataExtractor());
   }
 }
