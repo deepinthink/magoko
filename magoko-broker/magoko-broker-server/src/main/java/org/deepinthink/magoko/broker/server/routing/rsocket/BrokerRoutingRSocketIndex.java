@@ -25,10 +25,10 @@ import org.deepinthink.magoko.broker.server.util.RoaringBitmapIndexedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BrokerRSocketRoutingIndex
+public class BrokerRoutingRSocketIndex
     implements IndexedMap<RSocketRoutingRouteId, RSocket, RSocketRoutingTags> {
 
-  private static final Logger logger = LoggerFactory.getLogger(BrokerRSocketRoutingIndex.class);
+  private static final Logger logger = LoggerFactory.getLogger(BrokerRoutingRSocketIndex.class);
 
   private final IndexedMap<RSocketRoutingRouteId, RSocket, RSocketRoutingTags> indexedMap =
       new RoaringBitmapIndexedMap<>();

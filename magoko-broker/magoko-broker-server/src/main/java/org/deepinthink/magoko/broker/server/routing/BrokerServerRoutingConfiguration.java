@@ -15,14 +15,22 @@
  */
 package org.deepinthink.magoko.broker.server.routing;
 
+import java.util.stream.Collectors;
 import org.deepinthink.magoko.broker.core.routing.config.BrokerRSocketStrategiesAutoConfiguration;
-import org.deepinthink.magoko.broker.server.routing.rsocket.BrokerRSocketRoutingIndex;
+import org.deepinthink.magoko.broker.server.core.query.BrokerRSocketQuery;
+import org.deepinthink.magoko.broker.server.core.rsocket.BrokerCompositeRSocketLocator;
+import org.deepinthink.magoko.broker.server.core.rsocket.BrokerMulticastRSocketLocator;
+import org.deepinthink.magoko.broker.server.core.rsocket.BrokerRSocketLocator;
+import org.deepinthink.magoko.broker.server.core.rsocket.BrokerUnicastRSocketLocator;
+import org.deepinthink.magoko.broker.server.routing.rsocket.BrokerRoutingAddressExtractor;
 import org.deepinthink.magoko.broker.server.routing.rsocket.BrokerRoutingRSocketFactory;
+import org.deepinthink.magoko.broker.server.routing.rsocket.BrokerRoutingRSocketIndex;
 import org.deepinthink.magoko.broker.server.routing.rsocket.RSocketBrokerServerRoutingAcceptor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.messaging.rsocket.RSocketStrategies;
 
 @SpringBootConfiguration(proxyBeanMethods = false)
@@ -30,15 +38,43 @@ import org.springframework.messaging.rsocket.RSocketStrategies;
 public class BrokerServerRoutingConfiguration {
 
   @Bean
-  @ConditionalOnMissingBean
-  public BrokerRSocketRoutingIndex brokerRSocketRoutingIndex() {
-    return new BrokerRSocketRoutingIndex();
+  public BrokerRoutingRSocketIndex brokerRSocketRoutingIndex() {
+    return new BrokerRoutingRSocketIndex();
   }
 
   @Bean
-  @ConditionalOnMissingBean
+  public BrokerMulticastRSocketLocator brokerMulticastRSocketLocator(
+      BrokerRSocketQuery rSocketQuery) {
+    return new BrokerMulticastRSocketLocator(rSocketQuery);
+  }
+
+  @Bean
+  public BrokerUnicastRSocketLocator brokerUnicastRSocketLocator(BrokerRSocketQuery rSocketQuery) {
+    return new BrokerUnicastRSocketLocator(rSocketQuery);
+  }
+
+  @Bean
+  @Primary
+  public BrokerCompositeRSocketLocator brokerCompositeRSocketLocator(
+      ObjectProvider<BrokerRSocketLocator> locators) {
+    return new BrokerCompositeRSocketLocator(locators.orderedStream().collect(Collectors.toList()));
+  }
+
+  @Bean
+  public BrokerRoutingAddressExtractor brokerRoutingAddressExtractor(
+      RSocketStrategies rSocketStrategies) {
+    return new BrokerRoutingAddressExtractor(rSocketStrategies.metadataExtractor());
+  }
+
+  @Bean
+  public BrokerRoutingRSocketFactory brokerRoutingRSocketFactory(
+      BrokerRSocketLocator rSocketLocator, BrokerRoutingAddressExtractor addressExtractor) {
+    return new BrokerRoutingRSocketFactory(rSocketLocator, addressExtractor);
+  }
+
+  @Bean
   public BrokerServerRoutingAcceptor brokerServerRoutingAcceptor(
-      BrokerRSocketRoutingIndex routingIndex,
+      BrokerRoutingRSocketIndex routingIndex,
       BrokerRoutingRSocketFactory routingRSocketFactory,
       RSocketStrategies rSocketStrategies) {
     return new RSocketBrokerServerRoutingAcceptor(
