@@ -35,12 +35,12 @@ public class RSocketBrokerServerRoutingAcceptor implements BrokerServerRoutingAc
   private static final Logger logger =
       LoggerFactory.getLogger(RSocketBrokerServerRoutingAcceptor.class);
 
-  private final BrokerRSocketRoutingIndex routingIndex;
+  private final BrokerRoutingRSocketIndex routingIndex;
   private final BrokerRoutingRSocketFactory routingRSocketFactory;
   private final MetadataExtractor metadataExtractor;
 
   public RSocketBrokerServerRoutingAcceptor(
-      BrokerRSocketRoutingIndex routingIndex,
+      BrokerRoutingRSocketIndex routingIndex,
       BrokerRoutingRSocketFactory routingRSocketFactory,
       MetadataExtractor metadataExtractor) {
     this.routingIndex = Objects.requireNonNull(routingIndex);

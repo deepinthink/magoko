@@ -15,6 +15,7 @@
  */
 package org.deepinthink.magoko.broker.core.routing;
 
+import io.rsocket.metadata.WellKnownMimeType;
 import org.springframework.util.MimeType;
 
 public final class RSocketRoutingMimeTypes {
@@ -24,6 +25,10 @@ public final class RSocketRoutingMimeTypes {
 
   public static final MimeType ROUTING_FRAME_MIME_TYPE =
       new MimeType(ROUTING_MESSAGE_TYPE, ROUTING_MESSAGE_SUBTYPE);
+  public static final String ROUTING_FRAME_METADATA_KEY = "routing-frame";
+
+  public static final MimeType COMPOSITE_MIME_TYPE =
+      MimeType.valueOf(WellKnownMimeType.MESSAGE_RSOCKET_COMPOSITE_METADATA.getString());
 
   private RSocketRoutingMimeTypes() {}
 }
