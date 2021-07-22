@@ -23,5 +23,15 @@
       <artifactId>spring-boot-starter-rsocket</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.agrona</groupId>
+      <artifactId>agrona</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.roaringbitmap</groupId>
+      <artifactId>RoaringBitmap</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 </project>

@@ -19,6 +19,8 @@
     <parameter.maven-spring-boot.classifier>exec</parameter.maven-spring-boot.classifier>
     <dep.dataseer.version>0.0.1-SNAPSHOT</dep.dataseer.version>
     <dep.groot.version>0.0.1-SNAPSHOT</dep.groot.version>
+    <dep.agrona.version>1.11.0</dep.agrona.version>
+    <dep.roaringbitmap.version>0.9.15</dep.roaringbitmap.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -49,6 +51,16 @@
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.agrona</groupId>
+        <artifactId>agrona</artifactId>
+        <version>${dep.agrona.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.roaringbitmap</groupId>
+        <artifactId>RoaringBitmap</artifactId>
+        <version>${dep.roaringbitmap.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
