@@ -6,16 +6,15 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.deepinthink.magoko</groupId>
-    <artifactId>magoko-parent</artifactId>
+    <artifactId>magoko-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>magoko-parent/pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>magoko</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-    <module>magoko-boot</module>
-    <module>magoko-build</module>
-    <module>magoko-dependencies</module>
-    <module>magoko-parent</module>
-  </modules>
+  <artifactId>magoko-boot-starter</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+  </dependencies>
 </project>

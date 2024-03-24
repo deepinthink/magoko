@@ -8,14 +8,13 @@
     <groupId>org.deepinthink.magoko</groupId>
     <artifactId>magoko-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>magoko-parent/pom.xml</relativePath>
+    <relativePath>../magoko-parent/pom.xml</relativePath>
   </parent>
-  <artifactId>magoko</artifactId>
+  <artifactId>magoko-boot</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>magoko-boot</module>
-    <module>magoko-build</module>
-    <module>magoko-dependencies</module>
-    <module>magoko-parent</module>
+    <module>magoko-boot-autoconfigure</module>
+    <module>magoko-boot-core</module>
+    <module>magoko-boot-starter</module>
   </modules>
 </project>
