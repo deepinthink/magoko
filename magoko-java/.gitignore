@@ -1,0 +1,8 @@
+# MacOS
+.DS_Store
+
+# Jetbrains IDEA
+.idea/
+
+# Maven
+target/
