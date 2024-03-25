@@ -13,6 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.deepinthink.magoko.boot.bootstrap;
+package org.deepinthink.magoko.boot.module.annotation;
 
-public interface Bootstrap {}
+import java.lang.annotation.*;
+import org.springframework.aot.hint.annotation.Reflective;
+
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Reflective(ModuleReflectiveProcessor.class)
+public @interface ModuleExceptionHandler {
+  Class<? extends Throwable>[] value() default {};
+}
