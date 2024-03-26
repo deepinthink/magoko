@@ -12,6 +12,9 @@
   </parent>
   <artifactId>magoko-parent</artifactId>
   <packaging>pom</packaging>
+  <properties>
+    <guava.version>33.1.0-jre</guava.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -20,6 +23,11 @@
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
